@@ -55,6 +55,7 @@ ipython_config.py
 *.db
 *.xlsx
 *.xls
+*.png
 
 # ========================
 # macOS
