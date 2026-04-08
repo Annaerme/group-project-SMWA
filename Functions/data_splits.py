@@ -355,11 +355,11 @@ def train_val_test_split(
 if __name__ == "__main__":
     import numpy as np
 
-    # Build a 120-day dummy dataset mirroring the real data shape
-    dates = pd.date_range("2024-07-01", periods=120, freq="D")
+    # Dummy data covering the full timeline, so we can see how the splits work in practice.
+    dates = pd.date_range("2024-07-05", "2024-11-05", freq="D")
     rng = np.random.default_rng(42)
     dummy_df = pd.DataFrame(
-        {"price": rng.uniform(0.3, 0.8, size=120)},
+        {"price": rng.uniform(0.3, 0.8, size=len(dates))},
         index=dates,
     )
 
