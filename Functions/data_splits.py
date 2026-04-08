@@ -10,8 +10,59 @@ Context
 Task    : 1-day-ahead forecasting of Polymarket daily prices for the
           2024 US presidential election.
 Data    : ~4 months of daily data (approx. Jul–Nov 2024).
-Strategy: Expanding-window time-series cross-validation (TimeSeriesSplit),
-          with a fixed held-out test set covering the final N days.
+Strategy: Expanding-window (walk-forward) time-series cross-validation,
+          with a fixed held-out test set covering the final 14 days.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  WALK-FORWARD CROSS-VALIDATION  —  how & why
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Full timeline (≈ 120 days, Jul → Nov 2024)
+  ├──────────────────────────────────────────────────┤ TEST (14 days, held-out)
+  │◄──────────────── CV region (≈ 106 days) ────────►│
+
+  Each fold EXPANDS the training window — no data is ever discarded:
+
+  Fold 1  ├─── TRAIN (~35 d) ───┤·├── VAL (~21 d) ──┤
+  Fold 2  ├───── TRAIN (~56 d) ─────┤·├── VAL (~21 d) ──┤
+  Fold 3  ├──────── TRAIN (~77 d) ──────────┤·├ VAL (~14 d) ┤
+                                              ^
+                                           gap = 1 day
+
+  Legend
+  ──────
+  TRAIN  rows the model is fitted on
+  VAL    rows used to evaluate / tune hyperparameters  (never fitted on)
+  ·      gap row(s) — intentionally excluded from both sets
+  TEST   completely untouched until final model evaluation
+
+WHY WALK-FORWARD (not standard k-fold)?
+────────────────────────────────────────
+  Standard k-fold shuffles data randomly, so a validation fold can contain
+  dates that are EARLIER than some training dates. For a time series that
+  means the model "sees the future" during training — an unrealistic
+  advantage that inflates CV scores and leads to poor real-world performance.
+
+  Walk-forward respects the arrow of time: the model is always trained on
+  the past and evaluated on what comes next, exactly as it would be used in
+  production. Each fold simulates a real deployment scenario.
+
+  We use an EXPANDING (not sliding) window because election prediction
+  dynamics accumulate over time — early-campaign data remains informative
+  even close to election day. A sliding window would needlessly discard
+  that signal.
+
+WHY A GAP OF 1 DAY?
+────────────────────
+  Our features include rolling averages, lag values and other backward-
+  looking aggregations computed at day t from days t-1, t-2, … If the last
+  training day were immediately adjacent to the first validation day, a
+  feature at the boundary could still "bleed" information across the split
+  (e.g. a 3-day rolling mean on the first val day would include training
+  rows). The 1-day gap eliminates this edge case and mirrors the real
+  prediction task: we observe day t-1, then predict day t.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 DATA LEAKAGE REMINDERS
 ----------------------
@@ -23,8 +74,8 @@ DATA LEAKAGE REMINDERS
    tuning and model selection must be done exclusively on CV folds.
 4. If you add any feature that aggregates over the full dataset (e.g. mean
    encoding), recompute it inside each fold's training window only.
-5. Gaps between train and val exist to prevent leakage from rolling features
-   that span multiple days. Do not remove the gap.
+5. The gap between train and val exists to prevent leakage from rolling
+   features that span the boundary. Do not remove it.
 """
 
 from __future__ import annotations
@@ -60,7 +111,7 @@ def _ensure_datetime_index(df: pd.DataFrame) -> pd.DataFrame:
 
 def get_cv_folds(
     df: pd.DataFrame,
-    n_splits: int = 5,
+    n_splits: int = 3,
     gap: int = 1,
     test_days: int | None = None,
 ) -> List[Tuple[np.ndarray, np.ndarray]]:
@@ -324,7 +375,7 @@ if __name__ == "__main__":
     )
 
     print("\n=== CV folds (n_splits=5, gap=1, test_days=14) ===")
-    folds = get_cv_folds(dummy_df, n_splits=5, gap=1, test_days=14)
+    folds = get_cv_folds(dummy_df, n_splits=3, gap=1, test_days=14)
     print_fold_summary(dummy_df, folds)
 
     print("\n=== Leakage validation (all folds) ===")
