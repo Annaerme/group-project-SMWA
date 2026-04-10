@@ -43,6 +43,9 @@ ipython_config.py
 # ========================
 *.csv
 !Data/3_Gold/*.csv
+# ML model caches — large derived files, regenerated automatically by notebooks
+Data/3_Gold/finbert_news_cache.csv
+Data/3_Gold/sbert_features_cache.csv
 *.tsv
 *.json
 *.jsonl
