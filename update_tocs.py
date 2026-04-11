@@ -30,9 +30,11 @@ def save(path, nb):
     path.write_text(json.dumps(nb, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
-def heading_items(nb, skip_toc=True):
-    """(level, title, anchor) voor alle markdown-headings, optioneel zonder TOC-cellen."""
+def heading_items(nb, skip_toc=True, skip_title=False):
+    """(level, title, anchor) voor alle markdown-headings.
+    skip_title=True slaat de eerste # titelregel over (vermijdt dubbele vermelding)."""
     items = []
+    title_seen = False
     for cell in nb["cells"]:
         if cell["cell_type"] != "markdown":
             continue
@@ -46,16 +48,23 @@ def heading_items(nb, skip_toc=True):
             title = line.lstrip("#").strip()
             anchor = re.sub(r"[^\w\s-]", "", title.lower())
             anchor = re.sub(r"\s+", "-", anchor.strip())
+            # Sla de allereerste # titelregel over als skip_title aan staat
+            if skip_title and not title_seen and level == 1:
+                title_seen = True
+                continue
             items.append((level, title, anchor))
     return items
 
 
 def toc_source(items):
+    if not items:
+        return TOC_MARKER + "\n## Contents\n"
+    # Normaliseer: kleinste level wordt niveau 0 (geen inspringing)
+    min_lvl = min(l for l, _, _ in items)
     lines = [TOC_MARKER + "\n## Contents\n"]
     for level, title, anchor in items:
-        indent = "  " * (level - 1)
-        link   = f"**[{title}](#{anchor})**" if level == 1 else f"[{title}](#{anchor})"
-        lines.append(f"{indent}- {link}\n")
+        indent = "  " * (level - min_lvl)
+        lines.append(f"{indent}- [{title}](#{anchor})\n")
     return "".join(lines)
 
 
@@ -90,8 +99,8 @@ def process_notebook(nb_path):
             keep.append(cell)
     nb["cells"] = keep
 
-    # Nieuwe TOC berekenen (zonder de TOC-cel zelf)
-    items      = heading_items(nb, skip_toc=True)
+    # Nieuwe TOC berekenen (zonder TOC-cel én zonder de # titelregel)
+    items      = heading_items(nb, skip_toc=True, skip_title=True)
     new_source = toc_source(items)
 
     # Zoek bestaande TOC-cel
@@ -156,18 +165,19 @@ def build_overview(notebooks):
                 rel = "/".join(quote(part, safe="") for part in rel_raw.split("/"))
                 name = nb_path.stem.replace("_", " ").replace("-", " ").title()
                 nb   = load(nb_path)
-                items = heading_items(nb, skip_toc=True)
+                # Sla titelregel over — de bold notebooknaam is al de titel
+                items = heading_items(nb, skip_toc=True, skip_title=True)
 
                 if not items:
                     lines.append(f"- [{name}]({rel})\n")
                     continue
 
-                # Normaliseer levels: kleinste level wordt 1
+                # Normaliseer: eerste subsectie-level wordt inspringing 1
                 min_lvl = min(l for l, _, _ in items)
 
                 lines.append(f"- **[{name}]({rel})**\n")
                 for level, title, anchor in items:
-                    depth  = level - min_lvl + 1          # relatief niveau
+                    depth  = level - min_lvl + 1   # eerste subsectie = 1 inspring
                     indent = "  " * depth
                     lines.append(f"{indent}- [{title}]({rel}#{anchor})\n")
 
