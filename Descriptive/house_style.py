@@ -174,3 +174,74 @@ def buzz_legend(ax, loc="upper right"):
               labelcolor=TEXT_PRIMARY)
 
 candidate_legend = buzz_legend  # backwards-compatible alias
+
+
+# ── Table of contents ──────────────────────────────────────────────────────────
+def show_toc(_=None):
+    """No-op binnen de kernel — geen bestandsschrijf, geen VSCode-conflict.
+
+    De TOC markdown cel staat al bovenaan het notebook.
+    Hergeneren na sectiewijzigingen: voer vanuit de projectroot uit:
+        python update_tocs.py
+    """
+    pass
+
+
+def _build_toc(nb_path):
+    """Interne helper: (her)genereert de TOC markdown cel in een notebook.
+    Alleen aan te roepen vanuit update_tocs.py, niet vanuit de kernel.
+    """
+    import json, re, uuid, pathlib
+
+    nb_path = pathlib.Path(nb_path)
+    with open(nb_path, encoding="utf-8") as f:
+        nb = json.load(f)
+
+    items = []
+    for cell in nb["cells"]:
+        if cell["cell_type"] != "markdown":
+            continue
+        for line in "".join(cell["source"]).splitlines():
+            if not line.startswith("#"):
+                continue
+            level = len(line) - len(line.lstrip("#"))
+            title = line.lstrip("#").strip()
+            anchor = re.sub(r"[^\w\s-]", "", title.lower())
+            anchor = re.sub(r"\s+", "-", anchor.strip())
+            items.append((level, title, anchor))
+
+    MARKER = "<!-- toc -->"
+    lines  = [MARKER + "\n## Contents\n"]
+    for level, title, anchor in items:
+        indent = "  " * (level - 1)
+        link   = f"**[{title}](#{anchor})**" if level == 1 else f"[{title}](#{anchor})"
+        lines.append(f"{indent}- {link}\n")
+    new_source = "".join(lines)
+
+    toc_idx, code_idx = None, None
+    for i, cell in enumerate(nb["cells"]):
+        src = "".join(cell.get("source", []))
+        if cell["cell_type"] == "markdown" and MARKER in src:
+            toc_idx = i
+        if cell["cell_type"] == "code" and "show_toc" in src and "def show_toc" not in src:
+            if code_idx is None:
+                code_idx = i
+
+    if toc_idx is not None and "".join(nb["cells"][toc_idx]["source"]) == new_source:
+        return False  # niets veranderd
+
+    if toc_idx is not None:
+        nb["cells"][toc_idx]["source"] = [new_source]
+    elif code_idx is not None:
+        nb["cells"].insert(code_idx, {
+            "cell_type": "markdown",
+            "id": uuid.uuid4().hex[:8],
+            "metadata": {},
+            "source": [new_source],
+        })
+    else:
+        return False
+
+    with open(nb_path, "w", encoding="utf-8") as f:
+        json.dump(nb, f, ensure_ascii=False, indent=1)
+    return True

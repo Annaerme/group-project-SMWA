@@ -1,9 +1,6 @@
 """
 data_splits.py — Single source of truth for cross-validation splits.
 
-All team members MUST import their CV folds from this module rather than
-defining their own splits. Using different splits across feature branches
-will make results incomparable and may introduce data leakage.
 
 Context
 -------
@@ -306,46 +303,6 @@ def print_fold_summary(
             f"{str(val_dates.max().date()):>12}  "
             f"{len(val_idx):>6}"
         )
-
-
-# ---------------------------------------------------------------------------
-# Legacy helper — kept for backward compatibility
-# ---------------------------------------------------------------------------
-
-def train_val_test_split(
-    df: pd.DataFrame,
-    date_col: str = "date",
-    train_start: str = "2024-07-05",
-    train_end: str = "2024-10-03",
-    val_start: str = "2024-10-04",
-    val_end: str = "2024-10-20",
-    test_start: str = "2024-10-21",
-    test_end: str = "2024-11-04",
-    verbose: bool = True,
-) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    """
-    Fixed-boundary chronological train/validation/test split (legacy).
-
-    Prefer `get_cv_folds` + `get_test_split` for new work. This function
-    is retained so existing notebooks do not break.
-
-    Features are always based on day t-1, odds predicted on day t.
-    """
-    df = df.copy()
-    df[date_col] = pd.to_datetime(df[date_col])
-
-    train_df = df[df[date_col].between(train_start, train_end)].copy()
-    val_df = df[df[date_col].between(val_start, val_end)].copy()
-    test_df = df[df[date_col].between(test_start, test_end)].copy()
-
-    if verbose:
-        for name, split in [("Train", train_df), ("Val  ", val_df), ("Test ", test_df)]:
-            print(
-                f"{name}: {len(split):>5} rows  "
-                f"({split[date_col].min().date()} -> {split[date_col].max().date()})"
-            )
-
-    return train_df, val_df, test_df
 
 
 # ---------------------------------------------------------------------------
