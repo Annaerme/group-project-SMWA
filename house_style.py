@@ -131,6 +131,43 @@ def apply_style():
     })
 
 
+# ── Key political events (shared across all notebooks) ────────────────────────
+# Each entry: (label, date_str, colour)
+EVENTS = [
+    ('Trump shot',                '2024-07-13', REPUBLICAN),
+    ('JD Vance VP pick',          '2024-07-15', '#e07b39'),
+    ('Biden withdraws',           '2024-07-21', DEMOCRAT),
+    ('Harris nominated',          '2024-08-05', '#5dade2'),
+    ('Trump–Harris debate (ABC)', '2024-09-10', NEUTRAL),
+    ('2nd assassination attempt', '2024-09-15', '#c0392b'),
+]
+
+# Quick lookup: label → colour
+EVENT_PALETTE = {lbl: color for lbl, _, color in EVENTS}
+
+
+def add_events(ax, events=None, zorder=3):
+    """Draw dashed vertical event lines on *ax*. Uses EVENTS if not specified."""
+    import matplotlib.lines as mlines
+    import pandas as pd
+    if events is None:
+        events = EVENTS
+    for lbl, date, color in events:
+        ax.axvline(pd.Timestamp(date), color=color, linestyle='--',
+                   linewidth=1.4, alpha=0.9, zorder=zorder)
+
+
+def event_legend_handles(events=None):
+    """Return Line2D handles for a legend of the key events."""
+    import matplotlib.lines as mlines
+    if events is None:
+        events = EVENTS
+    return [
+        mlines.Line2D([], [], color=c, linestyle='--', linewidth=2.5, label=lbl)
+        for lbl, _, c in events
+    ]
+
+
 # ── Convenience helpers ────────────────────────────────────────────────────────
 def styled_fig(nrows=1, ncols=1, figsize=None, title=None, **kwargs):
     """Create a pre-styled figure. Returns (fig, ax) or (fig, axes)."""
