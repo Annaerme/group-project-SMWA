@@ -9,7 +9,7 @@ from pathlib import Path
 from urllib.parse import quote
 
 ROOT       = Path(__file__).parent
-SKIP       = {"A. Lectures"}
+SKIP       = {"A. Lectures", "data_retrieval"}
 TOC_MARKER = "<!-- toc -->"
 
 
