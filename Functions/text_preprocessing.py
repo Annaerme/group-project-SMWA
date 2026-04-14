@@ -3,6 +3,12 @@ import re
 import pandas as pd
 from nltk.corpus import stopwords
 
+try:
+    from langdetect import detect, LangDetectException
+    _LANGDETECT_AVAILABLE = True
+except ImportError:
+    _LANGDETECT_AVAILABLE = False
+
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -34,6 +40,25 @@ def remove_urls(text: str) -> str:
     text = re.sub(r'www\.\S+', '', text)             # www. URLs
     text = re.sub(r'\b\w+\.\w+/\S+', '', text)      # short domains (apple.news/xxx)
     return re.sub(r'\s+', ' ', text).strip()
+
+
+def detect_language(text: str) -> str:
+    """
+    Detect the language of a text string using langdetect.
+
+    Returns the ISO 639-1 language code (e.g. 'en', 'nl', 'fr'),
+    or 'unknown' if detection fails or text is too short.
+
+    Requires: pip install langdetect
+    """
+    if not _LANGDETECT_AVAILABLE:
+        raise ImportError("langdetect is not installed. Run: pip install langdetect")
+    if not isinstance(text, str) or len(text.strip()) < 10:
+        return 'unknown'
+    try:
+        return detect(text)
+    except LangDetectException:
+        return 'unknown'
 
 
 # ── Core cleaning function ────────────────────────────────────────────────────
@@ -88,11 +113,14 @@ def apply_text_cleaning(
     text_col: str = 'text',
     output_col: str = 'text_clean',
     extra_stopwords: set = None,
+    filter_english: bool = False,
+    lang_col: str = None,
     reset_index: bool = True,
     verbose: bool = True,
 ) -> pd.DataFrame:
     """
     Apply clean_text to a DataFrame column and add word count columns.
+    Optionally filters to English-only rows before cleaning.
 
     Parameters
     ----------
@@ -100,15 +128,44 @@ def apply_text_cleaning(
     text_col        : Column to clean (default: 'text').
     output_col      : Name for the cleaned text column (default: 'text_clean').
     extra_stopwords : Optional extra words to remove on top of NLTK English.
+    filter_english  : If True, keep only English rows (default: False).
+                      Uses lang_col if provided, otherwise detects with langdetect.
+    lang_col        : Existing column with language codes (e.g. 'detected_lang' or 'lang').
+                      If provided and filter_english=True, used instead of auto-detection.
     reset_index     : Reset index after cleaning (default: True).
     verbose         : Print a short summary if True.
 
     Returns
     -------
     DataFrame with new columns: `output_col`, 'words', 'word_count'.
+    If filter_english=True and no lang_col, also adds 'detected_lang'.
     """
     df = df.copy()
+    n_before = len(df)
 
+    # ── Language filtering ────────────────────────────────────────────────────
+    if filter_english:
+        if lang_col and lang_col in df.columns:
+            # Use existing language column (e.g. from Bluesky data)
+            df = df[df[lang_col] == 'en'].copy()
+        else:
+            # Auto-detect language using langdetect
+            if not _LANGDETECT_AVAILABLE:
+                raise ImportError(
+                    "langdetect is not installed. Run: pip install langdetect\n"
+                    "Or pass lang_col= if you already have a language column."
+                )
+            if verbose:
+                print(f"Detecting language for {len(df):,} rows (this may take a moment)...")
+            df['detected_lang'] = df[text_col].astype(str).apply(detect_language)
+            df = df[df['detected_lang'] == 'en'].copy()
+
+        if verbose:
+            n_dropped = n_before - len(df)
+            print(f"✓ Language filter: kept {len(df):,} English rows "
+                  f"(dropped {n_dropped:,} non-English, {n_dropped/n_before*100:.1f}%)")
+
+    # ── Text cleaning ─────────────────────────────────────────────────────────
     stop_words = set(stopwords.words('english'))
     if extra_stopwords:
         stop_words |= set(extra_stopwords)
@@ -129,4 +186,3 @@ def apply_text_cleaning(
         print(df[[output_col, 'word_count']].head(3))
 
     return df
-    
