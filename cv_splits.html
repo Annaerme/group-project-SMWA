@@ -5,7 +5,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{width:100%;height:100%;background:#060c14;overflow:hidden}
+html,body{width:100%;height:100%;background:#0f171f;overflow:hidden}
 #world{position:fixed;left:0;top:0;width:1400px;height:800px;transform-origin:0 0}
 svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 </style>
@@ -39,7 +39,7 @@ const defs=mk('defs',{});
 
 // Drop-shadow filter for bars
 const fds=mk('filter',{id:'shadow',x:'-5%',y:'-20%',width:'110%',height:'160%'});
-mk('feDropShadow',{dx:'0',dy:'4','stdDeviation':'6','flood-color':'rgba(0,50,150,0.5)','flood-opacity':'1'},fds);
+mk('feDropShadow',{dx:'0',dy:'4','stdDeviation':'6','flood-color':'rgba(0,20,60,0.6)','flood-opacity':'1'},fds);
 defs.appendChild(fds);
 
 // Glow filter
@@ -64,26 +64,26 @@ const FOLDS=[
 const Y_RULER=158;
 const Y_ROWS=[258,373,488];
 
-// ── BLUE PALETTE ────────────────────────────────────
-// Three clearly distinct shades of blue
+// ── HOUSE-STYLE PALETTE ─────────────────────────────
+// Mapped from house_style.py
 const B={
-  // deep navy-blue  (training)
-  train0:'#1a3a6e', train1:'#2563eb',
-  // sky-blue        (validation)
-  val0:  '#0e4f7a', val1:  '#38bdf8',
-  // cyan-blue       (test)
-  test0: '#064e5e', test1: '#06b6d4',
-  // muted slate-blue (gap)
-  gap:   'rgba(100,140,210,0.55)',
-  // text/UI
-  textHi:'rgba(220,235,255,0.95)',
-  textMd:'rgba(140,170,215,0.80)',
-  textLo:'rgba(80,120,180,0.65)',
-  // bar background
-  dimFill:'rgba(30,55,120,0.12)',
-  dimStr: 'rgba(50,90,180,0.15)',
-  // ruler
-  rule:  'rgba(60,110,200,0.30)',
+  // Democrat blue  (training) — #207dff
+  train0:'#0d3d8a', train1:'#207dff',
+  // Teal           (validation) — #2ec4b6
+  val0:  '#0d5c57', val1:  '#2ec4b6',
+  // Republican red (test / held-out) — #e6524d
+  test0: '#7a1a17', test1: '#e6524d',
+  // Accent navy    (gap) — #243c69
+  gap:   'rgba(36,60,105,0.75)',
+  // text/UI — TEXT_PRIMARY / TEXT_MUTED
+  textHi:'#e8eaed',
+  textMd:'#6b8399',
+  textLo:'rgba(107,131,153,0.70)',
+  // bar background — BG_PANEL / SPINE_COLOR
+  dimFill:'rgba(22,35,46,0.60)',
+  dimStr: '#1e3048',
+  // ruler — GRID_COLOR
+  rule:  '#1c2d3e',
 };
 
 // Gradients (userSpaceOnUse so they don't shift when bar grows)
@@ -112,12 +112,12 @@ const gCards =mk('g',{opacity:0});
 // ── BACKGROUND: grid + subtle noise lines ───────────
 for(let i=0;i<=TOTAL_DAYS;i+=10){
   mk('line',{x1:X0+i*PPD,y1:108,x2:X0+i*PPD,y2:Y_ROWS[2]+BH+60,
-    stroke:'rgba(40,80,180,0.06)','stroke-width':'1'},gBg);
+    stroke:'#1c2d3e','stroke-width':'1'},gBg);
 }
 // horizontal reference lines at each fold row
 Y_ROWS.forEach(y=>{
   mk('line',{x1:X0-35,y1:y+BH/2,x2:X1,y2:y+BH/2,
-    stroke:'rgba(40,80,180,0.06)','stroke-width':'1'},gBg);
+    stroke:'#1c2d3e','stroke-width':'1'},gBg);
 });
 
 // ── TITLE ──────────────────────────────────────────
@@ -164,8 +164,8 @@ FOLDS.forEach((fold,fi)=>{
     'font-family':'Inter,sans-serif','font-size':'11','font-weight':'600',
     fill:B.textLo},gLabels);
   // small circle behind number
-  mk('circle',{cx:X0-22,cy:y+BH/2,r:12,fill:'rgba(30,60,140,0.35)',
-    stroke:'rgba(60,100,200,0.25)','stroke-width':'1'},gBars);
+  mk('circle',{cx:X0-22,cy:y+BH/2,r:12,fill:'#16232e',
+    stroke:'#1e3048','stroke-width':'1'},gBars);
 
   // ── Dim background (CV region)
   mk('rect',{x:X0,y,width:TX-X0,height:BH,rx:BR,
@@ -176,13 +176,13 @@ FOLDS.forEach((fold,fi)=>{
     fill:`url(#gTest)`,filter:'url(#shadow)'},gBars);
   // top highlight line on test
   mk('line',{x1:TX+BR,y1:y+1.5,x2:X1-2,y2:y+1.5,
-    stroke:'rgba(150,240,255,0.30)','stroke-width':'1.5',
+    stroke:'rgba(230,82,77,0.35)','stroke-width':'1.5',
     'stroke-linecap':'round'},gBars);
 
   // ── Test label
   const tl=tx('TEST',{x:TX+(X1-TX)/2,y:y+BH/2+5,'text-anchor':'middle',
     'font-family':'Inter,sans-serif','font-size':'10.5','font-weight':'700',
-    'letter-spacing':'0.8',fill:'rgba(200,250,255,0.90)',opacity:0},gLabels);
+    'letter-spacing':'0.8',fill:'#e8eaed',opacity:0},gLabels);
   allTestLbls.push(tl);
 
   // ── Train bar (animated width)
@@ -190,11 +190,11 @@ FOLDS.forEach((fold,fi)=>{
     fill:`url(#gTrain${fi})`,filter:'url(#shadow)'},gBars);
   // top highlight
   const trainHL=mk('line',{x1:X0+BR,y1:y+1.5,x2:X0,y2:y+1.5,
-    stroke:'rgba(150,200,255,0.28)','stroke-width':'1.5',
+    stroke:'rgba(32,125,255,0.35)','stroke-width':'1.5',
     'stroke-linecap':'round'},gBars);
   const trainLbl=tx('TRAIN',{x:X0+tw/2,y:y+BH/2+5,'text-anchor':'middle',
     'font-family':'Inter,sans-serif','font-size':'10.5','font-weight':'700',
-    'letter-spacing':'0.8',fill:'rgba(200,225,255,0.88)',opacity:0},gLabels);
+    'letter-spacing':'0.8',fill:'#e8eaed',opacity:0},gLabels);
 
   // ── Gap indicator (thin pill between train and val)
   const gapBar=mk('rect',{x:X0+tw,y:y+BH*0.28,width:gapW,height:BH*0.44,rx:3,
@@ -204,11 +204,11 @@ FOLDS.forEach((fold,fi)=>{
   const valBar=mk('rect',{x:vx,y,width:0,height:BH,rx:BR,
     fill:`url(#gVal${fi})`,filter:'url(#shadow)'},gBars);
   const valHL=mk('line',{x1:vx+BR,y1:y+1.5,x2:vx,y2:y+1.5,
-    stroke:'rgba(150,230,255,0.28)','stroke-width':'1.5',
+    stroke:'rgba(46,196,182,0.35)','stroke-width':'1.5',
     'stroke-linecap':'round'},gBars);
   const valLbl=tx('VAL',{x:vx+vw/2,y:y+BH/2+5,'text-anchor':'middle',
     'font-family':'Inter,sans-serif','font-size':'10.5','font-weight':'700',
-    'letter-spacing':'0.8',fill:'rgba(200,245,255,0.88)',opacity:0},gLabels);
+    'letter-spacing':'0.8',fill:'#e8eaed',opacity:0},gLabels);
 
   // ── Animate
   const delay=500+fi*380;
@@ -299,7 +299,7 @@ cardData.forEach((cd,i)=>{
   const cx=CGX[i];
   // glass card bg
   mk('rect',{x:cx,y:CY,width:CW,height:CH,rx:12,
-    fill:'rgba(12,28,75,0.55)',stroke:'rgba(50,90,200,0.20)','stroke-width':'1'},gCards);
+    fill:'#16232e',stroke:'#1e3048','stroke-width':'1'},gCards);
   // top accent bar
   mk('rect',{x:cx,y:CY,width:CW,height:3,rx:2,fill:cd.accent,'fill-opacity':'0.75'},gCards);
   // title
