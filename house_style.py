@@ -142,6 +142,7 @@ EVENTS = [
     ('Trump–Harris debate (ABC)', '2024-09-10', NEUTRAL),
     ('2nd assassination attempt', '2024-09-15', '#c0392b'),
     ('Vance-Walz debate (CBC)', '2024-10-01', NEUTRAL),
+    ('America PAC offers $47 to supporters who refer another registered voter in a swing state', '2024-10-07', REPUBLICAN),
     ('Musk increases petition reward', '2024-10-10', REPUBLICAN),
 ]
 
