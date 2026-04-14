@@ -137,9 +137,11 @@ EVENTS = [
     ('Trump shot',                '2024-07-13', REPUBLICAN),
     ('JD Vance VP pick',          '2024-07-15', '#e07b39'),
     ('Biden withdraws',           '2024-07-21', DEMOCRAT),
+    ('Obama endorses Harris',     '2024-07-26', DEMOCRAT),
     ('Harris nominated',          '2024-08-05', '#5dade2'),
     ('Trump–Harris debate (ABC)', '2024-09-10', NEUTRAL),
     ('2nd assassination attempt', '2024-09-15', '#c0392b'),
+    ('Vance-Walz debate (CBC)', '2024-10-01', NEUTRAL),
 ]
 
 # Quick lookup: label → colour
