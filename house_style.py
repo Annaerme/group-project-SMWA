@@ -155,6 +155,7 @@ EVENTS = [
     ('Biden withdraws',           '2024-07-21', DEMOCRAT),
     ('Obama endorses Harris',     '2024-07-26', DEMOCRAT),
     ('Harris nominated',          '2024-08-05', '#5dade2'),
+    ("Start of DNC", "2024-08-19", "#7dd3fc"),  # lichtblauw
     ('Trump–Harris debate (ABC)', '2024-09-10', NEUTRAL),
     ('2nd assassination attempt', '2024-09-15', '#c0392b'),
     ('Vance-Walz debate (CBC)', '2024-10-01', NEUTRAL),
