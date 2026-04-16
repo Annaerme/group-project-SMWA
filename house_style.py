@@ -24,7 +24,21 @@ DEMOCRAT     = "#207dff"   # CandidateB (Harris / Democrat)
 ACCENT       = "#243c69"   # secondary accent (borders, highlights)
 NEUTRAL      = "#77787A"   # neutral posts / misc elements
 BLUESKY_BLUE = "#1185fe"   # platform color for Bluesky volume/series
-REDDIT_ORG   = "#e46234"   # platform color for Reddit volume/series
+REDDIT_ORG   = "#e85a28"   # platform color for Reddit volume/series
+
+# ── Signal colours ─────────────────────────────────────────────────────────────
+C_VIX    = "#f0a500"   # oranje        — marktvolatiliteit (VIX)
+C_SP500  = "#1a3875"   # donkerblauw   — S&P 500
+
+# ── NRC emotion colours ────────────────────────────────────────────────────────
+C_FEAR         = "#8b1a5c"   # bordeaux-paars
+C_ANGER        = "#cc2222"   # rood
+C_TRUST        = "#27ae60"   # groen
+C_DISGUST      = "#1e6b35"   # donkergroen
+C_SADNESS      = "#3b82c4"   # blauw
+C_JOY          = "#f0c330"   # geel
+C_ANTICIPATION = "#f5a0c0"   # babyroze
+
 TEXT_PRIMARY = "#e8eaed"   # main text
 TEXT_MUTED   = "#6b8399"   # axis labels, tick labels
 GRID_COLOR   = "#1c2d3e"   # subtle grid lines
