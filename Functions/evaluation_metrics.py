@@ -6,7 +6,8 @@ Shared evaluation helpers for all model notebooks.
 Import
 ------
     from Functions.evaluation_metrics import (
-        directional_accuracy, compute_metrics, cv_evaluate, final_eval
+        directional_accuracy, compute_metrics, cv_evaluate, final_eval,
+        tune_hyperparams,
     )
 """
 
@@ -70,6 +71,67 @@ def cv_evaluate(model_factory, folds, X, y, scale=False):
     print(f"  -- Mean --  MAE={mean['MAE']:.4f}  RMSE={mean['RMSE']:.4f}  "
           f"DA={mean['Dir. Accuracy']:.3f}  R2={mean['R2']:.4f}")
     return pd.concat([agg, mean.to_frame().T, std.to_frame().T])
+
+
+def tune_hyperparams(make_model, param_grid, folds, X, y, scale=False):
+    """
+    Grid search over param_grid using walk-forward CV folds.
+
+    Parameters
+    ----------
+    make_model : callable
+        Function(**params) -> fresh unfitted sklearn-compatible model.
+        Must accept every key in param_grid as a keyword argument.
+    param_grid : dict
+        {param_name: [values_to_try], ...}
+    folds : list of (train_idx, val_idx)
+        Walk-forward CV folds from get_cv_folds().
+    X : np.ndarray  (n_samples, n_features)
+    y : np.ndarray  (n_samples,)
+    scale : bool
+        If True, fit StandardScaler on train fold only, transform both.
+
+    Returns
+    -------
+    best_params : dict
+        Parameter combination with the lowest mean CV MAE.
+    results_df : pd.DataFrame
+        All combinations sorted by cv_mae ascending, with cv_mae_std column.
+    """
+    from itertools import product as iterproduct
+
+    keys   = list(param_grid.keys())
+    combos = list(iterproduct(*param_grid.values()))
+
+    records    = []
+    best_mae   = float("inf")
+    best_params = None  # kept as original Python types from param_grid
+
+    for combo in combos:
+        params    = dict(zip(keys, combo))
+        fold_maes = []
+        for train_idx, val_idx in folds:
+            X_tr, y_tr   = X[train_idx], y[train_idx]
+            X_val, y_val = X[val_idx],   y[val_idx]
+            if scale:
+                sc    = StandardScaler()
+                X_tr  = sc.fit_transform(X_tr)
+                X_val = sc.transform(X_val)
+            model = make_model(**params)
+            model.fit(X_tr, y_tr)
+            fold_maes.append(mean_absolute_error(y_val, model.predict(X_val)))
+        mean_mae = float(np.mean(fold_maes))
+        if mean_mae < best_mae:
+            best_mae    = mean_mae
+            best_params = params          # original Python int/float from param_grid
+        records.append({
+            **params,
+            "cv_mae"    : mean_mae,
+            "cv_mae_std": float(np.std(fold_maes)),
+        })
+
+    results_df = pd.DataFrame(records).sort_values("cv_mae").reset_index(drop=True)
+    return best_params, results_df
 
 
 def final_eval(model_factory, X_tv, y_tv, X_test, y_test, scale=False):
