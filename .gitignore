@@ -60,6 +60,7 @@ Data/3_Gold/sbert_features_cache.csv
 *.xlsx
 *.xls
 *.png
+*.txt
 
 # ========================
 # macOS
