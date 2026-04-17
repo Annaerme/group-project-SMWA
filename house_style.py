@@ -27,7 +27,7 @@ BLUESKY_BLUE = "#1185fe"   # platform color for Bluesky volume/series
 REDDIT_ORG   = "#e85a28"   # platform color for Reddit volume/series
 
 # ── Signal colours ─────────────────────────────────────────────────────────────
-C_VIX    = "#f0a500"   # oranje        — marktvolatiliteit (VIX)
+C_VIX    = "#e69c1e"   # oranje        — marktvolatiliteit (VIX)
 C_SP500  = "#1a3875"   # donkerblauw   — S&P 500
 
 # ── NRC emotion colours ────────────────────────────────────────────────────────
