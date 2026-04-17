@@ -1,0 +1,57 @@
+# ── Core data science ─────────────────────────────────────────────────────────
+numpy>=2.4
+pandas>=3.0
+scipy>=1.17
+scikit-learn
+xgboost
+
+# ── Visualisation ──────────────────────────────────────────────────────────────
+matplotlib>=3.10
+seaborn
+plotly
+wordcloud
+pyLDAvis
+Pillow>=12.0
+
+# ── NLP & text ─────────────────────────────────────────────────────────────────
+nltk
+vaderSentiment
+nrclex
+textblob
+spacy
+langdetect
+emoji
+symspellpy
+gensim
+
+# ── Transformers / embeddings ──────────────────────────────────────────────────
+transformers
+sentence-transformers
+torch
+bertopic
+umap-learn
+datasets
+
+# ── Explainability ─────────────────────────────────────────────────────────────
+shap
+
+# ── Network analysis ───────────────────────────────────────────────────────────
+networkx
+
+# ── Data retrieval & APIs ──────────────────────────────────────────────────────
+requests
+pytrends
+yfinance
+pandas-datareader
+mediacloud
+beautifulsoup4
+pyarrow
+tqdm
+
+# ── Social media APIs ──────────────────────────────────────────────────────────
+atproto
+Mastodon.py
+ollama
+
+# ── Utilities ──────────────────────────────────────────────────────────────────
+ipython
