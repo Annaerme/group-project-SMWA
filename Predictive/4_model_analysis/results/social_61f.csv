@@ -1,0 +1,6 @@
+Feature_set,Model,MAE,RMSE,DA,R2
+Social (61f),Naive (zero),0.0162,0.0208,0.0,-0.057
+Social (61f),Ridge,0.0158,0.0211,0.5,-0.088
+Social (61f),Random Forest,0.0159,0.021,0.5,-0.0825
+Social (61f),SVM,0.0166,0.0227,0.5,-0.2609
+Social (61f),XGBoost,0.0161,0.0212,0.5714,-0.0994

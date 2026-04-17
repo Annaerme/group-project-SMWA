@@ -1,0 +1,6 @@
+Feature_set,Model,MAE,RMSE,DA,R2
+Financial (10f),Naive (zero),0.0162,0.0208,0.0,-0.057
+Financial (10f),Ridge,0.016,0.0205,0.4286,-0.0332
+Financial (10f),Random Forest,0.0168,0.0202,0.4286,0.0033
+Financial (10f),SVM,0.016,0.0202,0.5714,0.0021
+Financial (10f),XGBoost,0.0166,0.0204,0.5714,-0.0183

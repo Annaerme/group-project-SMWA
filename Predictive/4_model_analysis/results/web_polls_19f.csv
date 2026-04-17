@@ -1,0 +1,6 @@
+Feature_set,Model,MAE,RMSE,DA,R2
+Web+Polls (19f),Naive (zero),0.0162,0.0208,0.0,-0.057
+Web+Polls (19f),Ridge,0.0161,0.0206,0.4286,-0.0433
+Web+Polls (19f),Random Forest,0.016,0.0202,0.5,0.0005
+Web+Polls (19f),SVM,0.016,0.0201,0.4286,0.0078
+Web+Polls (19f),XGBoost,0.0156,0.0196,0.5714,0.0569
