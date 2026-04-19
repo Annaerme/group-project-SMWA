@@ -89,3 +89,18 @@ Data/3_Gold/sbert_features_cache.csv
 *.bak
 *.swp
 *~
+
+
+# ========================
+# For tex files
+# ========================
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.bbl
+*.blg
+*.pdf      # optional — some teams commit the final PDF, some don't
