@@ -28,7 +28,7 @@ REDDIT_ORG   = "#e85a28"   # platform color for Reddit volume/series
 
 # ── Signal colours ─────────────────────────────────────────────────────────────
 C_VIX    = "#e69c1e"   # oranje        — marktvolatiliteit (VIX)
-C_SP500  = "#1a3875"   # donkerblauw   — S&P 500
+C_SP500  = "#4a90e2"   # middenblauw   — S&P 500
 
 # ── NRC emotion colours ────────────────────────────────────────────────────────
 C_FEAR         = "#8b1a5c"   # bordeaux-paars
@@ -159,8 +159,9 @@ EVENTS = [
     ('Trump–Harris debate (ABC)', '2024-09-10', NEUTRAL),
     ('2nd assassination attempt', '2024-09-15', '#c0392b'),
     ('Vance-Walz debate (CBC)', '2024-10-01', NEUTRAL),
-    ('America PAC offers $47 to supporters who refer another registered voter in a swing state', '2024-10-07', REPUBLICAN),
-    ('Musk increases petition reward', '2024-10-10', REPUBLICAN),
+    ('Musk at Butler rally',   '2024-10-05', '#f5a623'),
+    ('America PAC offers $47 to supporters who refer another registered voter in a swing state', '2024-10-07', '#f5a623'),
+    ('Musk increases petition reward', '2024-10-10', '#f5a623'),
 ]
 
 # Quick lookup: label → colour
