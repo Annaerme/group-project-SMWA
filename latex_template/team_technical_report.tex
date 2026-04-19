@@ -1,0 +1,484 @@
+\documentclass[12pt,a4paper,faculty=eb,language=en]{ugent-doc}
+
+%\geometry{bottom=2.5cm,top=2.5cm,left=3cm,right=2cm}
+%\renewcommand{\baselinestretch}{1.15}
+
+% Font
+\usepackage[mono=false]{libertine}
+\usepackage{libertinust1math}
+
+% Language
+\usepackage[english]{babel}
+
+% Mathematics
+\usepackage{amsmath}
+
+% Figures
+\usepackage{graphicx}
+\graphicspath{{./figures/}{../Data/2_Silver/snapshots/}}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+
+% Hyperreferences
+\usepackage[colorlinks=true, allcolors=ugentblue]{hyperref}
+
+% Whitespace between paragraphs and no indentation
+\usepackage[parfill]{parskip}
+
+% Bibliography (author--year)
+\usepackage[authoryear,round]{natbib}
+
+% -----------------------------------------------------------------------
+% Title page
+% -----------------------------------------------------------------------
+\thetitle{\color{ugentblue}Can Social Media Anticipate a\\Prediction Market?\\
+\large Evidence from the 2024 US Presidential Election}
+\thesubtitle{Technical Report}
+
+\infoboxa{\bfseries\large Course: Social Media and Web Analytics}
+
+\infoboxb{Teacher:
+\begin{tabular}[t]{l}
+    Prof.\ Dr.\ Matthias Bogaert
+\end{tabular}
+}
+
+\infoboxc{Students:
+\begin{tabular}[t]{lll}
+    Team NUMBER &&\\
+    NAME 1 & Pieter-Jan Brys & EMAIL 1 \\
+    NAME 2 & Helena Lips & EMAIL 2 \\
+    NAME 3 & Nina Vandevelde 3 & EMAIL 3 \\
+    NAME 4 & Daphne D'Guyter 4 & EMAIL 4 \\
+    NAME 5 & Seppe Reussen 5 & EMAIL 5 \\
+	NAME 6 & Anna Vermeulen 5 & 022094
+\end{tabular}
+}
+
+\infoboxd{Academic year: 2025--2026}
+
+
+\begin{document}
+
+% =====================================================================
+% Cover
+% =====================================================================
+\maketitle
+
+% =====================================================================
+% Front matter
+% =====================================================================
+{\hypersetup{hidelinks}\tableofcontents}
+\newpage
+
+
+% =====================================================================
+% Main matter
+% =====================================================================
+
+% ---------------------------------------------------------------------
+\section{Introduction}
+% ---------------------------------------------------------------------
+
+The 2024 US presidential election generated an unprecedented volume of digital discourse. Decentralized prediction markets such as Polymarket simultaneously aggregated the beliefs of financially motivated participants into a single daily probability estimate for each candidate's chances of winning. The central question of this project is whether publicly available signals from social media, news coverage, polling data, financial markets, and search behavior can be used to anticipate the daily movements of such a market price.
+
+Prediction markets are theorized to be highly efficient aggregators of dispersed information, rapidly incorporating new signals into prices \citep{manski2006}. If social media and news data carry information that reaches these markets with a measurable delay, then the text mining, sentiment analysis, and network analysis techniques covered in this course may yield directional forecasting value. The project applies the full analytical pipeline from Lecture~1 through Lecture~6 to this real-world forecasting problem, covering data collection, preprocessing, word analysis, sentiment analysis, network analysis, and predictive modeling. Sections~2 through~7 follow this structure in order; Section~8 discusses key findings and limitations.
+
+% ---------------------------------------------------------------------
+\section{Research Design \& Data}
+% ---------------------------------------------------------------------
+
+The target variable is the daily closing price of the Polymarket contract ``Will Donald Trump win the 2024 US presidential election?'', interpretable as the market's consensus probability of a Trump victory \citep{manski2006}. Data cover a 125-day window from 5 July to 4 November 2024, yielding 124 daily observations (min: 44.3\%, max: 70.5\%, mean: 54.7\%). Prices were scraped daily at approximately 00:03~UTC and manually corrected for a one-day offset in Polymarket's date labeling. Two modeling objectives were defined: Model~A predicts the price level, benchmarked against an AR(1) baseline; Model~B predicts the daily price change, a more stationary target suited to assessing directional signal value.
+
+Data were collected from seven sources via APIs or archived datasets, the standard approach for structured, rate-limited access to platform data (Lecture~1). An overview of all sources, collection methods, volumes, and key limitations is provided in Table~\ref{tab:datasources} in Appendix~\ref{app:datasources}.
+
+Reddit data were drawn from seven politically diverse subreddits and filtered on election-related keywords, reducing 5.39 million raw comments to 1.4 million. Non-English content was removed using \texttt{langdetect} (5.4\% of posts, 1.7\% of comments). Bluesky data were collected via the AT Protocol API (18\% removed after language filtering). News coverage was retrieved via the MediaCloud API across sources classified as Democratic (36.6\%), Republican (21.2\%), or center/unknown (44.5\%). No single source provides a fully representative view of public opinion --- Bluesky's user base skews left-leaning, evidenced by Harris-related posts receiving twice as many likes as Trump-related posts (5.06 vs.\ 2.44) despite comparable volumes --- motivating the cross-source design that allows findings to be triangulated.
+
+% ---------------------------------------------------------------------
+\section{Preprocessing}
+% ---------------------------------------------------------------------
+
+All text data were processed through a uniform eight-step pipeline: (1)~lowercasing, (2)~URL removal, (3)~second-pass URL fallback, (4)~removal of @mentions, (5)~hashtag stripping while preserving the word, (6)~removal of non-alphabetic characters, (7)~whitespace normalization, and (8)~tokenization with NLTK English stopwords and removal of tokens shorter than three characters or with URL-slug-like structure. Language detection via \texttt{langdetect} retained only English documents, removing 5.4\% of Reddit posts, 1.7\% of comments, and 18\% of Bluesky posts. Reddit comments were additionally filtered to between 3 and 500 words, and duplicates were removed.
+
+Each cleaned document was assigned a political buzz label using whole-word regex matching. Documents were classified as TrumpBuzz, HarrisBuzz, or ElectionBuzz based on keyword sets of approximately 80 and 70 terms respectively. The label of the highest-scoring category was assigned provided its margin over the runner-up met a minimum gap of one match; ambiguous or keyword-free documents received the ElectionBuzz label. This approach does not account for irony or sarcasm, a known limitation discussed in Section~7.
+
+% ---------------------------------------------------------------------
+\section{Descriptive Modeling}
+% ---------------------------------------------------------------------
+
+\subsection{Word Analysis \& Embeddings}
+
+Text-based features were constructed through TF-IDF with dimensionality reduction, word embeddings, and topic modeling. For TF-IDF, each day's text was aggregated per platform into a single document. The vectorizer used unigrams and bigrams, a vocabulary cap of 500 features, logarithmic term frequency scaling (\texttt{sublinear\_tf=True}), and English stopword removal. Critically, the vectorizer was fitted exclusively on training data within each cross-validation fold to prevent vocabulary leakage from future documents (Lecture~2). The resulting sparse matrix was reduced to five dense components per platform via Singular Value Decomposition, yielding 15 TF-IDF features in total.
+
+For word embeddings, a Word2Vec skip-gram model was trained from scratch on the news headline corpus, with separate models per political lean (Democratic, Republican, center), enabling cross-partisan semantic comparison \citep{mikolov2013}. The model used 100 dimensions, a context window of five, and 30 epochs. Pre-trained GloVe embeddings (\texttt{glove.6B.100d}) complemented this approach, covering 97.4\% of headline tokens and providing better generalization for low-frequency terms \citep{pennington2014}. Both spaces were visualized using t-SNE (perplexity=30) for local cluster structure and UMAP (\texttt{n\_neighbors=15}, cosine metric) for global relationships \citep{vandermaaten2008}.
+
+Topic modeling was applied to Reddit posts using LDA \citep{blei2003}. After filtering (\texttt{no\_below=5}, \texttt{no\_above=0.5}), the vocabulary contained 12,302 words across 85,446 documents. A coherence sweep over $K=2$ to $10$ returned $K=2$ as optimal (\texttt{u\_mass}$=-3.54$), reflecting the thematic homogeneity of campaign text in which discourse reduces to a pro-Trump versus pro-Harris axis. The model was fitted with 15 passes and 400 EM iterations.
+
+\subsection{Sentiment Analysis}
+
+Five sentiment methods were applied across the three text sources to capture distinct affective dimensions of political discourse. The multi-method design allows the predictive model to select the most informative signal through regularization rather than requiring a single method to generalize across all contexts (Lectures~4--5).
+
+VADER was applied to all platforms as the primary lexicon-based method. Its trigram-based valence shifting mechanism handles negations, intensifiers, capitalization, and punctuation, making it well-suited to social media text \citep{hutto2014}. Twitter-RoBERTa (\texttt{cardiffnlp/twitter-roberta-base-sentiment-latest}) complemented VADER on social media by processing full token sequences bidirectionally, capturing contextual dependencies that VADER's trigram window cannot resolve \citep{barbieri2022}. The pairwise correlation between their compound scores was 0.54, confirming partial but non-redundant overlap. For news headlines, FinBERT replaced VADER as the primary method given its domain-specific pre-training on financial text, which closely resembles the forward-looking and evaluative framing of campaign coverage. TextBlob provided a subjectivity dimension orthogonal to polarity (correlation with VADER: 0.43), and NRCLex extracted eight primary emotions from Plutchik's wheel to capture affect beyond positive/negative polarity (correlation with VADER: 0.34). Finally, SBERT (\texttt{all-MiniLM-L6-v2}) embedded 50 random sentences per day and source into 384-dimensional vectors, reduced to five principal components via PCA, yielding 15 dense semantic features with frozen weights.
+
+All methods are summarized in Table~\ref{tab:sentiment} in Appendix~\ref{app:sentiment}. Sentiment scores were aggregated daily and computed separately for TrumpBuzz and HarrisBuzz documents to produce sentiment gap features. A key descriptive finding is that the news sentiment gap correlates at $r=0.31$ with Polymarket prices, while raw news volume correlates near zero, suggesting that affective framing rather than volume carries market-relevant information.
+
+\subsection{Network Analysis}
+
+A directed mention graph was constructed from Bluesky data using NetworkX, with a weighted edge from account~A to~B for each @mention of~B by~A. After normalizing usernames by stripping the \texttt{.bsky.social} suffix, the full graph contains 1,467 nodes and 1,474 edges (density: 0.000685). The largest connected component (LCC) retains 928 nodes (63.3\%), with density 0.001317, diameter 15, mean shortest path 5.83 hops, and an average clustering coefficient of 0.0016 (Lecture~1). The low clustering coefficient confirms the broadcast-oriented nature of the platform: users mention others without sharing mutual audiences.
+
+The degree distribution follows a power-law pattern on a log-log scale, confirming a scale-free topology in which a small number of hub nodes accumulate a disproportionate share of incoming mentions --- the most-mentioned account received 66 in-degree mentions. Hub nodes with high betweenness centrality act as information bridges whose activity may correlate with broader shifts in public discourse.
+
+Echo chamber structure was quantified via a cross-cluster mention matrix partitioning users into TrumpBuzz, HarrisBuzz, and ElectionBuzz clusters. The diagonal dominance of this matrix operationalizes homophily: the principle that individuals preferentially associate with similar others \citep{hamilton2016}. Fewer than 6.8\% of LCC nodes bridge both political clusters. Weekly within-cluster ratios reveal monotonically increasing insularity approaching election day. The Reddit author overlap analysis corroborates this: the Jaccard similarity between \texttt{r/conservative} and \texttt{r/democrats} authors is only 0.019 (0.8\% cross-partisan participation), providing strong evidence for structurally enforced echo chambers \citep{hamilton2016}. Network-derived daily features including density, hub degree averages, community homophily, and echo chamber velocity were included in the predictive model.
+
+% ---------------------------------------------------------------------
+\section{Predictive Modeling}
+% ---------------------------------------------------------------------
+
+\subsection{Feature Engineering}
+
+The base table aggregates all daily features into a 124-row matrix with 129 columns across nine groups: Bluesky (11), network (5), Reddit (19), news (22), financial (20), macro (5), event dummies (10, with lag-1 versions), polls (5), and lags (8). Ratios and shares are preferred over raw counts for scale invariance; seven-day rolling averages smooth day-to-day noise (Lecture~6). A second table version adds interaction and surprise features: sentiment gap (Trump minus Harris), sentiment surprise (deviation from seven-day rolling mean), poll margin momentum (first difference), and a sentiment-gap-times-poll-margin interaction term capturing the hypothesis that prediction markets respond to deviations from expectations rather than absolute levels.
+
+Our target is the daily change in Trump's win probability on Polymarket. The models try to predict whether the market will give Trump a higher or lower chance than the day before. This differencing of the dependent variable ensures that the series is stationary, which is beneficial for time-series modelling and prevents the model from simply learning to repeat yesterday's value. A natural baseline is therefore a naive model that always predicts zero change, representing the assumption that price changes are unpredictable.
+
+The independent features are built from eight different data sources all aggregated to a single row per day, resulting in a 124-row matrix with 129 columns. Social media activity from Bluesky and Reddit is captured through daily post volumes, engagement metrics, and sentiment scores. Newspaper coverage is measured by article counts per political leaning alongside tone indicators. Google Trends provide daily search interest for election-related keywords, while poll numbers are included as daily averages of Trump and Harris support, where days without new polls simply carry forward the most recent available value. Financial market data is included through daily price levels and derived metrics such as day-over-day returns and 7-day rolling average volatility --- covering the S\&P~500, oil, the VIX volatility index, bonds, and the US dollar index. As we are working with a time-series dataset, lagged versions of the target and key signals are added so the models can learn from recent momentum. Before modelling, near-constant features, features with negligible correlation to the target, and highly redundant feature pairs are removed.
+
+\textcolor{red}{\textbf{[TODO: Feature selection only happens after train--test split. All selection decisions are made exclusively on the training data and then applied to the full dataset, taking the cross-validation setup into account.]}}
+
+An overview of all included variables is provided in Appendix~A, Table~\ref{tab:basetable}.
+
+\subsection{Cross-Validation Strategy}
+
+Standard $k$-fold cross-validation is not applicable to time series data as shuffling would introduce look-ahead bias \citep{makridakis2018}. An expanding walk-forward window scheme was adopted, in which the training set grows with each fold while the validation set covers a subsequent held-out period (Lecture~6). The 124-day dataset was split into a 110-day cross-validation region (5 July to 21 October) and a 14-day held-out test set (22 October to 4 November). Three folds expanded the training window by approximately 27 days each, with a one-day gap between training and validation to prevent leakage through rolling mean features. The imputer and scaler were fitted on training rows only and applied to validation rows, consistent with Lecture~4 principles. The test set was accessed only after final model selection.
+
+\subsection{Models and Results}
+
+Model~A predicts the price level (AR(1) baseline MAE: 0.013); Model~B predicts the daily first difference (naive baseline MAE: 0.010). Six model families were evaluated: AR(1), Ridge, Lasso, ElasticNet, Random Forest (200 trees), and XGBoost, each with and without TF-IDF+SVD text features. Neural networks were excluded due to severe overfitting on the approximately 30-observation training folds in early windows (Lecture~6). Hyperparameters were tuned via a manual walk-forward grid search to avoid sklearn's data-shuffling behavior, selecting the configuration with the lowest mean MAE across three folds. Results are summarized in Table~\ref{tab:results} in Appendix~\ref{app:results}.
+
+The most notable finding is that a Random Forest trained exclusively on social media features achieves 64.3\% directional accuracy on the test set. No learned model consistently beats the AR(1) baseline on MAE for Model~A, confirming the near-random-walk structure of the price level. The gap between cross-validation directional accuracy (54.2\%) and test set accuracy (64.3\%) for the social media Random Forest may partly reflect a favorable split; with only 14 test observations, directional accuracy estimates carry high variance and should be interpreted with caution.
+
+% ---------------------------------------------------------------------
+\section{Discussion \& Conclusion}
+% ---------------------------------------------------------------------
+
+\textit{[To be completed.]}
+
+% ---------------------------------------------------------------------
+\section{Limitations and Further Improvement}
+% ---------------------------------------------------------------------
+
+\textit{[TODO: Mention the second approach proposed by Nathan.]}
+
+\begin{itemize}
+    \item \textit{[Further limitations to be added.]}
+\end{itemize}
+
+% =====================================================================
+% References
+% =====================================================================
+\newpage
+\begin{thebibliography}{99}
+
+\bibitem[Barbieri et al.(2022)]{barbieri2022}
+Barbieri, F., Camacho-Collados, J., Espinosa-Anke, L., \& Neves, L. (2022).
+TweetEval: Unified benchmark and comparative evaluation for tweet classification.
+\textit{arXiv:2010.12421}.
+
+\bibitem[Blei et al.(2003)]{blei2003}
+Blei, D.~M., Ng, A.~Y., \& Jordan, M.~I. (2003).
+Latent Dirichlet Allocation.
+\textit{Journal of Machine Learning Research}, 3, 993--1022.
+
+\bibitem[Hamilton et al.(2016)]{hamilton2016}
+Hamilton, W.~L., Clark, K., Leskovec, J., \& Jurafsky, D. (2016).
+Inducing domain-specific sentiment lexicons from unlabeled corpora.
+\textit{arXiv:1606.02820}.
+
+\bibitem[Hutto \& Gilbert(2014)]{hutto2014}
+Hutto, C.~J., \& Gilbert, E. (2014).
+VADER: A parsimonious rule-based model for sentiment analysis of social media text.
+\textit{ICWSM}, 8(1).
+
+\bibitem[Makridakis et al.(2018)]{makridakis2018}
+Makridakis, S., Spiliotis, E., \& Assimakopoulos, V. (2018).
+Statistical and machine learning forecasting methods: Concerns and ways forward.
+\textit{PLOS ONE}, 13(3).
+
+\bibitem[Manski(2006)]{manski2006}
+Manski, C.~F. (2006).
+Interpreting the predictions of prediction markets.
+\textit{Economics Letters}, 91(3), 425--429.
+
+\bibitem[Mikolov et al.(2013)]{mikolov2013}
+Mikolov, T., Chen, K., Corrado, G., \& Dean, J. (2013).
+Efficient estimation of word representations in vector space.
+\textit{arXiv:1301.3781}.
+
+\bibitem[Pennington et al.(2014)]{pennington2014}
+Pennington, J., Socher, R., \& Manning, C.~D. (2014).
+GloVe: Global vectors for word representation.
+\textit{EMNLP 2014}, 1532--1543.
+
+\bibitem[van der Maaten \& Hinton(2008)]{vandermaaten2008}
+van der Maaten, L., \& Hinton, G. (2008).
+Visualizing data using t-SNE.
+\textit{Journal of Machine Learning Research}, 9, 2579--2605.
+
+\end{thebibliography}
+
+% =====================================================================
+% Appendix
+% =====================================================================
+\appendix
+
+% ------------------------------------------------------------------
+\newpage
+\section{Data Sources}
+\label{app:datasources}
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{p{2.8cm} p{3.8cm} p{3.2cm} p{4.0cm}}
+\toprule
+\textbf{Source} & \textbf{Method} & \textbf{Volume (filtered)} & \textbf{Key limitation} \\
+\midrule
+Polymarket            & Web scrape ($\approx$00:03 UTC)    & 124 daily obs.                & Liquidity effects not corrected \\
+Reddit (7 subreddits) & Pushshift archive (JSONL)          & 1.4M comments, 111K posts     & Subreddit selection not representative \\
+Bluesky               & AT Protocol API                    & 26,949 posts                  & Demographically left-leaning \\
+News (MediaCloud)     & MediaCloud API                     & 229,946 articles, 187 sources & 44.5\% of sources unclassified \\
+Google Trends         & Trends API                         & 10 keywords, daily index      & Relative scale; event-driven \\
+Polls                 & Public aggregator                  & 256 national polls            & Pollster house effects up to $\pm$4 pp \\
+Financial \& macro    & Yahoo Finance / FRED               & 20 indicators                 & GDP removed ($>$30\% missing) \\
+\bottomrule
+\end{tabular}
+\caption{Overview of data sources.}
+\label{tab:datasources}
+\end{table}
+
+% ------------------------------------------------------------------
+\newpage
+\section{Sentiment Methods}
+\label{app:sentiment}
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{p{3.5cm} p{3.8cm} p{3.0cm} p{2.8cm}}
+\toprule
+\textbf{Method} & \textbf{Type} & \textbf{Output} & \textbf{Corr.\ with VADER} \\
+\midrule
+VADER              & Rule-based lexicon           & Compound $[-1, +1]$     & 1.00 \\
+Twitter-RoBERTa    & Fine-tuned transformer       & Compound $[-1, +1]$     & 0.54 \\
+TextBlob           & Pattern lexicon              & Polarity + subjectivity & 0.43 \\
+NRCLex             & Emotion lexicon (Plutchik)   & 8 emotion frequencies   & 0.34 \\
+FinBERT            & Domain-specific transformer  & Pos/neg ratio           & n/a (news only) \\
+\bottomrule
+\end{tabular}
+\caption{Overview of sentiment methods. Correlations on daily aggregated compound scores across all platforms.}
+\label{tab:sentiment}
+\end{table}
+
+% ------------------------------------------------------------------
+\newpage
+\section{Model Results}
+\label{app:results}
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{p{5.5cm} p{3.0cm} p{2.0cm} p{2.5cm}}
+\toprule
+\textbf{Scenario} & \textbf{Best model} & \textbf{MAE (test)} & \textbf{DirAcc (test)} \\
+\midrule
+Price level (Model A)       & AR(1) baseline    & 0.013          & 47.5\% \\
+Price change (Model B)      & Ridge             & $\approx$0.010 & 57.1\% \\
+Social media features only  & Random Forest     & 0.016          & 64.3\% \\
+Lag price only              & Linear Regression & 0.016          & 57.1\% \\
+News features only          & Random Forest     & 0.015          & 50.0\% \\
+\bottomrule
+\end{tabular}
+\caption{Model performance on the held-out test set (14 days). DirAcc = percentage of correctly predicted price movement directions.}
+\label{tab:results}
+\end{table}
+
+% ------------------------------------------------------------------
+\newpage
+\section{Basetable: Variable Overview}
+\label{app:basetable}
+
+\begin{longtable}{@{} p{2.3cm} p{3.6cm} p{8.7cm} @{}}
+\caption{Basetable: overview of all features included in the predictive model.}
+\label{tab:basetable} \\
+\toprule
+\textbf{Source} & \textbf{Feature group} & \textbf{Variables} \\
+\midrule
+\endfirsthead
+\multicolumn{3}{@{}l}{\small\itshape Continued from previous page} \\[3pt]
+\midrule
+\textbf{Source} & \textbf{Feature group} & \textbf{Variables} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r@{}}{\small\itshape Continued on next page} \\
+\endfoot
+\bottomrule
+\endlastfoot
+
+% -------------------------------------------------------
+\textbf{Target}
+  & Price change
+  & \texttt{price\_change}: daily first difference of Trump win probability (Polymarket closing price) \\
+\midrule
+
+% -------------------------------------------------------
+\textbf{Time}
+  & Calendar
+  & \texttt{days\_to\_election}, \texttt{is\_weekend}, \texttt{weekday},
+    \texttt{campaign\_week}, \texttt{days\_since\_last\_event} \\
+\midrule
+
+% -------------------------------------------------------
+\multirow{2}{*}{\textbf{Polymarket}}
+  & Price lags
+  & \texttt{polymarket\_trump\_prob\_lag1}, \texttt{lag2}, \texttt{lag3}, \texttt{lag4}, \texttt{lag5} \\
+  & Change lags
+  & \texttt{price\_change\_lag1}, \texttt{lag2}, \texttt{lag3},
+    \texttt{polymarket\_volatility\_7d} \\
+\midrule
+
+% -------------------------------------------------------
+\multirow{6}{*}{\textbf{Bluesky}}
+  & Volume
+  & \texttt{bsky\_total\_posts}, \texttt{bsky\_unique\_authors},
+    \texttt{bsky\_avg\_likes}, \texttt{bsky\_avg\_reposts}, \texttt{bsky\_reply\_ratio} \\
+  & Candidate share
+  & \texttt{bsky\_trump\_unique\_authors}, \texttt{bsky\_harris\_unique\_authors},
+    \texttt{bsky\_trump\_share}, \texttt{bsky\_harris\_share}, \texttt{bsky\_posts\_per\_author} \\
+  & Sentiment
+  & \texttt{bsky\_\{trump, harris, election\}\_sent\_avg}, \texttt{\_sent\_std},
+    \texttt{\_pos\_share}, \texttt{\_neg\_share};
+    \texttt{bsky\_sentiment\_gap}, \texttt{bsky\_sentiment\_gap\_lag1} \\
+  & Emotions (Trump)
+  & \texttt{bsky\_trump\_fear}, \texttt{\_anger}, \texttt{\_anticipation},
+    \texttt{\_trust}, \texttt{\_surprise}, \texttt{\_sadness},
+    \texttt{\_disgust}, \texttt{\_joy} \\
+  & Emotions (Harris)
+  & \texttt{bsky\_harris\_fear}, \texttt{\_anger}, \texttt{\_anticipation},
+    \texttt{\_trust}, \texttt{\_surprise}, \texttt{\_sadness},
+    \texttt{\_disgust}, \texttt{\_joy} \\
+  & Emotions (Election)
+  & \texttt{bsky\_election\_fear}, \texttt{\_anger}, \texttt{\_anticipation},
+    \texttt{\_trust}, \texttt{\_surprise}, \texttt{\_sadness},
+    \texttt{\_disgust}, \texttt{\_joy} \\
+\midrule
+
+% -------------------------------------------------------
+\multirow{6}{*}{\textbf{Reddit}}
+  & Volume
+  & \texttt{reddit\_total\_posts}, \texttt{reddit\_unique\_authors},
+    \texttt{reddit\_avg\_score}, \texttt{reddit\_avg\_upvote\_ratio},
+    \texttt{reddit\_avg\_comments} \\
+  & Candidate share
+  & \texttt{reddit\_trump\_unique\_authors}, \texttt{reddit\_harris\_unique\_authors},
+    \texttt{reddit\_trump\_share}, \texttt{reddit\_harris\_share},
+    \texttt{reddit\_conservative\_share}, \texttt{reddit\_liberal\_share},
+    \texttt{reddit\_posts\_per\_author} \\
+  & Sentiment
+  & \texttt{reddit\_\{trump, harris, election\}\_sent\_avg}, \texttt{\_sent\_std},
+    \texttt{\_pos\_share}, \texttt{\_neg\_share};
+    \texttt{reddit\_sentiment\_gap}, \texttt{reddit\_sentiment\_gap\_lag1} \\
+  & Emotions (Trump)
+  & \texttt{reddit\_trump\_fear}, \texttt{\_anger}, \texttt{\_anticipation},
+    \texttt{\_trust}, \texttt{\_surprise}, \texttt{\_sadness},
+    \texttt{\_disgust}, \texttt{\_joy} \\
+  & Emotions (Harris)
+  & \texttt{reddit\_harris\_fear}, \texttt{\_anger}, \texttt{\_anticipation},
+    \texttt{\_trust}, \texttt{\_surprise}, \texttt{\_sadness},
+    \texttt{\_disgust}, \texttt{\_joy} \\
+  & Emotions (Election)
+  & \texttt{reddit\_election\_fear}, \texttt{\_anger}, \texttt{\_anticipation},
+    \texttt{\_trust}, \texttt{\_surprise}, \texttt{\_sadness},
+    \texttt{\_disgust}, \texttt{\_joy} \\
+\midrule
+
+% -------------------------------------------------------
+\multirow{4}{*}{\textbf{News}}
+  & Volume \& counts
+  & \texttt{news\_total}, \texttt{news\_trump\_count}, \texttt{news\_harris\_count},
+    \texttt{news\_election\_count}, \texttt{news\_rep\_count}, \texttt{news\_dem\_count},
+    \texttt{news\_cen\_count}, \texttt{news\_trump\_share}, \texttt{news\_harris\_share} \\
+  & Attention asymmetry
+  & \texttt{news\_attention\_asymmetry}, \texttt{news\_attention\_asymmetry\_7d},
+    \texttt{news\_attention\_asymmetry\_lag1}, \texttt{news\_attention\_asymmetry\_7d\_lag1} \\
+  & VADER sentiment
+  & \texttt{vader\_compound\_mean/std} $\times$ (dem/rep/cen);
+    \texttt{vader\_pos/neg\_share} $\times$ (dem/rep/cen);
+    \texttt{news\_vader\_leaning\_gap}, \texttt{news\_vader\_leaning\_gap\_lag1} \\
+  & NRC emotions
+  & \texttt{nrc\_\{fear, anger, anticipation, trust, surprise, sadness, disgust, joy\}}
+    $\times$ (dem/rep/cen);
+    \texttt{nrc\_fear\_avg}, \texttt{nrc\_anger\_avg},
+    \texttt{nrc\_trust\_avg}, \texttt{nrc\_anticipation\_avg} \\
+\midrule
+
+% -------------------------------------------------------
+\multirow{3}{*}{\textbf{Google Trends}}
+  & Raw interest
+  & \texttt{gt\_trump}, \texttt{gt\_kamala}, \texttt{gt\_vance},
+    \texttt{gt\_walz}, \texttt{gt\_election\_2024} \\
+  & Derived features
+  & \texttt{gt\_trump\_minus\_kamala}, \texttt{gt\_trump\_share},
+    \texttt{gt\_trump\_7d}, \texttt{gt\_kamala\_7d} \\
+  & Lags
+  & \texttt{gt\_trump\_lag1}, \texttt{gt\_kamala\_lag1},
+    \texttt{gt\_trump\_share\_lag1} \\
+\midrule
+
+% -------------------------------------------------------
+\multirow{3}{*}{\textbf{Polls}}
+  & Current estimates
+  & \texttt{poll\_trump\_avg}, \texttt{poll\_harris\_avg},
+    \texttt{poll\_margin}, \texttt{poll\_n\_today} \\
+  & Rolling averages
+  & \texttt{poll\_trump\_7d\_avg}, \texttt{poll\_harris\_7d\_avg},
+    \texttt{poll\_margin\_7d\_avg}, \texttt{poll\_margin\_change\_7d},
+    \texttt{poll\_volatility\_7d} \\
+  & Lags \& divergence
+  & \texttt{poll\_margin\_lag1}, \texttt{poll\_market\_divergence},
+    \texttt{poll\_market\_divergence\_lag1} \\
+\midrule
+
+% -------------------------------------------------------
+\multirow{3}{*}{\textbf{Financial}}
+  & Market levels
+  & \texttt{sp500}, \texttt{oil}, \texttt{vix}, \texttt{bond\_10y},
+    \texttt{usd\_index} \\
+  & Returns \& volatility
+  & \texttt{sp500\_return\_1d}, \texttt{sp500\_return\_7d},
+    \texttt{sp500\_vol\_7d}, \texttt{oil\_return\_1d}, \texttt{vix\_change\_1d} \\
+  & Lags
+  & \texttt{vix\_lag1}, \texttt{sp500\_return\_1d\_lag1} \\
+
+\end{longtable}
+
+% ------------------------------------------------------------------
+\newpage
+\definecolor{bgdark}{HTML}{0f171f}
+\pagecolor{bgdark}
+\color{white}
+\section{Key Figures}
+\label{app:figures}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{snapshot_00_baseline.png}
+\caption{Polymarket win probabilities for Trump and Harris, July--November 2024.
+Solid lines show daily closing prices; dashed lines show 7-day rolling averages.}
+\label{fig:polymarket_baseline}
+\end{figure}
+
+\end{document}
