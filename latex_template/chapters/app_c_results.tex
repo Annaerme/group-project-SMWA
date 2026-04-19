@@ -1,0 +1,22 @@
+% ------------------------------------------------------------------
+\newpage
+\section{Model Results}
+\label{app:results}
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{p{5.5cm} p{3.0cm} p{2.0cm} p{2.5cm}}
+\toprule
+\textbf{Scenario} & \textbf{Best model} & \textbf{MAE (test)} & \textbf{DirAcc (test)} \\
+\midrule
+Price level (Model A)       & AR(1) baseline    & 0.013          & 47.5\% \\
+Price change (Model B)      & Ridge             & $\approx$0.010 & 57.1\% \\
+Social media features only  & Random Forest     & 0.016          & 64.3\% \\
+Lag price only              & Linear Regression & 0.016          & 57.1\% \\
+News features only          & Random Forest     & 0.015          & 50.0\% \\
+\bottomrule
+\end{tabular}
+\caption{Model performance on the held-out test set (14 days). DirAcc = percentage of correctly predicted price movement directions.}
+\label{tab:results}
+\end{table}

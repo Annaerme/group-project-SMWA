@@ -1,0 +1,159 @@
+% ------------------------------------------------------------------
+\newpage
+\section{Basetable: Variable Overview}
+\label{app:basetable}
+
+\begin{longtable}{@{} p{2.3cm} p{3.6cm} p{8.7cm} @{}}
+\caption{Basetable: overview of all features included in the predictive model.}
+\label{tab:basetable} \\
+\toprule
+\textbf{Source} & \textbf{Feature group} & \textbf{Variables} \\
+\midrule
+\endfirsthead
+\multicolumn{3}{@{}l}{\small\itshape Continued from previous page} \\[3pt]
+\midrule
+\textbf{Source} & \textbf{Feature group} & \textbf{Variables} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r@{}}{\small\itshape Continued on next page} \\
+\endfoot
+\bottomrule
+\endlastfoot
+
+% -------------------------------------------------------
+\textbf{Target}
+  & Price change
+  & \texttt{price\_change}: daily first difference of Trump win probability (Polymarket closing price) \\
+\midrule
+
+% -------------------------------------------------------
+\textbf{Time}
+  & Calendar
+  & \texttt{days\_to\_election}, \texttt{is\_weekend}, \texttt{weekday},
+    \texttt{campaign\_week}, \texttt{days\_since\_last\_event} \\
+\midrule
+
+% -------------------------------------------------------
+\multirow{2}{*}{\textbf{Polymarket}}
+  & Price lags
+  & \texttt{polymarket\_trump\_prob\_lag1}, \texttt{lag2}, \texttt{lag3}, \texttt{lag4}, \texttt{lag5} \\
+  & Change lags
+  & \texttt{price\_change\_lag1}, \texttt{lag2}, \texttt{lag3},
+    \texttt{polymarket\_volatility\_7d} \\
+\midrule
+
+% -------------------------------------------------------
+\multirow{6}{*}{\textbf{Bluesky}}
+  & Volume
+  & \texttt{bsky\_total\_posts}, \texttt{bsky\_unique\_authors},
+    \texttt{bsky\_avg\_likes}, \texttt{bsky\_avg\_reposts}, \texttt{bsky\_reply\_ratio} \\
+  & Candidate share
+  & \texttt{bsky\_trump\_unique\_authors}, \texttt{bsky\_harris\_unique\_authors},
+    \texttt{bsky\_trump\_share}, \texttt{bsky\_harris\_share}, \texttt{bsky\_posts\_per\_author} \\
+  & Sentiment
+  & \texttt{bsky\_\{trump, harris, election\}\_sent\_avg}, \texttt{\_sent\_std},
+    \texttt{\_pos\_share}, \texttt{\_neg\_share};
+    \texttt{bsky\_sentiment\_gap}, \texttt{bsky\_sentiment\_gap\_lag1} \\
+  & Emotions (Trump)
+  & \texttt{bsky\_trump\_fear}, \texttt{\_anger}, \texttt{\_anticipation},
+    \texttt{\_trust}, \texttt{\_surprise}, \texttt{\_sadness},
+    \texttt{\_disgust}, \texttt{\_joy} \\
+  & Emotions (Harris)
+  & \texttt{bsky\_harris\_fear}, \texttt{\_anger}, \texttt{\_anticipation},
+    \texttt{\_trust}, \texttt{\_surprise}, \texttt{\_sadness},
+    \texttt{\_disgust}, \texttt{\_joy} \\
+  & Emotions (Election)
+  & \texttt{bsky\_election\_fear}, \texttt{\_anger}, \texttt{\_anticipation},
+    \texttt{\_trust}, \texttt{\_surprise}, \texttt{\_sadness},
+    \texttt{\_disgust}, \texttt{\_joy} \\
+\midrule
+
+% -------------------------------------------------------
+\multirow{6}{*}{\textbf{Reddit}}
+  & Volume
+  & \texttt{reddit\_total\_posts}, \texttt{reddit\_unique\_authors},
+    \texttt{reddit\_avg\_score}, \texttt{reddit\_avg\_upvote\_ratio},
+    \texttt{reddit\_avg\_comments} \\
+  & Candidate share
+  & \texttt{reddit\_trump\_unique\_authors}, \texttt{reddit\_harris\_unique\_authors},
+    \texttt{reddit\_trump\_share}, \texttt{reddit\_harris\_share},
+    \texttt{reddit\_conservative\_share}, \texttt{reddit\_liberal\_share},
+    \texttt{reddit\_posts\_per\_author} \\
+  & Sentiment
+  & \texttt{reddit\_\{trump, harris, election\}\_sent\_avg}, \texttt{\_sent\_std},
+    \texttt{\_pos\_share}, \texttt{\_neg\_share};
+    \texttt{reddit\_sentiment\_gap}, \texttt{reddit\_sentiment\_gap\_lag1} \\
+  & Emotions (Trump)
+  & \texttt{reddit\_trump\_fear}, \texttt{\_anger}, \texttt{\_anticipation},
+    \texttt{\_trust}, \texttt{\_surprise}, \texttt{\_sadness},
+    \texttt{\_disgust}, \texttt{\_joy} \\
+  & Emotions (Harris)
+  & \texttt{reddit\_harris\_fear}, \texttt{\_anger}, \texttt{\_anticipation},
+    \texttt{\_trust}, \texttt{\_surprise}, \texttt{\_sadness},
+    \texttt{\_disgust}, \texttt{\_joy} \\
+  & Emotions (Election)
+  & \texttt{reddit\_election\_fear}, \texttt{\_anger}, \texttt{\_anticipation},
+    \texttt{\_trust}, \texttt{\_surprise}, \texttt{\_sadness},
+    \texttt{\_disgust}, \texttt{\_joy} \\
+\midrule
+
+% -------------------------------------------------------
+\multirow{4}{*}{\textbf{News}}
+  & Volume \& counts
+  & \texttt{news\_total}, \texttt{news\_trump\_count}, \texttt{news\_harris\_count},
+    \texttt{news\_election\_count}, \texttt{news\_rep\_count}, \texttt{news\_dem\_count},
+    \texttt{news\_cen\_count}, \texttt{news\_trump\_share}, \texttt{news\_harris\_share} \\
+  & Attention asymmetry
+  & \texttt{news\_attention\_asymmetry}, \texttt{news\_attention\_asymmetry\_7d},
+    \texttt{news\_attention\_asymmetry\_lag1}, \texttt{news\_attention\_asymmetry\_7d\_lag1} \\
+  & VADER sentiment
+  & \texttt{vader\_compound\_mean/std} $\times$ (dem/rep/cen);
+    \texttt{vader\_pos/neg\_share} $\times$ (dem/rep/cen);
+    \texttt{news\_vader\_leaning\_gap}, \texttt{news\_vader\_leaning\_gap\_lag1} \\
+  & NRC emotions
+  & \texttt{nrc\_\{fear, anger, anticipation, trust, surprise, sadness, disgust, joy\}}
+    $\times$ (dem/rep/cen);
+    \texttt{nrc\_fear\_avg}, \texttt{nrc\_anger\_avg},
+    \texttt{nrc\_trust\_avg}, \texttt{nrc\_anticipation\_avg} \\
+\midrule
+
+% -------------------------------------------------------
+\multirow{3}{*}{\textbf{Google Trends}}
+  & Raw interest
+  & \texttt{gt\_trump}, \texttt{gt\_kamala}, \texttt{gt\_vance},
+    \texttt{gt\_walz}, \texttt{gt\_election\_2024} \\
+  & Derived features
+  & \texttt{gt\_trump\_minus\_kamala}, \texttt{gt\_trump\_share},
+    \texttt{gt\_trump\_7d}, \texttt{gt\_kamala\_7d} \\
+  & Lags
+  & \texttt{gt\_trump\_lag1}, \texttt{gt\_kamala\_lag1},
+    \texttt{gt\_trump\_share\_lag1} \\
+\midrule
+
+% -------------------------------------------------------
+\multirow{3}{*}{\textbf{Polls}}
+  & Current estimates
+  & \texttt{poll\_trump\_avg}, \texttt{poll\_harris\_avg},
+    \texttt{poll\_margin}, \texttt{poll\_n\_today} \\
+  & Rolling averages
+  & \texttt{poll\_trump\_7d\_avg}, \texttt{poll\_harris\_7d\_avg},
+    \texttt{poll\_margin\_7d\_avg}, \texttt{poll\_margin\_change\_7d},
+    \texttt{poll\_volatility\_7d} \\
+  & Lags \& divergence
+  & \texttt{poll\_margin\_lag1}, \texttt{poll\_market\_divergence},
+    \texttt{poll\_market\_divergence\_lag1} \\
+\midrule
+
+% -------------------------------------------------------
+\multirow{3}{*}{\textbf{Financial}}
+  & Market levels
+  & \texttt{sp500}, \texttt{oil}, \texttt{vix}, \texttt{bond\_10y},
+    \texttt{usd\_index} \\
+  & Returns \& volatility
+  & \texttt{sp500\_return\_1d}, \texttt{sp500\_return\_7d},
+    \texttt{sp500\_vol\_7d}, \texttt{oil\_return\_1d}, \texttt{vix\_change\_1d} \\
+  & Lags
+  & \texttt{vix\_lag1}, \texttt{sp500\_return\_1d\_lag1} \\
+
+\end{longtable}

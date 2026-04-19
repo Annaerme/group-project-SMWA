@@ -1,0 +1,25 @@
+% ---------------------------------------------------------------------
+\section{Predictive Modeling}
+% ---------------------------------------------------------------------
+
+\subsection{Feature Engineering}
+
+The base table aggregates all daily features into a 124-row matrix with 129 columns across nine groups: Bluesky (11), network (5), Reddit (19), news (22), financial (20), macro (5), event dummies (10, with lag-1 versions), polls (5), and lags (8). Ratios and shares are preferred over raw counts for scale invariance; seven-day rolling averages smooth day-to-day noise (Lecture~6). A second table version adds interaction and surprise features: sentiment gap (Trump minus Harris), sentiment surprise (deviation from seven-day rolling mean), poll margin momentum (first difference), and a sentiment-gap-times-poll-margin interaction term capturing the hypothesis that prediction markets respond to deviations from expectations rather than absolute levels.
+
+Our target is the daily change in Trump's win probability on Polymarket. The models try to predict whether the market will give Trump a higher or lower chance than the day before. This differencing of the dependent variable ensures that the series is stationary, which is beneficial for time-series modelling and prevents the model from simply learning to repeat yesterday's value. A natural baseline is therefore a naive model that always predicts zero change, representing the assumption that price changes are unpredictable.
+
+The independent features are built from eight different data sources all aggregated to a single row per day, resulting in a 124-row matrix with 129 columns. Social media activity from Bluesky and Reddit is captured through daily post volumes, engagement metrics, and sentiment scores. Newspaper coverage is measured by article counts per political leaning alongside tone indicators. Google Trends provide daily search interest for election-related keywords, while poll numbers are included as daily averages of Trump and Harris support, where days without new polls simply carry forward the most recent available value. Financial market data is included through daily price levels and derived metrics such as day-over-day returns and 7-day rolling average volatility --- covering the S\&P~500, oil, the VIX volatility index, bonds, and the US dollar index. As we are working with a time-series dataset, lagged versions of the target and key signals are added so the models can learn from recent momentum. Before modelling, near-constant features, features with negligible correlation to the target, and highly redundant feature pairs are removed.
+
+\textcolor{red}{\textbf{[TODO: Feature selection only happens after train--test split. All selection decisions are made exclusively on the training data and then applied to the full dataset, taking the cross-validation setup into account.]}}
+
+An overview of all included variables is provided in Appendix~A, Table~\ref{tab:basetable}.
+
+\subsection{Cross-Validation Strategy}
+
+Standard $k$-fold cross-validation is not applicable to time series data as shuffling would introduce look-ahead bias \citep{makridakis2018}. An expanding walk-forward window scheme was adopted, in which the training set grows with each fold while the validation set covers a subsequent held-out period (Lecture~6). The 124-day dataset was split into a 110-day cross-validation region (5 July to 21 October) and a 14-day held-out test set (22 October to 4 November). Three folds expanded the training window by approximately 27 days each, with a one-day gap between training and validation to prevent leakage through rolling mean features. The imputer and scaler were fitted on training rows only and applied to validation rows, consistent with Lecture~4 principles. The test set was accessed only after final model selection.
+
+\subsection{Models and Results}
+
+Model~A predicts the price level (AR(1) baseline MAE: 0.013); Model~B predicts the daily first difference (naive baseline MAE: 0.010). Six model families were evaluated: AR(1), Ridge, Lasso, ElasticNet, Random Forest (200 trees), and XGBoost, each with and without TF-IDF+SVD text features. Neural networks were excluded due to severe overfitting on the approximately 30-observation training folds in early windows (Lecture~6). Hyperparameters were tuned via a manual walk-forward grid search to avoid sklearn's data-shuffling behavior, selecting the configuration with the lowest mean MAE across three folds. Results are summarized in Table~\ref{tab:results} in Appendix~\ref{app:results}.
+
+The most notable finding is that a Random Forest trained exclusively on social media features achieves 64.3\% directional accuracy on the test set. No learned model consistently beats the AR(1) baseline on MAE for Model~A, confirming the near-random-walk structure of the price level. The gap between cross-validation directional accuracy (54.2\%) and test set accuracy (64.3\%) for the social media Random Forest may partly reflect a favorable split; with only 14 test observations, directional accuracy estimates carry high variance and should be interpreted with caution.
