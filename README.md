@@ -166,7 +166,7 @@ Three metrics are reported for every model × feature set combination:
 |--------|-------------|
 | **Directional Accuracy (DA)** | Fraction of test days where the model correctly predicted the *direction* of next-day movement — the primary operational metric |
 | **MAE** | Mean Absolute Error on the raw probability — secondary accuracy metric |
-| **R²** | Coefficient of determination; negative for all models, which is expected: prediction markets already price in most available information, so daily residuals are near-noise |
+| **R²** | Coefficient of determination; negative for almost all models, which is expected: prediction markets already price in most available information, so daily residuals are near-noise |
 
 A naive baseline (always predict zero change) scores MAE = 0.0162, DA = 0.00, R² = −0.057. The **best model overall is SVM** (DA = 0.571, MAE = 0.0143), correctly predicting the direction of market movement on 8 of the 14 held-out test days.
 
@@ -249,5 +249,23 @@ pip install -r requirements.txt
 # Optional: download spaCy model
 python -m spacy download en_core_web_sm
 ```
+
+### Pre-trained models
+
+The NLP notebooks use GloVe word embeddings (100-dimensional vectors trained on Wikipedia + Common Crawl). These are **not** committed to the repository due to file size. Download and place them manually:
+
+1. Download `glove.6B.zip` from [https://nlp.stanford.edu/projects/glove/](https://nlp.stanford.edu/projects/glove/)
+2. Extract and place the files under `Pre-trained-models/glove.6B/`:
+
+```
+Pre-trained-models/
+└── glove.6B/
+    ├── glove.6B.50d.txt
+    ├── glove.6B.100d.txt   ← used by the notebooks
+    ├── glove.6B.200d.txt
+    └── glove.6B.300d.txt
+```
+
+The notebooks load the embeddings via `GLOVE_PATH = Path('../../Pre-trained-models/glove.6B.100d.txt')`. If the file is not present, the GloVe section is skipped automatically without breaking the rest of the notebook.
 
 > **Data note:** Raw and processed data files are **not** committed to the repository. Run the notebooks in `data_retrieval/` in order (0 → 6) to populate `Data/1_Bronze/`, then run the cleaning/NLP cells in each `Descriptive/` source folder to populate `Data/2_Silver/`.
