@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import matplotlib.font_manager as fm
 import warnings
+import random
 
 # ── Colour palette ─────────────────────────────────────────────────────────────
 BG_DARK      = "#0f171f"   # figure / axes background
@@ -26,9 +27,102 @@ NEUTRAL      = "#77787A"   # neutral posts / misc elements
 BLUESKY_BLUE = "#1185fe"   # platform color for Bluesky volume/series
 REDDIT_ORG   = "#e85a28"   # platform color for Reddit volume/series
 
+# ── Topic modelling colours ───────────────────────────────────────────────────
+TM_BLUE        = "#007ef9"
+TM_ORANGE      = "#e85a28"
+TM_LAVENDER    = "#b39ddb"
+TM_CRIMSON     = "#9f193e"
+TM_BURGUNDY    = "#8b1a5c"
+TM_DEEP_BLUE   = "#1a3875"
+
+TOPIC_MODEL_COLORS = [
+    TM_BLUE,
+    TM_ORANGE,
+    TM_LAVENDER,
+    TM_CRIMSON,
+    TM_BURGUNDY,
+    TM_DEEP_BLUE,
+]
+TOPIC_COLORS = TOPIC_MODEL_COLORS  # short alias for notebook use
+
+# ── Word cloud colours ────────────────────────────────────────────────────────
+WC_START = "#7d0d2c"  # burgundy endpoint
+WC_END = "#1a3875"    # deep-blue endpoint
+
+
+def _hex_to_rgb(hex_color):
+    """Convert #RRGGBB to (r, g, b)."""
+    hex_color = hex_color.lstrip("#")
+    return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
+
+
+def _rgb_to_hex(rgb):
+    """Convert (r, g, b) to #RRGGBB."""
+    return "#{:02x}{:02x}{:02x}".format(*rgb)
+
+
+def _blend_hex(hex_a, hex_b, ratio=0.5):
+    """Blend two hex colours by `ratio` (0 = a, 1 = b)."""
+    ratio = max(0.0, min(1.0, float(ratio)))
+    a = _hex_to_rgb(hex_a)
+    b = _hex_to_rgb(hex_b)
+    rgb = tuple(int(round((1 - ratio) * a[i] + ratio * b[i])) for i in range(3))
+    return _rgb_to_hex(rgb)
+
+
+def wordcloud_palette(topic_id=None, n_shades=6):
+    """Return n_shades colours for a word cloud.
+
+    - topic_id=None: blue-red gradient (WC_START -> WC_END)
+    - topic_id set : shades around that specific topic colour
+    """
+    if n_shades <= 0:
+        if topic_id is None:
+            return [WC_START]
+        return [TOPIC_MODEL_COLORS[int(topic_id) % len(TOPIC_MODEL_COLORS)]]
+
+    if topic_id is None:
+        if n_shades == 1:
+            return [_blend_hex(WC_START, WC_END, ratio=0.5)]
+        return [
+            _blend_hex(WC_START, WC_END, ratio=i / (n_shades - 1))
+            for i in range(n_shades)
+        ]
+
+    base = TOPIC_MODEL_COLORS[int(topic_id) % len(TOPIC_MODEL_COLORS)]
+    dark = _blend_hex(base, "#000000", ratio=0.28)
+    light = _blend_hex(base, "#ffffff", ratio=0.18)
+    if n_shades == 1:
+        return [base]
+    return [
+        _blend_hex(dark, light, ratio=i / (n_shades - 1))
+        for i in range(n_shades)
+    ]
+
+
+# Ready-to-use gradient list for quick notebook usage.
+WORDCLOUD_GRADIENT = wordcloud_palette(n_shades=12)
+
+
+def wordcloud_color_func(topic_id=None, seed=42, n_shades=7):
+    """Create a deterministic WordCloud color_func for one topic.
+
+    Usage:
+        wc = WordCloud(background_color=BG_PANEL, color_func=wordcloud_color_func(topic_id=2))
+    """
+    palette = wordcloud_palette(topic_id=topic_id, n_shades=n_shades)
+    offset = 0 if topic_id is None else int(topic_id)
+    rng = random.Random(seed + offset)
+
+    def _color_func(word, font_size, position, orientation, random_state=None, **kwargs):
+        return rng.choice(palette)
+
+    return _color_func
+
 # ── Signal colours ─────────────────────────────────────────────────────────────
 C_VIX    = "#e69c1e"   # oranje        — marktvolatiliteit (VIX)
 C_SP500  = "#4a90e2"   # middenblauw   — S&P 500
+C_DIFF   = "#8a9bb0"   # grijs-blauw   — verschil-/spread-lijn (nooit wit)
 
 # ── NRC emotion colours ────────────────────────────────────────────────────────
 C_FEAR         = "#8b1a5c"   # bordeaux-paars
@@ -38,6 +132,13 @@ C_DISGUST      = "#1e6b35"   # donkergroen
 C_SADNESS      = "#3b82c4"   # blauw
 C_JOY          = "#f0c330"   # geel
 C_ANTICIPATION = "#f5a0c0"   # babyroze
+
+# Sentiment/model colours
+C_SURPRISE = "#8fd3ff"   # lichtblauw
+C_VADER    = "#f39c12"   # oranje
+C_NRC_LEX  = "#f5b041"   # geeloranje
+C_TEXTBLOB = "#d62828"   # rood
+C_ROBERTA  = "#1f8cff"   # fel blauw
 
 TEXT_PRIMARY = "#e8eaed"   # main text
 TEXT_MUTED   = "#6b8399"   # axis labels, tick labels
@@ -85,16 +186,16 @@ def apply_style():
         "figure.facecolor"      : BG_DARK,
         "figure.edgecolor"      : BG_DARK,
         "figure.dpi"            : 120,
-        "figure.titlesize"      : 16,
+        "figure.titlesize"      : 20,
         "figure.titleweight"    : "bold",
 
         # Axes
         "axes.facecolor"        : BG_PANEL,
         "axes.edgecolor"        : SPINE_COLOR,
         "axes.labelcolor"       : TEXT_PRIMARY,
-        "axes.labelsize"        : 11,
+        "axes.labelsize"        : 12,
         "axes.labelpad"         : 8,
-        "axes.titlesize"        : 13,
+        "axes.titlesize"        : 15,
         "axes.titleweight"      : "bold",
         "axes.titlecolor"       : TEXT_PRIMARY,
         "axes.titlepad"         : 12,
@@ -103,6 +204,8 @@ def apply_style():
         "axes.prop_cycle"       : mpl.cycler(color=PALETTE),
         "axes.grid"             : True,
         "axes.axisbelow"        : True,
+        "axes.xmargin"          : 0.0,
+        "axes.ymargin"          : 0.03,
 
         # Grid
         "grid.color"            : GRID_COLOR,
@@ -125,13 +228,14 @@ def apply_style():
         "legend.labelcolor"     : TEXT_PRIMARY,
         "legend.fontsize"       : 9,
         "legend.framealpha"     : 0.9,
-        "legend.title_fontsize" : 10,
+        "legend.title_fontsize" : 13,
+        "legend.loc"            : "lower center",
 
         # Text & fonts
         "text.color"            : TEXT_PRIMARY,
         "font.family"           : "sans-serif",
         "font.sans-serif"       : [FONT_FAMILY, "DejaVu Sans"],
-        "font.size"             : 10,
+        "font.size"             : 11,
 
         # Lines & markers
         "lines.linewidth"       : 2.0,
@@ -200,7 +304,8 @@ def styled_fig(nrows=1, ncols=1, figsize=None, title=None, **kwargs):
     fig, axes = plt.subplots(nrows, ncols, figsize=figsize, **kwargs)
     fig.patch.set_facecolor(BG_DARK)
     if title:
-        fig.suptitle(title, color=TEXT_PRIMARY, fontsize=16,
+        fig.suptitle(title, color=TEXT_PRIMARY,
+                     fontsize=mpl.rcParams["figure.titlesize"],
                      fontweight="bold", y=1.02)
     return fig, axes
 
@@ -216,6 +321,99 @@ def style_ax(ax, xlabel=None, ylabel=None, title=None, grid_axis="y"):
     ax.tick_params(colors=TEXT_MUTED)
     ax.grid(axis=grid_axis, color=GRID_COLOR, linewidth=0.8)
     ax.set_axisbelow(True)
+    return ax
+
+
+def limit_x_to_data(ax, x_values=None):
+    """Trim x-limits to data range so plots don't show empty time edges."""
+    import matplotlib.dates as mdates
+
+    vals = []
+    if x_values is not None:
+        vals = list(x_values)
+    else:
+        for line in ax.get_lines():
+            vals.extend(list(line.get_xdata()))
+
+    nums = []
+    for v in vals:
+        try:
+            nums.append(float(v))
+            continue
+        except Exception:
+            pass
+        try:
+            nums.append(mdates.date2num(v))
+        except Exception:
+            continue
+
+    if nums:
+        ax.set_xlim(min(nums), max(nums))
+    return ax
+
+
+def place_legends_bottom(ax, event_handles=None, main_ncol=2, event_ncol=4,
+                         main_y=0.20, event_y=0.03,
+                         main_handles=None, main_labels=None,
+                         main_title=None, event_title=None):
+    """Place main legend and optional separate event legend below the figure.
+
+    Uses fig.legend() so positioning is stable regardless of tight_layout.
+    Call plt.tight_layout(rect=[0, 0.26, 1, 1]) afterwards to leave room.
+    main_y sits above event_y — defaults tuned for 14×4/14×5 figures.
+
+    Pass main_handles (and optionally main_labels) to override ax handles.
+    Use main_title / event_title to add a header to each legend group.
+    """
+    fig = ax.get_figure()
+
+    if main_handles is None:
+        handles, labels = ax.get_legend_handles_labels()
+        pairs = [(h, l) for h, l in zip(handles, labels) if l and not l.startswith("_")]
+        if pairs:
+            main_handles, main_labels = zip(*pairs)
+        else:
+            main_handles, main_labels = [], []
+
+    main_legend = None
+    if main_handles:
+        legend_kwargs = dict(
+            loc="lower center", bbox_to_anchor=(0.5, main_y),
+            ncol=max(1, min(main_ncol, len(main_handles))),
+            facecolor=BG_PANEL, edgecolor=SPINE_COLOR, labelcolor=TEXT_PRIMARY,
+            framealpha=0.95,
+            title=main_title, title_fontsize=10,
+        )
+        if main_labels is not None:
+            main_legend = fig.legend(list(main_handles), list(main_labels), **legend_kwargs)
+        else:
+            main_legend = fig.legend(handles=list(main_handles), **legend_kwargs)
+        if main_title and main_legend.get_title():
+            main_legend.get_title().set_color(TEXT_MUTED)
+
+    event_legend = None
+    if event_handles:
+        event_legend = fig.legend(
+            handles=event_handles,
+            loc="lower center", bbox_to_anchor=(0.5, event_y),
+            ncol=max(1, min(event_ncol, len(event_handles))),
+            facecolor=BG_PANEL, edgecolor=SPINE_COLOR, labelcolor=TEXT_PRIMARY,
+            framealpha=0.95,
+            title=event_title, title_fontsize=10,
+        )
+        if event_title and event_legend.get_title():
+            event_legend.get_title().set_color(TEXT_MUTED)
+
+    return main_legend, event_legend
+
+
+def finalize_plot(ax, x_values=None, events=None, add_event_legend=False,
+                  main_ncol=2, event_ncol=4):
+    """Common final step: trim x-axis and place bottom legends."""
+    limit_x_to_data(ax, x_values=x_values)
+    event_handles = event_legend_handles(events) if add_event_legend else None
+    place_legends_bottom(ax, event_handles=event_handles,
+                         main_ncol=main_ncol, event_ncol=event_ncol)
     return ax
 
 
