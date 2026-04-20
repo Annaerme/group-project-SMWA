@@ -146,46 +146,53 @@ def process_notebook(nb_path):
 # ── Step 3: project_overview.ipynb ────────────────────────────────────────────
 
 def build_overview(notebooks):
-    # Group by top-level folder → subfolder (direct parent of the notebook)
+    # Group by top-level folder → first subfolder → optional second subfolder
     groups = {}
     for nb_path in notebooks:
         parts  = nb_path.relative_to(ROOT).parts
         top    = parts[0]
-        sub    = parts[-2] if len(parts) > 2 else ""
-        groups.setdefault(top, {}).setdefault(sub, []).append(nb_path)
+        sub    = parts[1] if len(parts) > 2 else ""
+        subsub = parts[2] if len(parts) > 3 else ""
+        (groups
+            .setdefault(top, {})
+            .setdefault(sub, {})
+            .setdefault(subsub, [])
+            .append(nb_path))
 
     lines = ["# Project Overview\n\n"]
 
     ORDER = ["data_retrieval", "Descriptive", "Predictive"]
     ordered_tops = ORDER + [t for t in sorted(groups) if t not in ORDER]
     for top in ordered_tops:
+        if top not in groups:
+            continue
         lines.append(f"## {top}\n\n")
         for sub in sorted(groups[top]):
             if sub and sub != top:
                 lines.append(f"### {sub}\n\n")
-            for nb_path in groups[top][sub]:
-                rel_raw = nb_path.relative_to(ROOT).as_posix()
-                # URL-encode each path part so spaces (%20) etc. work correctly in links
-                rel = "/".join(quote(part, safe="") for part in rel_raw.split("/"))
-                name = nb_path.stem.replace("_", " ").replace("-", " ").title()
-                nb   = load(nb_path)
-                # Skip the title line — the bold notebook name already serves as the title
-                items = heading_items(nb, skip_toc=True, skip_title=True)
+            for subsub in sorted(groups[top][sub]):
+                if subsub:
+                    lines.append(f"#### {subsub}\n\n")
+                for nb_path in groups[top][sub][subsub]:
+                    rel_raw = nb_path.relative_to(ROOT).as_posix()
+                    rel = "/".join(quote(part, safe="") for part in rel_raw.split("/"))
+                    name = nb_path.stem.replace("_", " ").replace("-", " ").title()
+                    nb   = load(nb_path)
+                    items = heading_items(nb, skip_toc=True, skip_title=True)
 
-                if not items:
-                    lines.append(f"- [{name}]({rel})\n")
-                    continue
+                    if not items:
+                        lines.append(f"- [{name}]({rel})\n")
+                        continue
 
-                # Normalise: first subsection level becomes indent 1
-                min_lvl = min(l for l, _, _ in items)
+                    min_lvl = min(l for l, _, _ in items)
 
-                lines.append(f"- **[{name}]({rel})**\n")
-                for level, title, anchor in items:
-                    depth  = level - min_lvl + 1   # first subsection = 1 indent
-                    indent = "  " * depth
-                    lines.append(f"{indent}- [{title}]({rel}#{anchor})\n")
+                    lines.append(f"- **[{name}]({rel})**\n")
+                    for level, title, anchor in items:
+                        depth  = level - min_lvl + 1
+                        indent = "  " * depth
+                        lines.append(f"{indent}- [{title}]({rel}#{anchor})\n")
 
-            lines.append("\n")
+                lines.append("\n")
 
     nb_struct = {
         "nbformat": 4,
