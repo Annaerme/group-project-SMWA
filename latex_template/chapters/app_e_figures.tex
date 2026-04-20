@@ -6,14 +6,23 @@
 \definecolor{textprimary}{HTML}{e8eaed}
 \titleformat{\section}{\sffamily\Large\bfseries\color{textmuted}}{\color{textmuted}\thesection}{1em}{}
 \titleformat{\subsection}{\sffamily\large\bfseries\color{textmuted}}{\color{textmuted}\thesubsection}{1em}{}
-\captionsetup{labelfont={color=textprimary,bf}, textfont={color=textprimary}}
+\captionsetup{labelfont={color=textmuted,bf}, textfont={color=textmuted}}
 \section{Key Figures}
 \label{app:figures}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{snapshot_00_baseline.png}
-\caption{Polymarket win probabilities for Trump and Harris, July--November 2024.
-Solid lines show daily closing prices; dashed lines show 7-day rolling averages.}
-\label{fig:polymarket_baseline}
+\includegraphics[width=\textwidth]{polymarket_presentation_chart.png}
+\caption{Polymarket win probabilities for Trump and Harris (July--November 2024).
+Solid lines show daily closing prices; dashed lines show 7-day rolling averages.
+Vertical dashed lines mark key campaign events.}
+\label{fig:polymarket_chart}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{polymarket_event_table.png}
+\caption{Overview of key campaign events included in the Polymarket analysis,
+with date, label, and brief description.}
+\label{fig:polymarket_events}
 \end{figure}

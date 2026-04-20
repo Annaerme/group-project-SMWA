@@ -152,15 +152,15 @@ def apply_style():
 EVENTS = [
     ('Trump shot',                '2024-07-13', REPUBLICAN),
     ('JD Vance VP pick',          '2024-07-15', '#e07b39'),
-    ('Biden withdraws',           '2024-07-21', DEMOCRAT),
-    ('Obama endorses Harris',     '2024-07-26', DEMOCRAT),
-    ('Harris nominated',          '2024-08-05', '#5dade2'),
-    ("Start of DNC", "2024-08-19", "#7dd3fc"),  # lichtblauw
+    ('Biden withdraws',           '2024-07-21', '#5dade2'),
+    ('Obama endorses Harris',     '2024-07-26', '#5dade2'),
+    ('Harris nominated',          '2024-08-05', DEMOCRAT),
+    ("Start of DNC", "2024-08-19", '#5dade2'), 
     ('Trump–Harris debate (ABC)', '2024-09-10', NEUTRAL),
-    ('2nd assassination attempt', '2024-09-15', '#c0392b'),
+    ('2nd assassination attempt', '2024-09-15',REPUBLICAN ),
     ('Vance-Walz debate (CBC)', '2024-10-01', NEUTRAL),
     ('Musk at Butler rally',   '2024-10-05', '#f5a623'),
-    ('America PAC offers $47 to supporters who refer another registered voter in a swing state', '2024-10-07', '#f5a623'),
+    ('$47 per registered voter in a swing state', '2024-10-07', '#f5a623'),
     ('Musk increases petition reward', '2024-10-10', '#f5a623'),
 ]
 
