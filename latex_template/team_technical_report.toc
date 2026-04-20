@@ -19,5 +19,6 @@
 \contentsline {section}{\numberline {E}Key Figures}{15}{appendix.E}%
 \contentsline {subsection}{\numberline {E.1}Financial Markets}{16}{subsection.E.1}%
 \contentsline {subsection}{\numberline {E.2}Google Trends}{18}{subsection.E.2}%
-\contentsline {subsection}{\numberline {E.3}Reddit Network Analysis}{20}{subsection.E.3}%
-\contentsline {subsection}{\numberline {E.4}Cross-Source}{24}{subsection.E.4}%
+\contentsline {subsection}{\numberline {E.3}Newspapers Network Analysis}{22}{subsection.E.3}%
+\contentsline {subsection}{\numberline {E.4}Reddit Network Analysis}{24}{subsection.E.4}%
+\contentsline {subsection}{\numberline {E.5}Cross-Source}{27}{subsection.E.5}%

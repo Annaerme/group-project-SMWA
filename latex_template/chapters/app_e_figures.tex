@@ -126,6 +126,33 @@ shown in a 2\,$\times$\,2 layout: \textit{Trump} (top-left), \textit{Harris} (to
 \label{fig:gt_candidate_grid}
 \end{figure}
 
+\subsection{Newspapers Network Analysis}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{news_network.png}
+\caption{Full newspaper source network based on shared title keywords.
+Node colour indicates media leaning; node size indicates degree centrality;
+edge width reflects cosine similarity strength.}
+\label{fig:news_network_full}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{news_network_top40.png}
+\caption{Zoomed view of the top-40 most connected newspaper sources in the network,
+highlighting core structure and cross-leaning connectivity.}
+\label{fig:news_network_top40}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{news_degree_centrality_top20.png}
+\caption{Top-20 newspaper sources by centrality metrics (degree, betweenness, and
+PageRank), grouped and colour-coded by media leaning.}
+\label{fig:news_centrality_top20}
+\end{figure}
+
 \subsection{Reddit Network Analysis}
 
 \begin{figure}[H]
@@ -172,7 +199,7 @@ over the campaign period (July--November 2024).}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Media_attentionvspolymarket.png}
+\includegraphics[width=\textwidth]{media_attention_vs_polymarket.png}
 \caption{Media attention indicators (coverage volume and Trump share of coverage)
 compared with Polymarket odds, July--November 2024.}
 \label{fig:media_attention_vs_polymarket}
@@ -180,7 +207,7 @@ compared with Polymarket odds, July--November 2024.}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{newspaper_sentimentvspolymarket.png}
+\includegraphics[width=\textwidth]{newspapersentimentvspolymarketodds.png}
 \caption{Newspaper sentiment indicators by media leaning compared with Polymarket odds,
 July--November 2024.}
 \label{fig:newspaper_sentiment_vs_polymarket}
@@ -188,7 +215,7 @@ July--November 2024.}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{shareofnegativeheadlines.png}
+\includegraphics[width=\textwidth]{negativety_coverage_share.png}
 \caption{Share of negative headlines by media leaning compared with Polymarket odds,
 July--November 2024.}
 \label{fig:share_negative_headlines}
