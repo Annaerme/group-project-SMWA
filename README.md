@@ -124,7 +124,60 @@ Within each era the analysis traces how the key events below drove measurable sh
 
 ## Predictive Modelling
 
-The predictive phase uses the features constructed from all seven sources to forecast **next-day Polymarket win probabilities**. Raw signals are first engineered into lagged rolling-window features and normalised, then fed into a structured model comparison. Models are built progressively — starting from a lag-only baseline, adding single source groups (social media, web search, traditional media, financial), then combining them, and finally running a full-feature model. Model performance is compared systematically, and the best-performing model is interpreted with SHAP to identify which signals drive the predictions.
+The predictive phase uses features from all seven sources to forecast the **next-day Polymarket Trump win probability**. The full pipeline runs from raw signals through feature engineering and preprocessing to a structured model comparison and interpretation.
+
+### Feature engineering & preprocessing
+
+All sources are merged into a single daily basetable (`Data/3_Gold/basetable_ultimate.csv`) covering July 5 – November 4, 2024. Features include lagged rolling-window aggregates of post volumes, sentiment scores, NRC emotion profiles, Google Trends indices, poll margins, financial indicators, and time-dimension variables (days to election, days since last major event). Missing values are imputed deterministically — financials are forward-filled (markets are closed on weekends), and pre-event leading NaNs are filled with a fixed prior. Feature selection applies three sequential filters (variance threshold, correlation deduplication, and mutual information) fitted exclusively on the train/validation set to prevent leakage.
+
+### Cross-validation strategy
+
+To respect the time-ordered structure of the data, an **expanding-window walk-forward CV** is used with 3 folds and a 1-day gap between train end and validation start. The final **14-day test set (Oct 22 – Nov 4, 2024)** is held out completely until the final evaluation.
+
+### Models tested
+
+Each feature set is evaluated with the same four model types:
+
+| Model | Notes |
+|-------|-------|
+| **Ridge Regression** | L2-regularised linear model; alpha tuned per fold via walk-forward CV |
+| **Random Forest** | Ensemble of decision trees; captures non-linear interactions |
+| **SVM** | RBF-kernel support vector machine; strong on small, noisy datasets |
+| **XGBoost** | Gradient-boosted trees; tuned for depth and learning rate |
+
+Models are trained on eight progressively richer feature sets, moving from single-source baselines to full-feature combinations:
+
+| Feature set | Sources included |
+|-------------|-----------------|
+| Lag-only baseline | Yesterday's Polymarket probability only |
+| Social media | Bluesky + Reddit post volumes & sentiment |
+| Web search | Google Trends keyword indices |
+| Traditional media | Newspaper coverage & NLP features |
+| Financial | S&P 500, VIX, oil price |
+| Lag + SMWA | Lag + social media + web search |
+| Lag + SMWA + traditional media | Above + newspaper features |
+| Full | All sources combined |
+
+### Evaluation metrics
+
+Three metrics are reported for every model × feature set combination:
+
+| Metric | Description |
+|--------|-------------|
+| **Directional Accuracy (DA)** | Fraction of test days where the model correctly predicted the *direction* of next-day movement — the primary operational metric |
+| **MAE** | Mean Absolute Error on the raw probability — secondary accuracy metric |
+| **R²** | Coefficient of determination; negative for all models, which is expected: prediction markets already price in most available information, so daily residuals are near-noise |
+
+A naive baseline (always predict zero change) scores MAE = 0.0162, DA = 0.00, R² = −0.057. The **best model overall is SVM** (DA = 0.571, MAE = 0.0143), correctly predicting the direction of market movement on 8 of the 14 held-out test days.
+
+### Interpretation
+
+Model behaviour is unpacked with four complementary methods:
+
+- **XGBoost gain & Random Forest MDI** — tree-based feature importances as a quick ranking baseline
+- **SHAP TreeExplainer (XGBoost)** — exact Shapley values; visualised as beeswarm plots (per-day per-feature contributions), summary bar charts (mean |SHAP|), waterfall plots (single-day decomposition), and dependence plots (non-linear feature effects)
+- **SHAP KernelExplainer (SVM)** — sampling-based Shapley values for the black-box best model; compared side-by-side with XGBoost SHAP to identify features that are robustly important across model classes
+- **Ridge standardised coefficients** — directly interpretable linear importance scores with direction (sign) indicating whether a feature is associated with an upward or downward move in Trump's predicted probability
 
 ---
 
