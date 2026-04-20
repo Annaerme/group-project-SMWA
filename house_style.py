@@ -120,25 +120,25 @@ def wordcloud_color_func(topic_id=None, seed=42, n_shades=7):
     return _color_func
 
 # ── Signal colours ─────────────────────────────────────────────────────────────
-C_VIX    = "#e69c1e"   # oranje        — marktvolatiliteit (VIX)
-C_SP500  = "#4a90e2"   # middenblauw   — S&P 500
-C_DIFF   = "#8a9bb0"   # grijs-blauw   — verschil-/spread-lijn (nooit wit)
+C_VIX    = "#e69c1e"   # orange        — market volatility (VIX)
+C_SP500  = "#4a90e2"   # mid-blue      — S&P 500
+C_DIFF   = "#8a9bb0"   # grey-blue     — difference / spread line (never white)
 
 # ── NRC emotion colours ────────────────────────────────────────────────────────
-C_FEAR         = "#8b1a5c"   # bordeaux-paars
-C_ANGER        = "#cc2222"   # rood
-C_TRUST        = "#27ae60"   # groen
-C_DISGUST      = "#1e6b35"   # donkergroen
-C_SADNESS      = "#3b82c4"   # blauw
-C_JOY          = "#f0c330"   # geel
-C_ANTICIPATION = "#f5a0c0"   # babyroze
+C_FEAR         = "#8b1a5c"   # bordeaux-purple
+C_ANGER        = "#cc2222"   # red
+C_TRUST        = "#27ae60"   # green
+C_DISGUST      = "#1e6b35"   # dark green
+C_SADNESS      = "#3b82c4"   # blue
+C_JOY          = "#f0c330"   # yellow
+C_ANTICIPATION = "#f5a0c0"   # baby pink
 
 # Sentiment/model colours
-C_SURPRISE = "#8fd3ff"   # lichtblauw
-C_VADER    = "#f39c12"   # oranje
-C_NRC_LEX  = "#f5b041"   # geeloranje
-C_TEXTBLOB = "#d62828"   # rood
-C_ROBERTA  = "#1f8cff"   # fel blauw
+C_SURPRISE = "#8fd3ff"   # light blue
+C_VADER    = "#f39c12"   # orange
+C_NRC_LEX  = "#f5b041"   # yellow-orange
+C_TEXTBLOB = "#d62828"   # red
+C_ROBERTA  = "#1f8cff"   # bright blue
 
 TEXT_PRIMARY = "#e8eaed"   # main text
 TEXT_MUTED   = "#6b8399"   # axis labels, tick labels
@@ -435,18 +435,18 @@ candidate_legend = buzz_legend  # backwards-compatible alias
 
 # ── Table of contents ──────────────────────────────────────────────────────────
 def show_toc(_=None):
-    """No-op binnen de kernel — geen bestandsschrijf, geen VSCode-conflict.
+    """No-op inside the kernel — no file writes, no VSCode conflicts.
 
-    De TOC markdown cel staat al bovenaan het notebook.
-    Hergeneren na sectiewijzigingen: voer vanuit de projectroot uit:
+    The TOC markdown cell is already placed at the top of each notebook.
+    To regenerate after section changes, run from the project root:
         python update_tocs.py
     """
     pass
 
 
 def _build_toc(nb_path):
-    """Interne helper: (her)genereert de TOC markdown cel in een notebook.
-    Alleen aan te roepen vanuit update_tocs.py, niet vanuit de kernel.
+    """Internal helper: (re)generates the TOC markdown cell in a notebook.
+    Should only be called from update_tocs.py, not from within the kernel.
     """
     import json, re, uuid, pathlib
 
@@ -485,7 +485,7 @@ def _build_toc(nb_path):
                 code_idx = i
 
     if toc_idx is not None and "".join(nb["cells"][toc_idx]["source"]) == new_source:
-        return False  # niets veranderd
+        return False  # nothing changed
 
     if toc_idx is not None:
         nb["cells"][toc_idx]["source"] = [new_source]
