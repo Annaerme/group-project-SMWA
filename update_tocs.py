@@ -1,7 +1,7 @@
 """
 update_tocs.py
 
-Gebruik (vanuit de projectroot, notebooks gesloten of opgeslagen):
+Usage (from the project root, with notebooks closed or saved):
     python update_tocs.py
 """
 import json, re, sys, uuid
@@ -9,7 +9,7 @@ from pathlib import Path
 from urllib.parse import quote
 
 ROOT       = Path(__file__).parent
-SKIP       = {"A. Lectures", "data_retrieval"}
+SKIP       = {"A. Lectures"}
 TOC_MARKER = "<!-- toc -->"
 
 
@@ -31,16 +31,22 @@ def save(path, nb):
 
 
 def heading_items(nb, skip_toc=True, skip_title=False):
-    """(level, title, anchor) voor alle markdown-headings.
-    skip_title=True slaat de eerste # titelregel over (vermijdt dubbele vermelding)."""
+    """Return (level, title, anchor) for all markdown headings.
+    skip_title=True skips the entire first cell that contains a # title
+    (avoids listing the title and any column/table descriptions in that cell)."""
     items = []
-    title_seen = False
+    title_cell_skipped = False
     for cell in nb["cells"]:
         if cell["cell_type"] != "markdown":
             continue
         src = "".join(cell["source"])
         if skip_toc and TOC_MARKER in src:
             continue
+        # Skip the whole cell that contains the first # heading
+        if skip_title and not title_cell_skipped:
+            if any(re.match(r"^#[^#]", line) for line in src.splitlines()):
+                title_cell_skipped = True
+                continue
         for line in src.splitlines():
             if not line.startswith("#"):
                 continue
@@ -48,10 +54,6 @@ def heading_items(nb, skip_toc=True, skip_title=False):
             title = line.lstrip("#").strip()
             anchor = re.sub(r"[^\w\s-]", "", title.lower())
             anchor = re.sub(r"\s+", "-", anchor.strip())
-            # Sla de allereerste # titelregel over als skip_title aan staat
-            if skip_title and not title_seen and level == 1:
-                title_seen = True
-                continue
             items.append((level, title, anchor))
     return items
 
@@ -59,7 +61,7 @@ def heading_items(nb, skip_toc=True, skip_title=False):
 def toc_source(items):
     if not items:
         return TOC_MARKER + "\n## Contents\n"
-    # Normaliseer: kleinste level wordt niveau 0 (geen inspringing)
+    # Normalise: smallest level becomes indent 0
     min_lvl = min(l for l, _, _ in items)
     lines = [TOC_MARKER + "\n## Contents\n"]
     for level, title, anchor in items:
@@ -68,17 +70,17 @@ def toc_source(items):
     return "".join(lines)
 
 
-# ── Stap 1 & 2: verwijder show_toc code cel + update markdown TOC ─────────────
+# ── Step 1 & 2: remove show_toc code cell + update markdown TOC ───────────────
 
 def find_insert_pos(cells):
-    """Geeft de index direct na de eerste # titelcel, of 0 als die er niet is."""
+    """Return the index directly after the first # title cell, or 0 if none found."""
     for i, cell in enumerate(cells):
         if cell["cell_type"] != "markdown":
             continue
         src = "".join(cell.get("source", []))
         if TOC_MARKER in src:
             continue
-        # Eerste regel die begint met één enkel #
+        # First line starting with a single #
         for line in src.splitlines():
             if re.match(r"^#[^#]", line):
                 return i + 1
@@ -89,7 +91,7 @@ def process_notebook(nb_path):
     nb      = load(nb_path)
     changed = False
 
-    # Verwijder overbodige show_toc code cellen
+    # Remove leftover show_toc code cells
     keep = []
     for cell in nb["cells"]:
         src = "".join(cell.get("source", []))
@@ -99,11 +101,11 @@ def process_notebook(nb_path):
             keep.append(cell)
     nb["cells"] = keep
 
-    # Nieuwe TOC berekenen (zonder TOC-cel én zonder de # titelregel)
+    # Compute new TOC (excluding the TOC cell itself and the # title line)
     items      = heading_items(nb, skip_toc=True, skip_title=True)
     new_source = toc_source(items)
 
-    # Zoek bestaande TOC-cel
+    # Find existing TOC cell
     toc_idx = next(
         (i for i, c in enumerate(nb["cells"])
          if c["cell_type"] == "markdown" and TOC_MARKER in "".join(c.get("source", []))),
@@ -112,7 +114,7 @@ def process_notebook(nb_path):
     target = find_insert_pos(nb["cells"])
 
     if not items:
-        # Geen headings gevonden — verwijder eventuele lege TOC-cel maar voeg geen nieuwe in
+        # No headings found — remove any existing empty TOC cell but don't insert a new one
         if toc_idx is not None:
             nb["cells"].pop(toc_idx)
             changed = True
@@ -121,12 +123,12 @@ def process_notebook(nb_path):
         return changed
 
     if toc_idx is not None:
-        # Verwijder de bestaande TOC-cel zodat we hem op de juiste plek terugzetten
+        # Remove existing TOC cell so we can re-insert it at the correct position
         nb["cells"].pop(toc_idx)
-        # Pas target aan als de verwijdering de index verschuift
+        # Adjust target if the removal shifted the index
         if toc_idx < target:
             target -= 1
-        changed = True  # altijd opnieuw invoegen op juiste positie
+        changed = True  # always re-insert at the correct position
 
     nb["cells"].insert(target, {
         "cell_type": "markdown",
@@ -141,10 +143,10 @@ def process_notebook(nb_path):
     return changed
 
 
-# ── Stap 3: project_overview.ipynb ────────────────────────────────────────────
+# ── Step 3: project_overview.ipynb ────────────────────────────────────────────
 
 def build_overview(notebooks):
-    # Groepeer per top-level map → submap (de directe map van het notebook)
+    # Group by top-level folder → subfolder (direct parent of the notebook)
     groups = {}
     for nb_path in notebooks:
         parts  = nb_path.relative_to(ROOT).parts
@@ -161,23 +163,23 @@ def build_overview(notebooks):
                 lines.append(f"### {sub}\n\n")
             for nb_path in groups[top][sub]:
                 rel_raw = nb_path.relative_to(ROOT).as_posix()
-                # URL-encode elk padonderdeel zodat spaties (%20) e.d. kloppen in links
+                # URL-encode each path part so spaces (%20) etc. work correctly in links
                 rel = "/".join(quote(part, safe="") for part in rel_raw.split("/"))
                 name = nb_path.stem.replace("_", " ").replace("-", " ").title()
                 nb   = load(nb_path)
-                # Sla titelregel over — de bold notebooknaam is al de titel
+                # Skip the title line — the bold notebook name already serves as the title
                 items = heading_items(nb, skip_toc=True, skip_title=True)
 
                 if not items:
                     lines.append(f"- [{name}]({rel})\n")
                     continue
 
-                # Normaliseer: eerste subsectie-level wordt inspringing 1
+                # Normalise: first subsection level becomes indent 1
                 min_lvl = min(l for l, _, _ in items)
 
                 lines.append(f"- **[{name}]({rel})**\n")
                 for level, title, anchor in items:
-                    depth  = level - min_lvl + 1   # eerste subsectie = 1 inspring
+                    depth  = level - min_lvl + 1   # first subsection = 1 indent
                     indent = "  " * depth
                     lines.append(f"{indent}- [{title}]({rel}#{anchor})\n")
 
@@ -205,11 +207,11 @@ def build_overview(notebooks):
 if __name__ == "__main__":
     notebooks = get_notebooks()
 
-    print("Notebooks verwerken...")
+    print("Processing notebooks...")
     for nb_path in notebooks:
         changed = process_notebook(nb_path)
-        print(f"  {'bijgewerkt' if changed else 'ongewijzigd':<12} {nb_path.relative_to(ROOT)}")
+        print(f"  {'updated' if changed else 'unchanged':<12} {nb_path.relative_to(ROOT)}")
 
-    print("\nproject_overview.ipynb genereren...")
+    print("\nGenerating project_overview.ipynb...")
     save(ROOT / "project_overview.ipynb", build_overview(notebooks))
-    print("  klaar")
+    print("  done")
