@@ -96,7 +96,29 @@ Once each source is understood in isolation, all daily signals are aligned on a 
 
 ### Event studies (`8_events/`)
 
-Four pivotal moments are studied in detail — Trump's campaign arc, the Biden withdrawal and Harris nomination, the debate and second assassination attempt, and Elon Musk's involvement — to understand how discrete real-world events propagate across platforms and markets.
+The campaign window is divided into four narrative eras, each capturing a distinct phase of the race:
+
+| Era | Period | Theme |
+|-----|--------|-------|
+| **Trump era** | Jul 5 – Jul 20 | Trump leads the race following the first assassination attempt and the JD Vance VP pick |
+| **Biden out / Harris in** | Jul 21 – Aug 18 | Biden withdraws, Harris enters, Obama endorses — a sudden reshaping of the field |
+| **Debate & second assassination attempt** | Aug 19 – Oct 4 | DNC, the Trump–Harris ABC debate, and the second attempt on Trump's life |
+| **Musk mingles** | Oct 5 – Nov 4 | Elon Musk's active campaign involvement, the Vance–Walz debate, and the final stretch |
+
+Within each era the analysis traces how the key events below drove measurable shifts across platforms and prediction markets:
+
+- **Jul 13** — Trump shot at Butler rally
+- **Jul 15** — JD Vance announced as VP pick
+- **Jul 21** — Biden withdraws from the race
+- **Jul 26** — Obama endorses Harris
+- **Aug 5** — Harris officially nominated
+- **Aug 19** — Democratic National Convention opens
+- **Sep 10** — Trump–Harris debate (ABC)
+- **Sep 15** — Second assassination attempt on Trump
+- **Oct 1** — Vance–Walz VP debate (CBC)
+- **Oct 5** — Musk appears at Butler rally with Trump
+- **Oct 7** — Musk's America PAC offers $47 per registered swing-state voter
+- **Oct 10** — Musk increases petition reward
 
 ---
 
