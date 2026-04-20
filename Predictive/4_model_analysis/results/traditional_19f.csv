@@ -3,4 +3,4 @@ Traditional (19f),Naive (zero),0.0162,0.0208,0.0,-0.057
 Traditional (19f),Ridge,0.016,0.0208,0.5,-0.0645
 Traditional (19f),Random Forest,0.0164,0.0215,0.5,-0.1357
 Traditional (19f),SVM,0.0169,0.0222,0.5,-0.2073
-Traditional (19f),XGBoost,0.0163,0.0216,0.4286,-0.1434
+Traditional (19f),XGBoost,0.0163,0.0216,0.5,-0.1429
