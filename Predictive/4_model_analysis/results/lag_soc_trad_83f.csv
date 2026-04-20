@@ -3,4 +3,4 @@ Lag+Soc+Trad (83f),Naive (zero),0.0162,0.0208,0.0,-0.057
 Lag+Soc+Trad (83f),Ridge,0.0156,0.021,0.5714,-0.0757
 Lag+Soc+Trad (83f),Random Forest,0.0156,0.0216,0.5,-0.1428
 Lag+Soc+Trad (83f),SVM,0.0169,0.0229,0.5,-0.2884
-Lag+Soc+Trad (83f),XGBoost,0.016,0.0208,0.5714,-0.0645
+Lag+Soc+Trad (83f),XGBoost,0.0159,0.0207,0.4286,-0.0526

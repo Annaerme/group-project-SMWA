@@ -3,4 +3,4 @@ Lag+Social (64f),Naive (zero),0.0162,0.0208,0.0,-0.057
 Lag+Social (64f),Ridge,0.0158,0.021,0.5714,-0.0788
 Lag+Social (64f),Random Forest,0.0159,0.0212,0.5,-0.0997
 Lag+Social (64f),SVM,0.0165,0.0227,0.5,-0.2607
-Lag+Social (64f),XGBoost,0.0161,0.0209,0.5,-0.0679
+Lag+Social (64f),XGBoost,0.016,0.0207,0.5,-0.0466
