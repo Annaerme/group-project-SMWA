@@ -84,78 +84,25 @@ Each notebook in `data_retrieval/` handles one source end-to-end: authentication
 
 ## Descriptive Analysis
 
-### Per-source notebooks
+The descriptive phase answers *what happened* across each data source and *how the sources relate to each other*. For a full clickable index see [`project_overview.ipynb`](project_overview.ipynb).
 
-Each source follows the same five-notebook pattern where applicable:
+### Per-source analysis (`0_polymarket/` – `6_polls/`)
 
-| Suffix | Focus |
-|--------|-------|
-| `1_eda` | Distributions, time series, coverage |
-| `2_network_analysis` | Retweet / mention graphs |
-| `3_textual_analysis` | Word frequencies, topic modelling |
-| `4_nlp` | NER, keyword extraction, embeddings |
-| `5_sentiment_analysis` | VADER + NRC emotion profiles |
-
-#### 0 · Polymarket
-[`0.1_eda`](Descriptive/0_polymarket/0.1_eda.ipynb) — Win-probability time series, volatility, and event-driven spikes.
-
-#### 1 · Reddit
-[`1.1_eda`](Descriptive/1_reddit/1.1_eda.ipynb) · [`1.2_network_analysis`](Descriptive/1_reddit/1.2_network_analysis.ipynb) · [`1.3_textual_analysis`](Descriptive/1_reddit/1.3_textual_analysis.ipynb) · [`1.4_nlp`](Descriptive/1_reddit/1.4_nlp.ipynb) · [`1.5_sentiment_analysis`](Descriptive/1_reddit/1.5_sentiment_analysis.ipynb)
-
-#### 2 · Bluesky
-[`2.1_eda`](Descriptive/2_bluesky/2.1_eda.ipynb) · [`2.2_network_analysis`](Descriptive/2_bluesky/2.2_network_analysis.ipynb) · [`2.3_textual_analysis`](Descriptive/2_bluesky/2.3_textual_analysis.ipynb) · [`2.4_nlp`](Descriptive/2_bluesky/2.4_nlp.ipynb) · [`2.5_sentiment_analysis`](Descriptive/2_bluesky/2.5_sentiment_analysis.ipynb)
-
-#### 3 · Newspapers
-[`3.1_eda`](Descriptive/3_newspapers/3.1_eda.ipynb) · [`3.2_network_analysis`](Descriptive/3_newspapers/3.2_network_analysis.ipynb) · [`3.3_textual_analysis`](Descriptive/3_newspapers/3.3_textual_analysis.ipynb) · [`3.4_nlp`](Descriptive/3_newspapers/3.4_nlp.ipynb) · [`3.5_sentiment_analysis`](Descriptive/3_newspapers/3.5_sentiment_analysis.ipynb)
-
-#### 4 · Financials
-[`4.1_eda`](Descriptive/4_financials/4.1_eda.ipynb) — S&P 500 and VIX behaviour relative to campaign events.
-
-#### 5 · Google Trends
-[`5.1_eda`](Descriptive/5_google_trends/5.1_eda.ipynb) — National keyword trends, Polymarket overlap, related queries.  
-[`5.2_state_analysis`](Descriptive/5_google_trends/5.2_state_analysis.ipynb) — State-level search gap ranking, swing-state focus, VP home-state effects, animated choropleth.
-
-#### 6 · Polls
-[`6.1_eda`](Descriptive/6_polls/6.1_eda.ipynb) — Polling averages, margin trends, comparison with prediction markets.
+Each source is explored in its own subfolder. Social media sources (Reddit, Bluesky, Newspapers) follow a consistent five-step pipeline: exploratory data analysis → network analysis → textual analysis → NLP (topic modelling, NER, embeddings) → sentiment analysis with VADER and NRC emotion profiles. Non-text sources (Polymarket, Financials, Google Trends, Polls) focus on time-series EDA, event-driven patterns, and comparisons with prediction market odds. Google Trends also includes a dedicated state-level analysis covering search-gap rankings across all 51 US states and an animated choropleth.
 
 ### Cross-source analysis (`7_cross_source/`)
 
-These notebooks bring all sources together on a shared daily timeline (July 5 – November 4 2024).
-
-| Notebook | Focus |
-|----------|-------|
-| [`7.1_cross_source_overview`](Descriptive/7_cross_source/7.1_cross_source_overview.ipynb) | Pearson correlation heatmap across all features; key-event timeline |
-| [`7.2_media_attention`](Descriptive/7_cross_source/7.2_media_attention.ipynb) | Media coverage vs. Polymarket odds; Google Trends vs. odds |
-| [`7.3_sentiment_emotions`](Descriptive/7_cross_source/7.3_sentiment_emotions.ipynb) | Sentiment divergence vs. odds; NRC emotion profiles per platform |
-| [`7.4_polls_coverage`](Descriptive/7_cross_source/7.4_polls_coverage.ipynb) | Polling margins vs. media coverage |
-| [`7.5_general_insights`](Descriptive/7_cross_source/7.5_general_insights.ipynb) | Multi-panel attention overview; social buzz (Reddit + Bluesky); Polymarket composites |
+Once each source is understood in isolation, all daily signals are aligned on a shared timeline (July 5 – November 4, 2024) and examined together. This section covers correlation structure across all features, how media attention and search interest track Polymarket odds, how sentiment divergence relates to shifts in electoral expectations, and how polling margins interact with coverage volume. A final general-insights notebook combines social buzz (Reddit + Bluesky), all attention signals, and Polymarket composites into multi-panel overviews.
 
 ### Event studies (`8_events/`)
 
-Deep-dives into four major campaign moments.
-
-| Notebook | Event |
-|----------|-------|
-| [`8.1_trump_era`](Descriptive/8_events/8.1_trump_era.ipynb) | Trump's overall campaign arc |
-| [`8.2_biden_out_harris_in`](Descriptive/8_events/8.2_biden_out_harris_in.ipynb) | Biden withdrawal & Harris nomination |
-| [`8.3_debate_&_trump_assassination_2.0`](Descriptive/8_events/8.3_debate_&_trump_assassination_2.0.ipynb) | Debate night & second assassination attempt |
-| [`8.4_musk_mingles`](Descriptive/8_events/8.4_musk_mingles%20copy.ipynb) | Elon Musk's involvement and its measurable impact |
+Four pivotal moments are studied in detail — Trump's campaign arc, the Biden withdrawal and Harris nomination, the debate and second assassination attempt, and Elon Musk's involvement — to understand how discrete real-world events propagate across platforms and markets.
 
 ---
 
 ## Predictive Modelling
 
-The goal is to predict **Polymarket win probability** (next-day) from lagged social media, sentiment, search, and financial features.
-
-| Notebook | Content |
-|----------|---------|
-| [`1_feature_engineering`](Predictive/1_feature_engineering/feature_engineering.ipynb) | Rolling windows, lag construction, normalisation |
-| [`2_preprocessing`](Predictive/2_preprocessing/preprocessing.ipynb) | Train/validation/test splits, scaling |
-| `3_models/Basic/` | Single-source baselines: lag-only, social media, web search, traditional media, financial |
-| `3_models/combo/` | Combined models: lag + SMWA; lag + SMWA + traditional media |
-| [`3_models/full/full`](Predictive/3_models/full/full.ipynb) | Full-feature model |
-| [`4_model_analysis/1_model_analysis`](Predictive/4_model_analysis/1_model_analysis.ipynb) | Performance comparison across all models |
-| [`4_model_analysis/2_interpretation_shap`](Predictive/4_model_analysis/2_interpretation_shap.ipynb) | SHAP feature importance & summary plots |
+The predictive phase uses the features constructed from all seven sources to forecast **next-day Polymarket win probabilities**. Raw signals are first engineered into lagged rolling-window features and normalised, then fed into a structured model comparison. Models are built progressively — starting from a lag-only baseline, adding single source groups (social media, web search, traditional media, financial), then combining them, and finally running a full-feature model. Model performance is compared systematically, and the best-performing model is interpreted with SHAP to identify which signals drive the predictions.
 
 ---
 
