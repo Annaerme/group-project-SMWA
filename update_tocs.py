@@ -156,7 +156,9 @@ def build_overview(notebooks):
 
     lines = ["# Project Overview\n\n"]
 
-    for top in sorted(groups):
+    ORDER = ["data_retrieval", "Descriptive", "Predictive"]
+    ordered_tops = ORDER + [t for t in sorted(groups) if t not in ORDER]
+    for top in ordered_tops:
         lines.append(f"## {top}\n\n")
         for sub in sorted(groups[top]):
             if sub and sub != top:
