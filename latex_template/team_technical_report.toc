@@ -1,4 +1,4 @@
-\babel@toc {english}{}\relax 
+\babel@toc {nil}{}\relax 
 \contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
 \contentsline {section}{\numberline {2}Research Design \& Data}{2}{section.2}%
 \contentsline {section}{\numberline {3}Preprocessing}{3}{section.3}%
@@ -21,4 +21,5 @@
 \contentsline {subsection}{\numberline {E.2}Google Trends}{18}{subsection.E.2}%
 \contentsline {subsection}{\numberline {E.3}Newspapers Network Analysis}{22}{subsection.E.3}%
 \contentsline {subsection}{\numberline {E.4}Reddit Network Analysis}{24}{subsection.E.4}%
-\contentsline {subsection}{\numberline {E.5}Cross-Source}{27}{subsection.E.5}%
+\contentsline {subsection}{\numberline {E.5}Bluesky}{27}{subsection.E.5}%
+\contentsline {subsection}{\numberline {E.6}Cross-Source}{31}{subsection.E.6}%

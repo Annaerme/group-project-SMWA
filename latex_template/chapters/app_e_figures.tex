@@ -187,6 +187,53 @@ cross-cluster audience overlap among candidate and election buzz streams.}
 \label{fig:reddit_echo_chambers}
 \end{figure}
 
+\subsection{Bluesky}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{centrality_landscape.png}
+\caption{Centrality landscape of the Bluesky mention network. Each node represents an account;
+position reflects betweenness centrality (x-axis) and in-degree (y-axis).
+Bridge accounts and cluster hubs are annotated separately.}
+\label{fig:bsky_centrality_landscape}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{keyword_similarity_heatmap.png}
+\caption{Keyword co-occurrence similarity heatmap across Bluesky posts,
+computed from TF-IDF cosine similarities between candidate and election buzz clusters.
+Darker cells indicate higher lexical overlap.}
+\label{fig:bsky_keyword_similarity_heatmap}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{keyword_similarity_treshold.png}
+\caption{Thresholded keyword similarity network derived from the heatmap above.
+Only pairs exceeding the similarity threshold are shown as edges,
+revealing the core lexical clusters in Bluesky discourse.}
+\label{fig:bsky_keyword_similarity_threshold}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{SVD-comments.png}
+\caption{SVD / Latent Semantic Analysis for Bluesky comments: scree plot (left) showing
+variance explained per component and cumulative variance curve (right) with 80\%, 90\%,
+and 95\% thresholds marked.}
+\label{fig:bsky_svd_comments}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{SVD-posts.png}
+\caption{SVD / Latent Semantic Analysis for Bluesky posts: scree plot (left) showing
+variance explained per component and cumulative variance curve (right) with 80\%, 90\%,
+and 95\% thresholds marked.}
+\label{fig:bsky_svd_posts}
+\end{figure}
+
 \subsection{Cross-Source}
 
 \begin{figure}[H]
