@@ -19,28 +19,33 @@
 \contentsline {section}{\numberline {C}Model Results}{11}{appendix.C}%
 \contentsline {section}{\numberline {D}Basetable: Variable Overview}{12}{appendix.D}%
 \contentsline {section}{\numberline {E}Key Figures}{15}{appendix.E}%
-\contentsline {subsection}{\numberline {E.1}EDA}{17}{subsection.E.1}%
-\contentsline {subsubsection}{\numberline {E.1.1}Polymarket and Events}{17}{subsubsection.E.1.1}%
-\contentsline {subsubsection}{\numberline {E.1.2}Election Buzz}{18}{subsubsection.E.1.2}%
-\contentsline {subsubsection}{\numberline {E.1.3}Financial Markets}{19}{subsubsection.E.1.3}%
-\contentsline {subsubsection}{\numberline {E.1.4}Google Trends}{21}{subsubsection.E.1.4}%
-\contentsline {subsubsection}{\numberline {E.1.5}Polls}{24}{subsubsection.E.1.5}%
-\contentsline {subsection}{\numberline {E.2}Network Analysis}{25}{subsection.E.2}%
-\contentsline {subsubsection}{\numberline {E.2.1}Centrality Landscape}{25}{subsubsection.E.2.1}%
-\contentsline {subsubsection}{\numberline {E.2.2}Echo Chambers}{26}{subsubsection.E.2.2}%
-\contentsline {subsubsection}{\numberline {E.2.3}Keyword Similarity}{27}{subsubsection.E.2.3}%
-\contentsline {subsubsection}{\numberline {E.2.4}News Source Network}{28}{subsubsection.E.2.4}%
-\contentsline {subsection}{\numberline {E.3}Bluesky Textual Analysis}{30}{subsection.E.3}%
-\contentsline {subsubsection}{\numberline {E.3.1}Preprocessing}{30}{subsubsection.E.3.1}%
-\contentsline {subsubsection}{\numberline {E.3.2}TF-IDF}{31}{subsubsection.E.3.2}%
-\contentsline {subsubsection}{\numberline {E.3.3}SVD}{33}{subsubsection.E.3.3}%
-\contentsline {subsubsection}{\numberline {E.3.4}LSA}{34}{subsubsection.E.3.4}%
-\contentsline {subsubsection}{\numberline {E.3.5}Key Terms}{35}{subsubsection.E.3.5}%
-\contentsline {subsubsection}{\numberline {E.3.6}Word Clouds}{37}{subsubsection.E.3.6}%
-\contentsline {subsection}{\numberline {E.4}NLP}{38}{subsection.E.4}%
-\contentsline {subsubsection}{\numberline {E.4.1}Bluesky NLP Topic Modeling}{41}{subsubsection.E.4.1}%
-\contentsline {subsection}{\numberline {E.5}Sentiment Analysis}{46}{subsection.E.5}%
-\contentsline {subsubsection}{\numberline {E.5.1}Newspapers}{46}{subsubsection.E.5.1}%
-\contentsline {subsubsection}{\numberline {E.5.2}Bluesky}{50}{subsubsection.E.5.2}%
-\contentsline {subsection}{\numberline {E.6}Cross Source}{51}{subsection.E.6}%
-\contentsline {subsection}{\numberline {E.7}Predictive Modeling}{53}{subsection.E.7}%
+\contentsline {subsection}{\numberline {E.1}EDA}{18}{subsection.E.1}%
+\contentsline {subsubsection}{\numberline {E.1.1}Polymarket and Events}{18}{subsubsection.E.1.1}%
+\contentsline {subsubsection}{\numberline {E.1.2}Election Buzz}{19}{subsubsection.E.1.2}%
+\contentsline {subsubsection}{\numberline {E.1.3}Financial Markets}{20}{subsubsection.E.1.3}%
+\contentsline {subsubsection}{\numberline {E.1.4}Google Trends}{22}{subsubsection.E.1.4}%
+\contentsline {subsubsection}{\numberline {E.1.5}Polls}{25}{subsubsection.E.1.5}%
+\contentsline {subsection}{\numberline {E.2}Network Analysis}{26}{subsection.E.2}%
+\contentsline {subsubsection}{\numberline {E.2.1}Centrality Landscape}{26}{subsubsection.E.2.1}%
+\contentsline {subsubsection}{\numberline {E.2.2}Echo Chambers}{27}{subsubsection.E.2.2}%
+\contentsline {subsubsection}{\numberline {E.2.3}Keyword Similarity}{28}{subsubsection.E.2.3}%
+\contentsline {subsubsection}{\numberline {E.2.4}News Source Network}{29}{subsubsection.E.2.4}%
+\contentsline {subsection}{\numberline {E.3}Bluesky Textual Analysis}{31}{subsection.E.3}%
+\contentsline {subsubsection}{\numberline {E.3.1}Preprocessing}{31}{subsubsection.E.3.1}%
+\contentsline {subsubsection}{\numberline {E.3.2}TF-IDF}{32}{subsubsection.E.3.2}%
+\contentsline {subsubsection}{\numberline {E.3.3}SVD}{34}{subsubsection.E.3.3}%
+\contentsline {subsubsection}{\numberline {E.3.4}LSA}{35}{subsubsection.E.3.4}%
+\contentsline {subsubsection}{\numberline {E.3.5}Key Terms}{36}{subsubsection.E.3.5}%
+\contentsline {subsubsection}{\numberline {E.3.6}Word Clouds}{38}{subsubsection.E.3.6}%
+\contentsline {subsection}{\numberline {E.4}NLP}{39}{subsection.E.4}%
+\contentsline {subsubsection}{\numberline {E.4.1}Newspapers NLP}{39}{subsubsection.E.4.1}%
+\contentsline {subsubsection}{\numberline {E.4.2}Bluesky LDA Setup}{40}{subsubsection.E.4.2}%
+\contentsline {subsubsection}{\numberline {E.4.3}Bluesky LDA Model Selection}{42}{subsubsection.E.4.3}%
+\contentsline {subsubsection}{\numberline {E.4.4}Bluesky LDA Outputs}{43}{subsubsection.E.4.4}%
+\contentsline {subsection}{\numberline {E.5}Sentiment Analysis}{45}{subsection.E.5}%
+\contentsline {subsubsection}{\numberline {E.5.1}VADER}{45}{subsubsection.E.5.1}%
+\contentsline {subsubsection}{\numberline {E.5.2}TextBlob}{46}{subsubsection.E.5.2}%
+\contentsline {subsubsection}{\numberline {E.5.3}NRC-Lex}{47}{subsubsection.E.5.3}%
+\contentsline {subsubsection}{\numberline {E.5.4}Bluesky}{47}{subsubsection.E.5.4}%
+\contentsline {subsubsection}{\numberline {E.5.5}Combination}{48}{subsubsection.E.5.5}%
+\contentsline {subsection}{\numberline {E.6}Predictive Modeling}{50}{subsection.E.6}%

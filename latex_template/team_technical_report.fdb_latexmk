@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1776789564.73075 "c:/Users/verme_hzys4y0/UGent/2025-2026/Social media and webanalytics/group-project-SMWA/latex_template/team_technical_report.tex" "team_technical_report.pdf" "team_technical_report" 1776789584.1033 0
+["pdflatex"] 1776791069.78983 "c:/Users/verme_hzys4y0/UGent/2025-2026/Social media and webanalytics/group-project-SMWA/latex_template/team_technical_report.tex" "team_technical_report.pdf" "team_technical_report" 1776791086.89051 0
   "C:/Users/verme_hzys4y0/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1776782224 134302 0cf07298b6e4ee7098171b60af853e19 ""
   "C:/Users/verme_hzys4y0/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1763307066 13337384 b4a011bb0066a6266170c6666579fde0 ""
   "C:/Users/verme_hzys4y0/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_edcawa.enc" 1497089888 2833 ab571e969b0d4b8e87f8f63627b1db02 ""
@@ -142,7 +142,7 @@
   "C:/Users/verme_hzys4y0/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/verme_hzys4y0/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "C:/Users/verme_hzys4y0/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
-  "c:/Users/verme_hzys4y0/UGent/2025-2026/Social media and webanalytics/group-project-SMWA/latex_template/team_technical_report.tex" 1776781438 3720 df79a0e5f13877db32e20bc907602950 ""
+  "c:/Users/verme_hzys4y0/UGent/2025-2026/Social media and webanalytics/group-project-SMWA/latex_template/team_technical_report.tex" 1776790945 3738 20095364b124b5c56b4ac2cdbd76e9c0 ""
   "chapters/01_introduction.tex" 1776629967 1443 918d19bcae453e455b4f35ee29ca324d ""
   "chapters/02_research_design.tex" 1776629983 2030 6a97412030fe0e736bbd46e69fdbdef6 ""
   "chapters/03_preprocessing.tex" 1776630006 1356 f837ed4a43ced1dbf071ef0596dbb1e0 ""
@@ -154,7 +154,7 @@
   "chapters/app_b_sentiment.tex" 1776630120 931 7c0dd194efb35e1e7a2640bc40767c61 ""
   "chapters/app_c_results.tex" 1776630131 897 23dc28886230c9152b2d928237bb1831 ""
   "chapters/app_d_basetable.tex" 1776630161 6776 4148da2f758f66428a4daeb86d3cc965 ""
-  "chapters/app_e_figures.tex" 1776789481 36540 1f36209d75f36005b0b15279436c5d24 ""
+  "chapters/app_e_figures.tex" 1776790932 34880 8fa85dbecd93ce3ce5dad5bde70dcd9a ""
   "chapters/references.tex" 1776630101 1965 14d7666ef310ab136328c6a60da69b74 ""
   "eb-en.pdf" 1776620758 14158 1086383368e351286c427445b6af5126 ""
   "figures/../figures/bluesky/NRC.png" 1776708630 192209 e997d7862ef221720012603f8f22c523 ""
@@ -211,7 +211,7 @@
   "figures/news/newssentiment_textblob.png" 1776717195 168556 8b9a32405fcd29805b10d9af3ba8b8ea ""
   "figures/news/normal_distributions_sentiment_scores.png" 1776760403 53067 53570c1dfb5dab2901c10c0b475aef5a ""
   "figures/news/sentiment_score_by_leaning_projections.png" 1776760403 117322 8645afdd6f9ee9295178e0264368ce0b ""
-  "figures/news/word_clouds.png" 1776760403 515049 18967f37eeedeed6ee40ee893421718a ""
+  "figures/polls/polls.png" 1776790781 125867 d7d41106121927e755a23f725e8461bf ""
   "figures/polymarket/polymarket_event_table.png" 1776696303 456489 317e82304dbbff671bd4103249caed80 ""
   "figures/polymarket/polymarket_presentation_chart.png" 1776696302 324022 fc709913499b1c5b2aec32a8052560d6 ""
   "figures/predictive/SVM_result.png" 1776784964 139835 6d68cd9b57d775fd38a6ae05e21c16f1 ""
@@ -221,10 +221,10 @@
   "figures/reddit/centrality landscape.png" 1776702537 128846 ecf194382bfa2fd0df609143b519dd21 ""
   "figures/reddit/echochambersreddit.png" 1776702707 116658 cc643e9901cadd40ae2a9828485d919a ""
   "figures/reddit/keywordsimilaritysubreddits.png" 1776702652 77085 660b4adb947e8bb3321adba6ffe3c8a6 ""
-  "team_technical_report.aux" 1776789583 31438 115a4cf5e29980156804d60f717f3780 "pdflatex"
-  "team_technical_report.out" 1776789583 6149 736665f5700c48051d7179b2a6555ffd "pdflatex"
-  "team_technical_report.tex" 1776781438 3720 df79a0e5f13877db32e20bc907602950 ""
-  "team_technical_report.toc" 1776789583 3773 bb6efc7a6b2b08a86e0bffd6cbe9e771 "pdflatex"
+  "team_technical_report.aux" 1776791086 31303 1d75662de5d344b548218d0bfc2dd3aa "pdflatex"
+  "team_technical_report.out" 1776791086 6810 0405dbbdae5e571fb9de957045572227 "pdflatex"
+  "team_technical_report.tex" 1776790945 3738 20095364b124b5c56b4ac2cdbd76e9c0 ""
+  "team_technical_report.toc" 1776791086 4228 c7ce4ff94a3aa354983b85548e2ea3c9 "pdflatex"
   "ugent-doc.cls" 1776780399 6374 7482a2d1e2c96f59c25c349ee7a2abeb ""
   "ugent-en.pdf" 1776620758 13833 50c66b7fcb4c360fd1a20dc16daedfa7 ""
   (generated)
