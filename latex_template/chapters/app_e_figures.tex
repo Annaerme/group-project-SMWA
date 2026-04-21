@@ -77,6 +77,15 @@
 \textcolor{textmuted}{\small\ref{fig:news_word_clouds}}            & \textcolor{textmuted}{\small NLP}                  & \textcolor{textmuted}{\small Newspapers}      & \textcolor{textmuted}{\small Word clouds by media leaning}             & \textcolor{textmuted}{\small\pageref{fig:news_word_clouds}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:news_ner_mentions}}           &                                                    & \textcolor{textmuted}{\small Newspapers}      & \textcolor{textmuted}{\small Named-entity mentions over time}          & \textcolor{textmuted}{\small\pageref{fig:news_ner_mentions}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:news_lda_topic}}              &                                                    & \textcolor{textmuted}{\small Newspapers}      & \textcolor{textmuted}{\small LDA topic composition}                    & \textcolor{textmuted}{\small\pageref{fig:news_lda_topic}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:bsky_nlp_preprocessing}}      & \textcolor{textmuted}{\small Bluesky NLP}        & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small LDA preprocessing summary}                & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_preprocessing}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:bsky_nlp_dictionary}}         &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Vocabulary size and filter metrics}       & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_dictionary}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:bsky_nlp_top_terms}}          &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Top 15 terms by document frequency}       & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_top_terms}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:bsky_nlp_coherence_sweep}}    &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Coherence and AIC sweep (K=2 to 10)}     & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_coherence_sweep}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:bsky_nlp_model_summary}}      &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Final LDA model parameters}              & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_model_summary}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:bsky_nlp_topic_words}}        &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Top 10 words per topic}                  & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_topic_words}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:bsky_nlp_wordclouds}}         &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Topic-specific word clouds}              & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_wordclouds}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:bsky_nlp_topics_time}}        &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Topic prominence over time}              & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_topics_time}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:bsky_nlp_topics_buzz}}        &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Topic distribution by buzz cluster}       & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_topics_buzz}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:bsky_svd}}                    &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small SVD scree plots (posts \& comments)}      & \textcolor{textmuted}{\small\pageref{fig:bsky_svd}} \\\hline
 
 % ----- 5. Sentiment Analysis -----
@@ -95,6 +104,14 @@
 \textcolor{textmuted}{\small\ref{fig:cross_source_dashboard}}      & \textcolor{textmuted}{\small Cross Source}         & \textcolor{textmuted}{\small All sources}     & \textcolor{textmuted}{\small Cross-source dashboard}                   & \textcolor{textmuted}{\small\pageref{fig:cross_source_dashboard}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:cross_attention_sentiment}}   &                                                    & \textcolor{textmuted}{\small All sources}     & \textcolor{textmuted}{\small Media attention \& sentiment vs.\ Polymarket} & \textcolor{textmuted}{\small\pageref{fig:cross_attention_sentiment}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:share_negative_headlines}}    &                                                    & \textcolor{textmuted}{\small All sources}     & \textcolor{textmuted}{\small Share of negative headlines}              & \textcolor{textmuted}{\small\pageref{fig:share_negative_headlines}} \\\hline
+
+% ----- 7. Predictive -----
+\multicolumn{5}{|l|}{\rule[-0.3em]{0pt}{1.2em}\textcolor{textprimary}{\sffamily\bfseries\small\enspace 7 \enspace Predictive}} \\
+\hline
+\textcolor{textmuted}{\small\ref{fig:pred_walk_forward_cv}}        & \textcolor{textmuted}{\small Experimental Design} & \textcolor{textmuted}{\small Polymarket}      & \textcolor{textmuted}{\small Walk-forward cross-validation scheme}      & \textcolor{textmuted}{\small\pageref{fig:pred_walk_forward_cv}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:pred_svm_result}}            & \textcolor{textmuted}{\small Model Results}       & \textcolor{textmuted}{\small Polymarket}      & \textcolor{textmuted}{\small Best-performing SVM model predictions}     & \textcolor{textmuted}{\small\pageref{fig:pred_svm_result}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:pred_svm_shap}}              &                                                    & \textcolor{textmuted}{\small Polymarket}      & \textcolor{textmuted}{\small SHAP kernel explainer for SVM}            & \textcolor{textmuted}{\small\pageref{fig:pred_svm_shap}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:pred_beeswarm}}              &                                                    & \textcolor{textmuted}{\small Polymarket}      & \textcolor{textmuted}{\small Feature importance beeswarm plot}         & \textcolor{textmuted}{\small\pageref{fig:pred_beeswarm}} \\\hline
 
 \end{longtable}
 
@@ -508,6 +525,94 @@ two latent topics per day, with $K=2$ selected by coherence sweep.}
 \end{figure}
 \vspace*{\fill}
 
+% ------------------------------------------------------------------
+\subsubsection{Bluesky NLP Topic Modeling}
+
+\vspace*{\fill}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{tables/nlp_preprocessing.png}
+\caption{Bluesky LDA preprocessing pipeline summary, documenting tokenization, filtering, and document preparation steps.}
+\label{fig:bsky_nlp_preprocessing}
+\end{figure}
+\vspace*{\fill}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Bluesky vocabulary size and filtering metrics for LDA topic modeling.}
+\label{tab:bsky_nlp_dictionary}
+\includegraphics[width=\textwidth]{tables/nlp_dictionary.png}
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Top 15 terms by document frequency in Bluesky corpus.}
+\label{tab:bsky_nlp_top_terms}
+\includegraphics[width=\textwidth]{tables/nlp_top_terms.png}
+\end{table}
+
+\vspace*{\fill}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{tables/nlp_coherence_sweep.png}
+\caption{Coherence (u\_mass) and AIC scores across topic range $K=2$ to $10$, with $K=4$ selected as optimal.}
+\label{fig:bsky_nlp_coherence_sweep}
+\end{figure}
+\vspace*{\fill}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Final LDA model parameters and training metrics for Bluesky posts.}
+\label{tab:bsky_nlp_model_summary}
+\includegraphics[width=\textwidth]{tables/nlp_model_summary.png}
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Top 10 terms and maximum weight for each of the 4 LDA topics.}
+\label{tab:bsky_nlp_topic_words}
+\includegraphics[width=\textwidth]{tables/nlp_topic_words.png}
+\end{table}
+
+\vspace*{\fill}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{nlp_2_wordclouds.png}
+\caption{Topic-specific word clouds derived from LDA topic modeling on Bluesky posts, illustrating the semantic content and relative word importance within each of the four identified topics.}
+\label{fig:bsky_nlp_wordclouds}
+\end{figure}
+\vspace*{\fill}
+
+\vspace*{\fill}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{nlp_3_topics_time.png}
+\caption{Topic prominence over time on Bluesky (7-day rolling mean percentage of daily posts), demonstrating how topic composition evolved across the 2024 US election campaign with marked shifts corresponding to major events.}
+\label{fig:bsky_nlp_topics_time}
+\end{figure}
+\vspace*{\fill}
+
+\vspace*{\fill}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{nlp_4_topics_buzzgroup.png}
+\caption{Topic distribution across buzz clusters (TrumpBuzz, HarrisBuzz, ElectionBuzz), highlighting how candidate-specific discourse clusters preferentially engage with distinct topic dimensions and revealing homophilic topic preferences.}
+\label{fig:bsky_nlp_topics_buzz}
+\end{figure}
+\vspace*{\fill}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Topic prevalence by buzz cluster, showing percentage of posts dominated by each topic.}
+\label{tab:bsky_nlp_topics_buzz}
+\includegraphics[width=\textwidth]{tables/nlp_topic_buzzgroup.png}
+\end{table}
+
 \vspace*{\fill}
 \begin{figure}[H]
 \centering
@@ -643,5 +748,45 @@ Bottom: newspaper sentiment by media leaning vs.\ Polymarket odds.}
 \caption{Share of negative headlines by media leaning compared with Polymarket odds,
 July--November 2024.}
 \label{fig:share_negative_headlines}
+\end{figure}
+\vspace*{\fill}
+
+% ==================================================================
+\newpage
+\subsection{Predictive Modeling}
+
+\vspace*{\fill}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{predictive/walk_forward_cv.png}
+\caption{Walk-forward cross-validation scheme with expanding training windows, preventing look-ahead bias in the time-series prediction task.}
+\label{fig:pred_walk_forward_cv}
+\end{figure}
+\vspace*{\fill}
+
+\vspace*{\fill}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{predictive/SVM_result.png}
+\caption{Best-performing SVM model predictions on test set (October 22 -- November 4, 2024), showing predicted vs.\ actual Polymarket Trump win probability.}
+\label{fig:pred_svm_result}
+\end{figure}
+\vspace*{\fill}
+
+\vspace*{\fill}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{predictive/svm_shap_kernel_explainer.png}
+\caption{SHAP kernel explainer analysis for the SVM model, illustrating feature contributions to individual predictions and aggregated feature importance.}
+\label{fig:pred_svm_shap}
+\end{figure}
+\vspace*{\fill}
+
+\vspace*{\fill}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{predictive/beeswarm.png}
+\caption{Feature importance beeswarm plot showing the distribution of SHAP values across all predictions, with color indicating feature value and position indicating impact on model output.}
+\label{fig:pred_beeswarm}
 \end{figure}
 \vspace*{\fill}
