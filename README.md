@@ -44,6 +44,11 @@ A high-level map of every notebook is available in [`project_overview.ipynb`](pr
 │   ├── 2_preprocessing/
 │   ├── 3_models/
 │   └── 4_model_analysis/
+├── Functions/               # Shared Python helpers imported across notebooks
+│   ├── buzz_column.py       # Buzz-label assignment logic
+│   ├── data_splits.py       # Walk-forward CV split utilities
+│   ├── evaluation_metrics.py# Model evaluation helpers
+│   └── text_preprocessing.py# Reusable text cleaning functions
 ├── house_style.py           # Shared colour palette, style helpers, event markers
 ├── project_overview.ipynb   # Auto-generated index of all notebooks
 ├── update_tocs.py           # Script: regenerates TOCs & project_overview.ipynb
