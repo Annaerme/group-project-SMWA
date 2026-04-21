@@ -2,10 +2,10 @@
 \section{Preprocessing}
 % ---------------------------------------------------------------------
 
-All text data were processed using a standardized preprocessing pipeline. First, basic string manipulation was applied: all text was converted to lowercase, and URLs, @mentions, hashtag symbols, non-alphabetic characters, and excess whitespace were removed.
-
-Next, tokenization and filtering were performed. Tokens were filtered using NLTK English stopwords, and tokens shorter than three characters as well as URL-slug-like strings were removed. Language detection using \texttt{langdetect} was applied to retain only English-language documents.
-
-For the Bluesky TF-IDF analysis, stemming was additionally applied using the \texttt{SnowballStemmer}. No stemming or lemmatization was performed for other parts of the analysis.
-
-Finally, each document was assigned a political buzz label using whole-word keyword matching. Documents were classified as \texttt{TrumpBuzz}, \texttt{HarrisBuzz}, or \texttt{ElectionBuzz}. The label corresponding to the highest number of keyword matches was assigned, provided it exceeded the next highest category by at least one match. In cases of ties, the default label \texttt{ElectionBuzz} was assigned.
+The following preprocessing steps were applied to all text sources:
+\begin{itemize}
+	\item Basic string manipulation: Text was converted to lowercase. URLs, @mentions, hashtag symbols, non-alphabetic characters, and excess whitespace were removed.
+	\item Tokenization \& filtering: Tokens were filtered using NLTK English stopwords, with removal of tokens shorter than three characters and URL-slug-like strings. Language detection via langdetect retained only English documents.
+	\item Stemming: For Bluesky TF-IDF analysis, SnowballStemmer was additionally applied. No stemming or lemmatization was used elsewhere.
+	\item Buzz labeling: Documents were classified as TrumpBuzz, HarrisBuzz, or ElectionBuzz via whole-word keyword matching. The highest-scoring label was assigned provided it led by at least one match; ties defaulted to ElectionBuzz.
+\end{itemize}
