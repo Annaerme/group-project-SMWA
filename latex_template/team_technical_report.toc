@@ -1,81 +1,43 @@
 \babel@toc {english}{}\relax 
-<<<<<<< Updated upstream
-\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
-\contentsline {section}{\numberline {2}Research Design \& Data}{2}{section.2}%
-\contentsline {section}{\numberline {3}Preprocessing}{2}{section.3}%
-\contentsline {section}{\numberline {4}Descriptive Modeling}{3}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Word Analysis \& Embeddings}{3}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Sentiment Analysis}{3}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Network Analysis}{4}{subsection.4.3}%
-\contentsline {section}{\numberline {5}Predictive Modeling}{4}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Feature Engineering}{5}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Cross-Validation Strategy}{5}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Models and Results}{6}{subsection.5.3}%
-\contentsline {section}{\numberline {6}Discussion \& Conclusion}{6}{section.6}%
-\contentsline {section}{\numberline {7}Limitations and Further Improvement}{6}{section.7}%
-\contentsline {section}{\numberline {A}Data Sources}{8}{appendix.A}%
-\contentsline {section}{\numberline {B}Sentiment Methods}{9}{appendix.B}%
-\contentsline {section}{\numberline {C}Model Results}{10}{appendix.C}%
-\contentsline {section}{\numberline {D}Basetable: Variable Overview}{11}{appendix.D}%
-\contentsline {section}{\numberline {E}Key Figures}{14}{appendix.E}%
-\contentsline {subsection}{\numberline {E.1}EDA}{16}{subsection.E.1}%
-\contentsline {subsubsection}{\numberline {E.1.1}Polymarket and Events}{16}{subsubsection.E.1.1}%
-\contentsline {subsubsection}{\numberline {E.1.2}Election Buzz}{17}{subsubsection.E.1.2}%
-\contentsline {subsubsection}{\numberline {E.1.3}Financial Markets}{18}{subsubsection.E.1.3}%
-\contentsline {subsubsection}{\numberline {E.1.4}Google Trends}{20}{subsubsection.E.1.4}%
-\contentsline {subsubsection}{\numberline {E.1.5}Polls}{23}{subsubsection.E.1.5}%
-\contentsline {subsection}{\numberline {E.2}Network Analysis}{24}{subsection.E.2}%
-\contentsline {subsubsection}{\numberline {E.2.1}Centrality Landscape}{24}{subsubsection.E.2.1}%
-\contentsline {subsubsection}{\numberline {E.2.2}Echo Chambers}{25}{subsubsection.E.2.2}%
-\contentsline {subsubsection}{\numberline {E.2.3}Keyword Similarity}{26}{subsubsection.E.2.3}%
-\contentsline {subsubsection}{\numberline {E.2.4}News Source Network}{27}{subsubsection.E.2.4}%
-\contentsline {subsection}{\numberline {E.3}NLP}{29}{subsection.E.3}%
-\contentsline {subsection}{\numberline {E.4}Sentiment Analysis}{33}{subsection.E.4}%
-\contentsline {subsubsection}{\numberline {E.4.1}Newspapers}{33}{subsubsection.E.4.1}%
-\contentsline {subsubsection}{\numberline {E.4.2}Bluesky}{35}{subsubsection.E.4.2}%
-\contentsline {subsubsection}{\numberline {E.4.3}Reddit}{36}{subsubsection.E.4.3}%
-\contentsline {subsection}{\numberline {E.5}Cross Source}{37}{subsection.E.5}%
-=======
 \contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
 \contentsline {section}{\numberline {2}Research Design \& Data}{3}{section.2}%
-\contentsline {section}{\numberline {3}Preprocessing}{4}{section.3}%
+\contentsline {section}{\numberline {3}Preprocessing}{3}{section.3}%
 \contentsline {section}{\numberline {4}Descriptive Modeling}{4}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Word Analysis \& Embeddings}{4}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Sentiment Analysis}{5}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.2}Sentiment Analysis}{4}{subsection.4.2}%
 \contentsline {subsection}{\numberline {4.3}Network Analysis}{5}{subsection.4.3}%
-\contentsline {section}{\numberline {5}Predictive Modeling}{6}{section.5}%
+\contentsline {section}{\numberline {5}Predictive Modeling}{5}{section.5}%
 \contentsline {subsection}{\numberline {5.1}Feature Engineering}{6}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Cross-Validation Strategy}{7}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.2}Cross-Validation Strategy}{6}{subsection.5.2}%
 \contentsline {subsection}{\numberline {5.3}Models and Results}{7}{subsection.5.3}%
-\contentsline {section}{\numberline {6}Discussion \& Conclusion}{8}{section.6}%
-\contentsline {section}{\numberline {7}Limitations and Further Improvement}{8}{section.7}%
-\contentsline {section}{\numberline {A}Data Sources}{10}{appendix.A}%
-\contentsline {section}{\numberline {B}Sentiment Methods}{11}{appendix.B}%
-\contentsline {section}{\numberline {C}Model Results}{12}{appendix.C}%
-\contentsline {section}{\numberline {D}Basetable: Variable Overview}{13}{appendix.D}%
-\contentsline {section}{\numberline {E}Key Figures}{16}{appendix.E}%
-\contentsline {subsection}{\numberline {E.1}EDA}{18}{subsection.E.1}%
-\contentsline {subsubsection}{\numberline {E.1.1}Polymarket and Events}{18}{subsubsection.E.1.1}%
-\contentsline {subsubsection}{\numberline {E.1.2}Election Buzz}{19}{subsubsection.E.1.2}%
-\contentsline {subsubsection}{\numberline {E.1.3}Financial Markets}{20}{subsubsection.E.1.3}%
-\contentsline {subsubsection}{\numberline {E.1.4}Google Trends}{22}{subsubsection.E.1.4}%
-\contentsline {subsubsection}{\numberline {E.1.5}Polls}{26}{subsubsection.E.1.5}%
-\contentsline {subsection}{\numberline {E.2}Network Analysis}{27}{subsection.E.2}%
-\contentsline {subsubsection}{\numberline {E.2.1}Centrality Landscape}{27}{subsubsection.E.2.1}%
-\contentsline {subsubsection}{\numberline {E.2.2}Echo Chambers}{28}{subsubsection.E.2.2}%
-\contentsline {subsubsection}{\numberline {E.2.3}Keyword Similarity}{29}{subsubsection.E.2.3}%
-\contentsline {subsubsection}{\numberline {E.2.4}News Source Network}{30}{subsubsection.E.2.4}%
-\contentsline {subsection}{\numberline {E.3}Bluesky Textual Analysis}{32}{subsection.E.3}%
-\contentsline {subsubsection}{\numberline {E.3.1}Preprocessing}{32}{subsubsection.E.3.1}%
-\contentsline {subsubsection}{\numberline {E.3.2}TF-IDF}{33}{subsubsection.E.3.2}%
-\contentsline {subsubsection}{\numberline {E.3.3}SVD}{35}{subsubsection.E.3.3}%
-\contentsline {subsubsection}{\numberline {E.3.4}LSA}{36}{subsubsection.E.3.4}%
-\contentsline {subsubsection}{\numberline {E.3.5}Key Terms}{37}{subsubsection.E.3.5}%
-\contentsline {subsubsection}{\numberline {E.3.6}Word Clouds}{39}{subsubsection.E.3.6}%
-\contentsline {subsection}{\numberline {E.4}NLP}{40}{subsection.E.4}%
-\contentsline {subsection}{\numberline {E.5}Sentiment Analysis}{44}{subsection.E.5}%
-\contentsline {subsubsection}{\numberline {E.5.1}Newspapers}{44}{subsubsection.E.5.1}%
-\contentsline {subsubsection}{\numberline {E.5.2}Bluesky}{47}{subsubsection.E.5.2}%
-\contentsline {subsubsection}{\numberline {E.5.3}Reddit}{48}{subsubsection.E.5.3}%
-\contentsline {subsection}{\numberline {E.6}Cross Source}{49}{subsection.E.6}%
->>>>>>> Stashed changes
+\contentsline {section}{\numberline {6}Discussion \& Conclusion}{7}{section.6}%
+\contentsline {section}{\numberline {7}Limitations and Further Improvement}{7}{section.7}%
+\contentsline {section}{\numberline {A}Data Sources}{9}{appendix.A}%
+\contentsline {section}{\numberline {B}Sentiment Methods}{10}{appendix.B}%
+\contentsline {section}{\numberline {C}Model Results}{11}{appendix.C}%
+\contentsline {section}{\numberline {D}Basetable: Variable Overview}{12}{appendix.D}%
+\contentsline {section}{\numberline {E}Key Figures}{15}{appendix.E}%
+\contentsline {subsection}{\numberline {E.1}EDA}{17}{subsection.E.1}%
+\contentsline {subsubsection}{\numberline {E.1.1}Polymarket and Events}{17}{subsubsection.E.1.1}%
+\contentsline {subsubsection}{\numberline {E.1.2}Election Buzz}{18}{subsubsection.E.1.2}%
+\contentsline {subsubsection}{\numberline {E.1.3}Financial Markets}{19}{subsubsection.E.1.3}%
+\contentsline {subsubsection}{\numberline {E.1.4}Google Trends}{21}{subsubsection.E.1.4}%
+\contentsline {subsubsection}{\numberline {E.1.5}Polls}{24}{subsubsection.E.1.5}%
+\contentsline {subsection}{\numberline {E.2}Network Analysis}{25}{subsection.E.2}%
+\contentsline {subsubsection}{\numberline {E.2.1}Centrality Landscape}{25}{subsubsection.E.2.1}%
+\contentsline {subsubsection}{\numberline {E.2.2}Echo Chambers}{26}{subsubsection.E.2.2}%
+\contentsline {subsubsection}{\numberline {E.2.3}Keyword Similarity}{27}{subsubsection.E.2.3}%
+\contentsline {subsubsection}{\numberline {E.2.4}News Source Network}{28}{subsubsection.E.2.4}%
+\contentsline {subsection}{\numberline {E.3}Bluesky Textual Analysis}{30}{subsection.E.3}%
+\contentsline {subsubsection}{\numberline {E.3.1}Preprocessing}{30}{subsubsection.E.3.1}%
+\contentsline {subsubsection}{\numberline {E.3.2}TF-IDF}{31}{subsubsection.E.3.2}%
+\contentsline {subsubsection}{\numberline {E.3.3}SVD}{33}{subsubsection.E.3.3}%
+\contentsline {subsubsection}{\numberline {E.3.4}LSA}{34}{subsubsection.E.3.4}%
+\contentsline {subsubsection}{\numberline {E.3.5}Key Terms}{36}{subsubsection.E.3.5}%
+\contentsline {subsubsection}{\numberline {E.3.6}Word Clouds}{38}{subsubsection.E.3.6}%
+\contentsline {subsection}{\numberline {E.4}NLP}{39}{subsection.E.4}%
+\contentsline {subsection}{\numberline {E.5}Sentiment Analysis}{43}{subsection.E.5}%
+\contentsline {subsubsection}{\numberline {E.5.1}Newspapers}{43}{subsubsection.E.5.1}%
+\contentsline {subsubsection}{\numberline {E.5.2}Bluesky}{45}{subsubsection.E.5.2}%
+\contentsline {subsubsection}{\numberline {E.5.3}Reddit}{46}{subsubsection.E.5.3}%
+\contentsline {subsection}{\numberline {E.6}Cross Source}{47}{subsection.E.6}%
