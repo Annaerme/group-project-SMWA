@@ -2,45 +2,47 @@
 \contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
 \contentsline {section}{\numberline {2}Preprocessing}{3}{section.2}%
 \contentsline {section}{\numberline {3}Descriptive Modeling}{3}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Word Analysis \& Embeddings}{3}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Sentiment Analysis}{4}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Network Analysis}{4}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Predictive Modeling}{5}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Experimental Design}{5}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Feature Engineering}{5}{subsection.4.2}%
+\contentsline {subsection}{\numberline {3.1}EDA}{3}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Network analysis}{4}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Textual analysis}{4}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}NLP}{5}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Sentiment analysis}{5}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Predictive Modeling}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Experimental Design}{6}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Feature Engineering}{6}{subsection.4.2}%
 \contentsline {subsection}{\numberline {4.3}Data Preparation}{6}{subsection.4.3}%
 \contentsline {subsection}{\numberline {4.4}Modeling}{6}{subsection.4.4}%
-\contentsline {subsection}{\numberline {4.5}Results}{7}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.5}Performance Evaluation}{7}{subsection.4.5}%
 \contentsline {section}{\numberline {5}Discussion \& Conclusion}{7}{section.5}%
-\contentsline {section}{\numberline {6}Limitations and Further Improvement}{7}{section.6}%
-\contentsline {section}{\numberline {A}Key Figures}{9}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}EDA}{12}{subsection.A.1}%
-\contentsline {subsubsection}{\numberline {A.1.1}Polymarket and Events}{12}{subsubsection.A.1.1}%
-\contentsline {subsubsection}{\numberline {A.1.2}Election Buzz}{13}{subsubsection.A.1.2}%
-\contentsline {subsubsection}{\numberline {A.1.3}Financial Markets}{14}{subsubsection.A.1.3}%
-\contentsline {subsubsection}{\numberline {A.1.4}Google Trends}{16}{subsubsection.A.1.4}%
-\contentsline {subsubsection}{\numberline {A.1.5}Polls}{19}{subsubsection.A.1.5}%
-\contentsline {subsection}{\numberline {A.2}Network Analysis}{20}{subsection.A.2}%
-\contentsline {subsubsection}{\numberline {A.2.1}Centrality Landscape}{20}{subsubsection.A.2.1}%
-\contentsline {subsubsection}{\numberline {A.2.2}Echo Chambers}{21}{subsubsection.A.2.2}%
-\contentsline {subsubsection}{\numberline {A.2.3}Keyword Similarity}{22}{subsubsection.A.2.3}%
-\contentsline {subsubsection}{\numberline {A.2.4}News Source Network}{23}{subsubsection.A.2.4}%
-\contentsline {subsection}{\numberline {A.3}Textual Analysis}{25}{subsection.A.3}%
-\contentsline {subsubsection}{\numberline {A.3.1}Preprocessing}{25}{subsubsection.A.3.1}%
-\contentsline {subsubsection}{\numberline {A.3.2}TF-IDF}{26}{subsubsection.A.3.2}%
-\contentsline {subsubsection}{\numberline {A.3.3}SVD}{28}{subsubsection.A.3.3}%
-\contentsline {subsubsection}{\numberline {A.3.4}LSA}{29}{subsubsection.A.3.4}%
-\contentsline {subsubsection}{\numberline {A.3.5}Key Terms}{30}{subsubsection.A.3.5}%
-\contentsline {subsubsection}{\numberline {A.3.6}Word Clouds}{31}{subsubsection.A.3.6}%
-\contentsline {subsection}{\numberline {A.4}NLP}{32}{subsection.A.4}%
-\contentsline {subsubsection}{\numberline {A.4.1}Bluesky LDA Setup}{32}{subsubsection.A.4.1}%
-\contentsline {subsubsection}{\numberline {A.4.2}Bluesky LDA Model Selection}{33}{subsubsection.A.4.2}%
-\contentsline {subsubsection}{\numberline {A.4.3}Bluesky LDA Outputs}{34}{subsubsection.A.4.3}%
-\contentsline {subsubsection}{\numberline {A.4.4}Newspapers NLP}{36}{subsubsection.A.4.4}%
-\contentsline {subsection}{\numberline {A.5}Sentiment Analysis}{37}{subsection.A.5}%
-\contentsline {subsubsection}{\numberline {A.5.1}VADER}{37}{subsubsection.A.5.1}%
-\contentsline {subsubsection}{\numberline {A.5.2}TextBlob}{37}{subsubsection.A.5.2}%
-\contentsline {subsubsection}{\numberline {A.5.3}NRCLex}{38}{subsubsection.A.5.3}%
-\contentsline {subsubsection}{\numberline {A.5.4}Twitter RoBERTa}{39}{subsubsection.A.5.4}%
-\contentsline {subsubsection}{\numberline {A.5.5}Combination}{40}{subsubsection.A.5.5}%
-\contentsline {subsection}{\numberline {A.6}Predictive Modeling}{41}{subsection.A.6}%
+\contentsline {section}{\numberline {6}Limitations and Further Improvement}{8}{section.6}%
+\contentsline {section}{\numberline {A}Key Figures}{10}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}EDA}{13}{subsection.A.1}%
+\contentsline {subsubsection}{\numberline {A.1.1}Polymarket and Events}{13}{subsubsection.A.1.1}%
+\contentsline {subsubsection}{\numberline {A.1.2}Election Buzz}{14}{subsubsection.A.1.2}%
+\contentsline {subsubsection}{\numberline {A.1.3}Financial Markets}{15}{subsubsection.A.1.3}%
+\contentsline {subsubsection}{\numberline {A.1.4}Google Trends}{17}{subsubsection.A.1.4}%
+\contentsline {subsubsection}{\numberline {A.1.5}Polls}{20}{subsubsection.A.1.5}%
+\contentsline {subsection}{\numberline {A.2}Network Analysis}{21}{subsection.A.2}%
+\contentsline {subsubsection}{\numberline {A.2.1}Centrality Landscape}{21}{subsubsection.A.2.1}%
+\contentsline {subsubsection}{\numberline {A.2.2}Echo Chambers}{22}{subsubsection.A.2.2}%
+\contentsline {subsubsection}{\numberline {A.2.3}Keyword Similarity}{23}{subsubsection.A.2.3}%
+\contentsline {subsubsection}{\numberline {A.2.4}News Source Network}{24}{subsubsection.A.2.4}%
+\contentsline {subsection}{\numberline {A.3}Textual Analysis}{26}{subsection.A.3}%
+\contentsline {subsubsection}{\numberline {A.3.1}Preprocessing}{26}{subsubsection.A.3.1}%
+\contentsline {subsubsection}{\numberline {A.3.2}TF-IDF}{27}{subsubsection.A.3.2}%
+\contentsline {subsubsection}{\numberline {A.3.3}SVD}{29}{subsubsection.A.3.3}%
+\contentsline {subsubsection}{\numberline {A.3.4}LSA}{30}{subsubsection.A.3.4}%
+\contentsline {subsubsection}{\numberline {A.3.5}Key Terms}{31}{subsubsection.A.3.5}%
+\contentsline {subsubsection}{\numberline {A.3.6}Word Clouds}{32}{subsubsection.A.3.6}%
+\contentsline {subsection}{\numberline {A.4}NLP}{33}{subsection.A.4}%
+\contentsline {subsubsection}{\numberline {A.4.1}Bluesky LDA Setup}{33}{subsubsection.A.4.1}%
+\contentsline {subsubsection}{\numberline {A.4.2}Bluesky LDA Model Selection}{34}{subsubsection.A.4.2}%
+\contentsline {subsubsection}{\numberline {A.4.3}Bluesky LDA Outputs}{35}{subsubsection.A.4.3}%
+\contentsline {subsubsection}{\numberline {A.4.4}Newspapers NLP}{37}{subsubsection.A.4.4}%
+\contentsline {subsection}{\numberline {A.5}Sentiment Analysis}{38}{subsection.A.5}%
+\contentsline {subsubsection}{\numberline {A.5.1}VADER}{38}{subsubsection.A.5.1}%
+\contentsline {subsubsection}{\numberline {A.5.2}TextBlob}{38}{subsubsection.A.5.2}%
+\contentsline {subsubsection}{\numberline {A.5.3}NRCLex}{39}{subsubsection.A.5.3}%
+\contentsline {subsubsection}{\numberline {A.5.4}Twitter RoBERTa}{40}{subsubsection.A.5.4}%
+\contentsline {subsubsection}{\numberline {A.5.5}Combination}{41}{subsubsection.A.5.5}%
+\contentsline {subsection}{\numberline {A.6}Predictive Modeling}{42}{subsection.A.6}%
