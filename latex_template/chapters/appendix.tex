@@ -544,6 +544,13 @@ key political figures extracted via NER (July--November 2024).}
 \label{fig:news_textblob}
 \end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{normal_distributions_sentiment_scores.png}
+\caption{KDE distributions of sentiment scores per method and media-leaning group, with a secondary projection by candidate focus (TrumpBuzz vs.\ HarrisBuzz).}
+\label{fig:news_sentiment_distributions}
+\end{figure}
+
 % ------------------------------------------------------------------
 \subsubsection{NRCLex}
 
@@ -875,3 +882,17 @@ SVM & kernel, $C$, $\varepsilon$ & kernel: [linear, rbf, poly, sigmoid]; $C$: [0
 \caption{Feature importance beeswarm plot showing the distribution of SHAP values across all predictions, with color indicating feature value and position indicating impact on model output.}
 \label{fig:pred_beeswarm}
 \end{figure}
+
+\begin{table}[H]
+\centering
+\includegraphics[width=\textwidth]{predictive/table_leaderboard_1of2.png}
+\caption{Model leaderboard: test-set performance for all model--feature set combinations (part 1 of 2).}
+\label{tab:results}
+\end{table}
+
+\begin{table}[H]
+\centering
+\includegraphics[width=\textwidth]{predictive/table_leaderboard_2of2.png}
+\caption{Model leaderboard: test-set performance for all model--feature set combinations (part 2 of 2).}
+\label{tab:results_2}
+\end{table}
