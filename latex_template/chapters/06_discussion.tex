@@ -2,4 +2,8 @@
 \section{Discussion \& Conclusion}
 % ---------------------------------------------------------------------
 
-\textit{[To be completed.]}
+The MAE improvement of only 11.7\% over the naïve baseline underscores how difficult it is to meaningfully outperform a model that simply predicts no daily change. A compelling theoretical explanation for this difficulty lies in the Efficient Market Hypothesis (Malkiel, 2003): in a well-functioning prediction market, all publicly available information is rapidly incorporated into prices by rational, profit-motivated participants. If social media sentiment, polling data, and news coverage are already reflected in the Polymarket odds by the time they are observed, these signals carry no marginal predictive value. They are, by definition, already priced in.
+
+Several limitations temper these conclusions. The study covers a single election cycle over a short 123-day window, limiting the generalizability of the findings. Additionally, feature selection was performed on the full train/validation portion rather than within each fold individually. While this introduces a mild form of leakage into the cross-validation estimates the impact is considerably less severe than feature selection on the full dataset including the test set (Rosenblatt et al., 2024). The held-out test set remained entirely untouched throughout. Given the small sample size of 109 observations, per-fold feature selection would moreover risk high instability in the selected feature set across folds (He \& Yu., 2010).
+
+Ultimately, the fact that Polymarket correctly anticipated Trump's victory 18 days in advance while the majority of polls still predicted Harris (Travin, 2025) suggests the market was already processing information more efficiently than traditional forecasting tools, making it inherently difficult to outsmart with the same publicly available data.
