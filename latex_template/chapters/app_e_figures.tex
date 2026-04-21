@@ -6,9 +6,16 @@
 \definecolor{textprimary}{HTML}{e8eaed}
 \titleformat{\section}{\sffamily\Large\bfseries\color{textmuted}}{\color{textmuted}\thesection}{1em}{}
 \titleformat{\subsection}{\sffamily\large\bfseries\color{textmuted}}{\color{textmuted}\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\sffamily\normalsize\bfseries\color{textmuted}}{\color{textmuted}\thesubsubsection}{1em}{}
 \captionsetup{labelfont={color=textmuted,bf}, textfont={color=textmuted}}
 \section{Key Figures}
 \label{app:figures}
+
+% ==================================================================
+\subsection{EDA}
+
+% ------------------------------------------------------------------
+\subsubsection{Polymarket and Events}
 
 \begin{figure}[H]
 \centering
@@ -21,13 +28,14 @@ Vertical dashed lines mark key campaign events.}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{polymarket_event_table.png}
+\includegraphics[width=0.85\textwidth]{polymarket_event_table.png}
 \caption{Overview of key campaign events included in the Polymarket analysis,
 with date, label, and brief description.}
 \label{fig:polymarket_events}
 \end{figure}
 
-\subsection{Financial Markets}
+% ------------------------------------------------------------------
+\subsubsection{Financial Markets}
 
 \begin{figure}[H]
 \centering
@@ -40,18 +48,12 @@ vertical dashed lines mark key political events.}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.65\textwidth]{financials_correlation.png}
-\caption{Pearson correlation matrix of daily market indicators,
-June--November 2024.}
-\label{fig:financials_correlation}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{financials_sp500_vix.png}
-\caption{S\&P 500 (left axis) versus VIX 10-day moving average (right axis),
-June--November 2024.}
-\label{fig:financials_sp500_vix}
+\includegraphics[width=0.54\textwidth]{financials_sp500_vix.png}
+\hfill
+\includegraphics[width=0.42\textwidth]{financials_correlation.png}
+\caption{Left: S\&P 500 versus VIX 10-day moving average (right axis), June--November 2024.
+Right: Pearson correlation matrix of daily market indicators.}
+\label{fig:financials_sp500_corr}
 \end{figure}
 
 \begin{figure}[H]
@@ -63,7 +65,8 @@ and real GDP.}
 \label{fig:financials_macro_table}
 \end{figure}
 
-\subsection{Google Trends}
+% ------------------------------------------------------------------
+\subsubsection{Google Trends}
 
 \begin{figure}[H]
 \centering
@@ -76,57 +79,52 @@ July--November 2024. Values are normalised to a 0--100 index.}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{gt_trump_vs_kamala.png}
-\caption{Google search interest for Trump and Kamala with key campaign events marked
-(July--November 2024). Vertical dashed lines correspond to the events defined in the
-shared event timeline.}
-\label{fig:gt_trump_vs_kamala}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{gt_search_gap.png}
-\caption{Daily search interest gap (Trump minus Kamala). Positive bars indicate days on
-which Trump attracted more search volume; negative bars indicate Kamala leading.}
-\label{fig:gt_search_gap}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{gt_trends_vs_polymarket.png}
-\caption{Google Trends search interest (solid line, left axis) versus Polymarket win
-probability (dashed line, right axis) for Trump (top) and Kamala (bottom),
-July--November 2024.}
-\label{fig:gt_trends_vs_polymarket}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{gt_correlation_scatter.png}
-\caption{Scatter plots of daily Google search interest against Polymarket win probability
-for Trump (left) and Kamala (right). The dashed white line shows the OLS trend.
-Pearson $r$ is reported in each panel title.}
-\label{fig:gt_correlation_scatter}
-\end{figure}
-
-\begin{figure}[p]
-\centering
-\includegraphics[width=0.48\textwidth,height=0.28\textheight,keepaspectratio]{gt_trump.png}
+\includegraphics[width=0.49\textwidth]{gt_trump_vs_kamala.png}
 \hfill
-\includegraphics[width=0.48\textwidth,height=0.28\textheight,keepaspectratio]{gt_harris.png}
+\includegraphics[width=0.49\textwidth]{gt_search_gap.png}
+\caption{Left: Google search interest for Trump and Kamala with key campaign events marked.
+Right: daily search interest gap (Trump minus Kamala); positive bars indicate Trump leading.}
+\label{fig:gt_comparison}
+\end{figure}
 
-\vspace{0.8em}
-
-\includegraphics[width=0.48\textwidth,height=0.28\textheight,keepaspectratio]{gt_vance.png}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.49\textwidth]{gt_trends_vs_polymarket.png}
 \hfill
-\includegraphics[width=0.48\textwidth,height=0.28\textheight,keepaspectratio]{gt_walz.png}
-\caption{Google search interest with key campaign events marked for four candidates
-shown in a 2\,$\times$\,2 layout: \textit{Trump} (top-left), \textit{Harris} (top-right),
-\textit{Vance} (bottom-left), and \textit{Walz} (bottom-right), July--November 2024.}
+\includegraphics[width=0.49\textwidth]{gt_correlation_scatter.png}
+\caption{Left: Google Trends interest vs.\ Polymarket win probability for Trump (top) and
+Kamala (bottom). Right: scatter plots of daily search interest against Polymarket probability;
+dashed line shows OLS trend, Pearson $r$ reported in panel titles.}
+\label{fig:gt_polymarket}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.48\textwidth,height=0.26\textheight,keepaspectratio]{gt_trump.png}
+\hfill
+\includegraphics[width=0.48\textwidth,height=0.26\textheight,keepaspectratio]{gt_harris.png}
+
+\vspace{0.5em}
+
+\includegraphics[width=0.48\textwidth,height=0.26\textheight,keepaspectratio]{gt_vance.png}
+\hfill
+\includegraphics[width=0.48\textwidth,height=0.26\textheight,keepaspectratio]{gt_walz.png}
+\caption{Google search interest with key campaign events for four candidates:
+\textit{Trump} (top-left), \textit{Harris} (top-right), \textit{Vance} (bottom-left),
+and \textit{Walz} (bottom-right), July--November 2024.}
 \label{fig:gt_candidate_grid}
 \end{figure}
 
-\subsection{Newspapers Network Analysis}
+% ------------------------------------------------------------------
+\subsubsection{Polls}
+
+% Placeholder: poll figures to be added here.
+
+% ==================================================================
+\subsection{Network Analysis}
+
+% ------------------------------------------------------------------
+\subsubsection{Newspapers}
 
 \begin{figure}[H]
 \centering
@@ -139,21 +137,16 @@ edge width reflects cosine similarity strength.}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{news_network_top40.png}
-\caption{Zoomed view of the top-40 most connected newspaper sources in the network,
-highlighting core structure and cross-leaning connectivity.}
-\label{fig:news_network_top40}
+\includegraphics[width=0.49\textwidth]{news_network_top40.png}
+\hfill
+\includegraphics[width=0.49\textwidth]{news_degree_centrality_top20.png}
+\caption{Left: zoomed view of the top-40 most connected newspaper sources.
+Right: top-20 sources by degree, betweenness, and PageRank, colour-coded by media leaning.}
+\label{fig:news_network_compact}
 \end{figure}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{news_degree_centrality_top20.png}
-\caption{Top-20 newspaper sources by centrality metrics (degree, betweenness, and
-PageRank), grouped and colour-coded by media leaning.}
-\label{fig:news_centrality_top20}
-\end{figure}
-
-\subsection{Reddit Network Analysis}
+% ------------------------------------------------------------------
+\subsubsection{Reddit}
 
 \begin{figure}[H]
 \centering
@@ -165,29 +158,26 @@ Node size reflects community activity; edge strength reflects overlap intensity.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{keywordsimilaritysubreddits.png}
-\caption{Keyword-similarity map across subreddits based on lexical overlap in posts.
-Higher similarity indicates more shared topic vocabulary between communities.}
-\label{fig:reddit_keyword_similarity_subreddits}
+\includegraphics[width=0.49\textwidth]{keywordsimilaritysubreddits.png}
+\hfill
+\includegraphics[width=0.49\textwidth]{candidate_buzz_distribution.png}
+\caption{Left: keyword-similarity map across subreddits based on lexical overlap.
+Right: distribution of candidate-focused buzz across Reddit discussions.}
+\label{fig:reddit_keyword_buzz}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{candidate_buzz_distribution.png}
-\caption{Distribution of candidate-focused buzz across Reddit discussions,
-comparing Trump, Harris, and general election-related content clusters.}
-\label{fig:reddit_candidate_buzz_distribution}
+\includegraphics[width=0.49\textwidth]{echochambersreddit.png}
+\hfill
+\includegraphics[width=0.49\textwidth]{centrality landscape.png}
+\caption{Left: echo-chamber diagnostics showing within-cluster retention and cross-cluster overlap.
+Right: centrality landscape of the Reddit mention network (betweenness vs.\ in-degree).}
+\label{fig:reddit_echo_centrality}
 \end{figure}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{echochambersreddit.png}
-\caption{Echo-chamber diagnostics on Reddit showing within-cluster retention and
-cross-cluster audience overlap among candidate and election buzz streams.}
-\label{fig:reddit_echo_chambers}
-\end{figure}
-
-\subsection{Bluesky}
+% ------------------------------------------------------------------
+\subsubsection{Bluesky}
 
 \begin{figure}[H]
 \centering
@@ -200,41 +190,120 @@ Bridge accounts and cluster hubs are annotated separately.}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{keyword_similarity_heatmap.png}
-\caption{Keyword co-occurrence similarity heatmap across Bluesky posts,
-computed from TF-IDF cosine similarities between candidate and election buzz clusters.
-Darker cells indicate higher lexical overlap.}
-\label{fig:bsky_keyword_similarity_heatmap}
+\includegraphics[width=0.49\textwidth]{keyword_similarity_heatmap.png}
+\hfill
+\includegraphics[width=0.49\textwidth]{keyword_similarity_treshold.png}
+\caption{Left: keyword co-occurrence similarity heatmap across Bluesky posts (TF-IDF cosine).
+Right: thresholded keyword similarity network showing core lexical clusters.}
+\label{fig:bsky_keyword_similarity}
+\end{figure}
+
+% ==================================================================
+\subsection{NLP}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{word_clouds.png}
+\caption{Word clouds of the most frequent terms in newspaper headlines, split by
+media leaning (Democratic, Republican, center), July--November 2024.}
+\label{fig:news_word_clouds}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{keyword_similarity_treshold.png}
-\caption{Thresholded keyword similarity network derived from the heatmap above.
-Only pairs exceeding the similarity threshold are shown as edges,
-revealing the core lexical clusters in Bluesky discourse.}
-\label{fig:bsky_keyword_similarity_threshold}
+\includegraphics[width=\textwidth]{key_mentions_over_time_NER.png}
+\caption{Named-entity mention counts over time in newspaper headlines, tracking
+key political figures extracted via NER (July--November 2024).}
+\label{fig:news_ner_mentions}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{SVD-comments.png}
-\caption{SVD / Latent Semantic Analysis for Bluesky comments: scree plot (left) showing
-variance explained per component and cumulative variance curve (right) with 80\%, 90\%,
-and 95\% thresholds marked.}
-\label{fig:bsky_svd_comments}
+\includegraphics[width=\textwidth]{LDA_topic.png}
+\caption{LDA topic composition for news headlines. Each bar shows the share of the
+two latent topics per day, with $K=2$ selected by coherence sweep.}
+\label{fig:news_lda_topic}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{SVD-posts.png}
-\caption{SVD / Latent Semantic Analysis for Bluesky posts: scree plot (left) showing
-variance explained per component and cumulative variance curve (right) with 80\%, 90\%,
-and 95\% thresholds marked.}
-\label{fig:bsky_svd_posts}
+\includegraphics[width=0.49\textwidth]{SVD-posts.png}
+\hfill
+\includegraphics[width=0.49\textwidth]{SVD-comments.png}
+\caption{SVD / Latent Semantic Analysis scree plots for Bluesky posts (left) and
+comments (right), showing variance explained per component with 80\%, 90\%, and 95\%
+thresholds.}
+\label{fig:bsky_svd}
 \end{figure}
 
-\subsection{Cross-Source}
+% ==================================================================
+\subsection{Sentiment Analysis}
+
+% ------------------------------------------------------------------
+\subsubsection{Newspapers}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{headline_sentiment_overtime.png}
+\caption{Daily average headline sentiment score over time for each media-leaning group,
+July--November 2024. Vertical dashed lines mark key campaign events.}
+\label{fig:news_headline_sentiment_overtime}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.49\textwidth]{comparision_sentiment.png}
+\hfill
+\includegraphics[width=0.49\textwidth]{newssentiment_textblob.png}
+\caption{Left: comparison of sentiment methods (VADER, FinBERT, TextBlob) on newspaper
+headlines. Right: TextBlob polarity and subjectivity by media leaning.}
+\label{fig:news_sentiment_methods}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.49\textwidth]{normal_distributions_sentiment_scores.png}
+\hfill
+\includegraphics[width=0.49\textwidth]{sentiment_score_by_leaning_projections.png}
+\caption{Left: KDE distributions of sentiment scores per method and media-leaning group.
+Right: sentiment score projections by leaning and candidate focus (TrumpBuzz vs.\ HarrisBuzz).}
+\label{fig:news_sentiment_distributions}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.49\textwidth]{../figures/news/NRC.png}
+\hfill
+\includegraphics[width=0.49\textwidth]{NRCle_ emotionscores.png}
+\caption{Left: NRC emotion scores for newspaper headlines across media leanings.
+Right: NRCLex eight-emotion profiles by media leaning (Plutchik wheel).}
+\label{fig:news_nrc}
+\end{figure}
+
+% ------------------------------------------------------------------
+\subsubsection{Bluesky}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../figures/bluesky/NRC.png}
+\caption{NRC emotion scores for Bluesky posts, showing the eight-emotion
+breakdown for TrumpBuzz and HarrisBuzz clusters.}
+\label{fig:bluesky_nrc}
+\end{figure}
+
+% ------------------------------------------------------------------
+\subsubsection{Reddit}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../figures/reddit/NRC.png}
+\caption{NRC emotion scores for Reddit posts, comparing emotion profiles across
+TrumpBuzz, HarrisBuzz, and ElectionBuzz subreddit clusters.}
+\label{fig:reddit_nrc}
+\end{figure}
+
+% ==================================================================
+\subsection{Cross Source}
 
 \begin{figure}[H]
 \centering
@@ -246,18 +315,12 @@ over the campaign period (July--November 2024).}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{media_attention_vs_polymarket.png}
-\caption{Media attention indicators (coverage volume and Trump share of coverage)
-compared with Polymarket odds, July--November 2024.}
-\label{fig:media_attention_vs_polymarket}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{newspapersentimentvspolymarketodds.png}
-\caption{Newspaper sentiment indicators by media leaning compared with Polymarket odds,
-July--November 2024.}
-\label{fig:newspaper_sentiment_vs_polymarket}
+\includegraphics[width=0.49\textwidth]{media_attention_vs_polymarket.png}
+\hfill
+\includegraphics[width=0.49\textwidth]{newspapersentimentvspolymarketodds.png}
+\caption{Left: media attention (coverage volume and Trump share) vs.\ Polymarket odds.
+Right: newspaper sentiment by media leaning vs.\ Polymarket odds.}
+\label{fig:cross_attention_sentiment}
 \end{figure}
 
 \begin{figure}[H]
