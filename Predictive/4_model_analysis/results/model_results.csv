@@ -1,0 +1,34 @@
+,Feature set,Model,MAE,RMSE,DA,R2
+1,Full (111f),SVM,0.0143,0.0209,0.5714,-0.0657
+2,Full (111f),Ridge,0.0155,0.0208,0.5714,-0.0577
+3,Lag+Soc+Trad (83f),Ridge,0.0156,0.021,0.5714,-0.0757
+4,Web+Polls (19f),XGBoost,0.0156,0.0196,0.5714,0.0602
+5,Lag+Social (64f),Ridge,0.0158,0.021,0.5714,-0.0788
+6,Financial (10f),SVM,0.016,0.0202,0.5714,0.0021
+7,Lag (2f),XGBoost,0.0162,0.02,0.5714,0.0165
+8,Lag (2f),SVM,0.0163,0.02,0.5714,0.0245
+9,Lag (2f),Random Forest,0.017,0.0201,0.5714,0.0073
+10,Lag+Soc+Trad (83f),Random Forest,0.0156,0.0216,0.5,-0.1428
+11,Full (111f),Random Forest,0.0158,0.0215,0.5,-0.1343
+12,Social (61f),Ridge,0.0158,0.0211,0.5,-0.088
+13,Lag+Social (64f),Random Forest,0.0159,0.0212,0.5,-0.0997
+14,Social (61f),Random Forest,0.0159,0.021,0.5,-0.0825
+15,Full (111f),XGBoost,0.016,0.0209,0.5,-0.0724
+16,Lag+Social (64f),XGBoost,0.016,0.0207,0.5,-0.0466
+17,Traditional (19f),Ridge,0.016,0.0208,0.5,-0.0645
+18,Web+Polls (19f),Random Forest,0.016,0.0202,0.5,0.0005
+19,Lag (2f),Ridge,0.0161,0.0204,0.5,-0.0215
+20,Social (61f),XGBoost,0.0161,0.0208,0.5,-0.0651
+21,Traditional (19f),XGBoost,0.0163,0.0216,0.5,-0.1429
+22,Financial (10f),XGBoost,0.0164,0.0203,0.5,-0.0053
+23,Traditional (19f),Random Forest,0.0164,0.0215,0.5,-0.1357
+24,Lag+Social (64f),SVM,0.0165,0.0227,0.5,-0.2607
+25,Social (61f),SVM,0.0166,0.0227,0.5,-0.2609
+26,Lag+Soc+Trad (83f),SVM,0.0169,0.0229,0.5,-0.2884
+27,Traditional (19f),SVM,0.0169,0.0222,0.5,-0.2073
+28,Lag+Soc+Trad (83f),XGBoost,0.0159,0.0207,0.4286,-0.0526
+29,Financial (10f),Ridge,0.016,0.0205,0.4286,-0.0332
+30,Web+Polls (19f),SVM,0.016,0.0201,0.4286,0.0078
+31,Web+Polls (19f),Ridge,0.0161,0.0206,0.4286,-0.0433
+32,Financial (10f),Random Forest,0.0168,0.0202,0.4286,0.0033
+33,— (all feature sets),Naive (zero),0.0162,0.0208,0.0,-0.057
