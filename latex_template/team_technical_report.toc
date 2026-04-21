@@ -1,24 +1,24 @@
 \babel@toc {english}{}\relax 
-\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
-\contentsline {section}{\numberline {2}Research Design \& Data}{2}{section.2}%
-\contentsline {section}{\numberline {3}Preprocessing}{2}{section.3}%
-\contentsline {section}{\numberline {4}Descriptive Modeling}{3}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Word Analysis \& Embeddings}{3}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Sentiment Analysis}{3}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Network Analysis}{4}{subsection.4.3}%
-\contentsline {section}{\numberline {5}Predictive Modeling}{4}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Experimental Design}{5}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Feature Engineering}{5}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Data Preparation}{5}{subsection.5.3}%
-\contentsline {subsection}{\numberline {5.4}Modeling}{6}{subsection.5.4}%
-\contentsline {subsection}{\numberline {5.5}Results}{6}{subsection.5.5}%
-\contentsline {section}{\numberline {6}Discussion \& Conclusion}{6}{section.6}%
-\contentsline {section}{\numberline {7}Limitations and Further Improvement}{6}{section.7}%
-\contentsline {section}{\numberline {A}Data Sources}{8}{appendix.A}%
-\contentsline {section}{\numberline {B}Sentiment Methods}{9}{appendix.B}%
-\contentsline {section}{\numberline {C}Model Results}{10}{appendix.C}%
-\contentsline {section}{\numberline {D}Basetable: Variable Overview}{11}{appendix.D}%
-\contentsline {section}{\numberline {E}Key Figures}{14}{appendix.E}%
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
+\contentsline {section}{\numberline {2}Research Design \& Data}{3}{section.2}%
+\contentsline {section}{\numberline {3}Preprocessing}{3}{section.3}%
+\contentsline {section}{\numberline {4}Descriptive Modeling}{4}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Word Analysis \& Embeddings}{4}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Sentiment Analysis}{4}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Network Analysis}{5}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Predictive Modeling}{5}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Experimental Design}{6}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Feature Engineering}{6}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Data Preparation}{6}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Modeling}{7}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Results}{7}{subsection.5.5}%
+\contentsline {section}{\numberline {6}Discussion \& Conclusion}{7}{section.6}%
+\contentsline {section}{\numberline {7}Limitations and Further Improvement}{7}{section.7}%
+\contentsline {section}{\numberline {A}Data Sources}{9}{appendix.A}%
+\contentsline {section}{\numberline {B}Sentiment Methods}{10}{appendix.B}%
+\contentsline {section}{\numberline {C}Model Results}{11}{appendix.C}%
+\contentsline {section}{\numberline {D}Basetable: Variable Overview}{12}{appendix.D}%
+\contentsline {section}{\numberline {E}Key Figures}{15}{appendix.E}%
 \contentsline {subsection}{\numberline {E.1}EDA}{17}{subsection.E.1}%
 \contentsline {subsubsection}{\numberline {E.1.1}Polymarket and Events}{17}{subsubsection.E.1.1}%
 \contentsline {subsubsection}{\numberline {E.1.2}Election Buzz}{18}{subsubsection.E.1.2}%
@@ -35,13 +35,12 @@
 \contentsline {subsubsection}{\numberline {E.3.2}TF-IDF}{31}{subsubsection.E.3.2}%
 \contentsline {subsubsection}{\numberline {E.3.3}SVD}{33}{subsubsection.E.3.3}%
 \contentsline {subsubsection}{\numberline {E.3.4}LSA}{34}{subsubsection.E.3.4}%
-\contentsline {subsubsection}{\numberline {E.3.5}Key Terms}{36}{subsubsection.E.3.5}%
-\contentsline {subsubsection}{\numberline {E.3.6}Word Clouds}{38}{subsubsection.E.3.6}%
-\contentsline {subsection}{\numberline {E.4}NLP}{39}{subsection.E.4}%
+\contentsline {subsubsection}{\numberline {E.3.5}Key Terms}{35}{subsubsection.E.3.5}%
+\contentsline {subsubsection}{\numberline {E.3.6}Word Clouds}{37}{subsubsection.E.3.6}%
+\contentsline {subsection}{\numberline {E.4}NLP}{38}{subsection.E.4}%
 \contentsline {subsubsection}{\numberline {E.4.1}Bluesky NLP Topic Modeling}{41}{subsubsection.E.4.1}%
-\contentsline {subsection}{\numberline {E.5}Sentiment Analysis}{47}{subsection.E.5}%
-\contentsline {subsubsection}{\numberline {E.5.1}Newspapers}{47}{subsubsection.E.5.1}%
-\contentsline {subsubsection}{\numberline {E.5.2}Bluesky}{49}{subsubsection.E.5.2}%
-\contentsline {subsubsection}{\numberline {E.5.3}Reddit}{50}{subsubsection.E.5.3}%
+\contentsline {subsection}{\numberline {E.5}Sentiment Analysis}{46}{subsection.E.5}%
+\contentsline {subsubsection}{\numberline {E.5.1}Newspapers}{46}{subsubsection.E.5.1}%
+\contentsline {subsubsection}{\numberline {E.5.2}Bluesky}{50}{subsubsection.E.5.2}%
 \contentsline {subsection}{\numberline {E.6}Cross Source}{51}{subsection.E.6}%
-\contentsline {subsection}{\numberline {E.7}Predictive Modeling}{54}{subsection.E.7}%
+\contentsline {subsection}{\numberline {E.7}Predictive Modeling}{53}{subsection.E.7}%

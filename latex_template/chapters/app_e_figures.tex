@@ -8,6 +8,7 @@
 \titleformat{\subsection}{\sffamily\large\bfseries\color{textmuted}}{\color{textmuted}\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\sffamily\normalsize\bfseries\color{textmuted}}{\color{textmuted}\thesubsubsection}{1em}{}
 \captionsetup{labelfont={color=textmuted,bf}, textfont={color=textmuted}}
+\captionsetup[table]{position=bottom}
 \section{Key Figures}
 \label{app:figures}
 
@@ -16,7 +17,7 @@
 \begin{longtable}{|p{0.05\linewidth}|p{0.14\linewidth}|p{0.16\linewidth}|p{0.43\linewidth}|p{0.06\linewidth}|}
 
 \hline
-\textcolor{textprimary}{\small\bfseries\sffamily Fig.} &
+\textcolor{textprimary}{\small\bfseries\sffamily Fig./Tab.} &
 \textcolor{textprimary}{\small\bfseries\sffamily Section} &
 \textcolor{textprimary}{\small\bfseries\sffamily Source} &
 \textcolor{textprimary}{\small\bfseries\sffamily Description} &
@@ -27,7 +28,7 @@
 \hline
 \multicolumn{5}{|l|}{\textcolor{textmuted}{\small\itshape \ldots vervolg}} \\
 \hline
-\textcolor{textprimary}{\small\bfseries\sffamily Fig.} &
+\textcolor{textprimary}{\small\bfseries\sffamily Fig./Tab.} &
 \textcolor{textprimary}{\small\bfseries\sffamily Section} &
 \textcolor{textprimary}{\small\bfseries\sffamily Source} &
 \textcolor{textprimary}{\small\bfseries\sffamily Description} &
@@ -64,7 +65,6 @@
 % ----- 3. Bluesky Textual Analysis -----
 \multicolumn{5}{|l|}{\rule[-0.3em]{0pt}{1.2em}\textcolor{textprimary}{\sffamily\bfseries\small\enspace 3 \enspace Bluesky Textual Analysis}} \\
 \hline
-\textcolor{textmuted}{\small\ref{fig:bsky_char_distribution}}      & \textcolor{textmuted}{\small Descriptive stats} & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Character length distribution}            & \textcolor{textmuted}{\small\pageref{fig:bsky_char_distribution}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:bsky_tfidf_buzzgroups}}       & \textcolor{textmuted}{\small TF-IDF}           & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Distinctive words by buzz group}          & \textcolor{textmuted}{\small\pageref{fig:bsky_tfidf_buzzgroups}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:bsky_svd_variance}}           & \textcolor{textmuted}{\small LSA / SVD}        & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Variance explained by SVD components}     & \textcolor{textmuted}{\small\pageref{fig:bsky_svd_variance}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:bsky_lsa_time}}               &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small LSA concepts over time}                   & \textcolor{textmuted}{\small\pageref{fig:bsky_lsa_time}} \\\hline
@@ -76,17 +76,15 @@
 \hline
 \textcolor{textmuted}{\small\ref{fig:news_word_clouds}}            & \textcolor{textmuted}{\small NLP}                  & \textcolor{textmuted}{\small Newspapers}      & \textcolor{textmuted}{\small Word clouds by media leaning}             & \textcolor{textmuted}{\small\pageref{fig:news_word_clouds}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:news_ner_mentions}}           &                                                    & \textcolor{textmuted}{\small Newspapers}      & \textcolor{textmuted}{\small Named-entity mentions over time}          & \textcolor{textmuted}{\small\pageref{fig:news_ner_mentions}} \\\hline
-\textcolor{textmuted}{\small\ref{fig:news_lda_topic}}              &                                                    & \textcolor{textmuted}{\small Newspapers}      & \textcolor{textmuted}{\small LDA topic composition}                    & \textcolor{textmuted}{\small\pageref{fig:news_lda_topic}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:bsky_nlp_preprocessing}}      & \textcolor{textmuted}{\small Bluesky NLP}        & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small LDA preprocessing summary}                & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_preprocessing}} \\\hline
-\textcolor{textmuted}{\small\ref{fig:bsky_nlp_dictionary}}         &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Vocabulary size and filter metrics}       & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_dictionary}} \\\hline
-\textcolor{textmuted}{\small\ref{fig:bsky_nlp_top_terms}}          &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Top 15 terms by document frequency}       & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_top_terms}} \\\hline
+\textcolor{textmuted}{\small Tab.~\ref{tab:bsky_nlp_dictionary}}   &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Vocabulary size and filter metrics}       & \textcolor{textmuted}{\small\pageref{tab:bsky_nlp_dictionary}} \\\hline
+\textcolor{textmuted}{\small Tab.~\ref{tab:bsky_nlp_top_terms}}    &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Top 15 terms by document frequency}       & \textcolor{textmuted}{\small\pageref{tab:bsky_nlp_top_terms}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:bsky_nlp_coherence_sweep}}    &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Coherence and AIC sweep (K=2 to 10)}     & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_coherence_sweep}} \\\hline
-\textcolor{textmuted}{\small\ref{fig:bsky_nlp_model_summary}}      &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Final LDA model parameters}              & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_model_summary}} \\\hline
-\textcolor{textmuted}{\small\ref{fig:bsky_nlp_topic_words}}        &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Top 10 words per topic}                  & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_topic_words}} \\\hline
+\textcolor{textmuted}{\small Tab.~\ref{tab:bsky_nlp_model_summary}}&                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Final LDA model parameters}              & \textcolor{textmuted}{\small\pageref{tab:bsky_nlp_model_summary}} \\\hline
+\textcolor{textmuted}{\small Tab.~\ref{tab:bsky_nlp_topic_words}}  &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Top 10 words per topic}                  & \textcolor{textmuted}{\small\pageref{tab:bsky_nlp_topic_words}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:bsky_nlp_wordclouds}}         &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Topic-specific word clouds}              & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_wordclouds}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:bsky_nlp_topics_time}}        &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Topic prominence over time}              & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_topics_time}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:bsky_nlp_topics_buzz}}        &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Topic distribution by buzz cluster}       & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_topics_buzz}} \\\hline
-\textcolor{textmuted}{\small\ref{fig:bsky_svd}}                    &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small SVD scree plots (posts \& comments)}      & \textcolor{textmuted}{\small\pageref{fig:bsky_svd}} \\\hline
 
 % ----- 5. Sentiment Analysis -----
 \multicolumn{5}{|l|}{\rule[-0.3em]{0pt}{1.2em}\textcolor{textprimary}{\sffamily\bfseries\small\enspace 5 \enspace Sentiment Analysis}} \\
@@ -96,13 +94,11 @@
 \textcolor{textmuted}{\small\ref{fig:news_sentiment_distributions}} &                                                   & \textcolor{textmuted}{\small Newspapers}      & \textcolor{textmuted}{\small KDE distributions \& leaning projections} & \textcolor{textmuted}{\small\pageref{fig:news_sentiment_distributions}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:news_nrc}}                    &                                                    & \textcolor{textmuted}{\small Newspapers}      & \textcolor{textmuted}{\small NRC \& NRCLex emotion scores}             & \textcolor{textmuted}{\small\pageref{fig:news_nrc}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:bluesky_nrc}}                 &                                                    & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small NRC emotion scores}                       & \textcolor{textmuted}{\small\pageref{fig:bluesky_nrc}} \\\hline
-\textcolor{textmuted}{\small\ref{fig:reddit_nrc}}                  &                                                    & \textcolor{textmuted}{\small Reddit}          & \textcolor{textmuted}{\small NRC emotion scores}                       & \textcolor{textmuted}{\small\pageref{fig:reddit_nrc}} \\\hline
 
 % ----- 6. Cross Source -----
 \multicolumn{5}{|l|}{\rule[-0.3em]{0pt}{1.2em}\textcolor{textprimary}{\sffamily\bfseries\small\enspace 6 \enspace Cross Source}} \\
 \hline
-\textcolor{textmuted}{\small\ref{fig:cross_source_dashboard}}      & \textcolor{textmuted}{\small Cross Source}         & \textcolor{textmuted}{\small All sources}     & \textcolor{textmuted}{\small Cross-source dashboard}                   & \textcolor{textmuted}{\small\pageref{fig:cross_source_dashboard}} \\\hline
-\textcolor{textmuted}{\small\ref{fig:cross_attention_sentiment}}   &                                                    & \textcolor{textmuted}{\small All sources}     & \textcolor{textmuted}{\small Media attention \& sentiment vs.\ Polymarket} & \textcolor{textmuted}{\small\pageref{fig:cross_attention_sentiment}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:cross_attention_sentiment}}   & \textcolor{textmuted}{\small Cross Source}         & \textcolor{textmuted}{\small All sources}     & \textcolor{textmuted}{\small Newspaper sentiment vs.\ Polymarket}     & \textcolor{textmuted}{\small\pageref{fig:cross_attention_sentiment}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:share_negative_headlines}}    &                                                    & \textcolor{textmuted}{\small All sources}     & \textcolor{textmuted}{\small Share of negative headlines}              & \textcolor{textmuted}{\small\pageref{fig:share_negative_headlines}} \\\hline
 
 % ----- 7. Predictive -----
@@ -176,7 +172,7 @@ vertical dashed lines mark key political events.}
 \centering
 \includegraphics[width=\textwidth,height=0.38\textheight,keepaspectratio]{financials_sp500_vix.png}
 
-\vspace{0.5em}
+\vspace{1.2em}
 
 \includegraphics[width=0.65\textwidth,height=0.38\textheight,keepaspectratio]{financials_correlation.png}
 \caption{Top: S\&P 500 versus VIX 10-day moving average, June--November 2024.
@@ -215,7 +211,7 @@ July--November 2024. Values are normalised to a 0--100 index.}
 \centering
 \includegraphics[width=\textwidth,height=0.38\textheight,keepaspectratio]{gt_trump_vs_kamala.png}
 
-\vspace{0.5em}
+\vspace{1.2em}
 
 \includegraphics[width=\textwidth,height=0.38\textheight,keepaspectratio]{gt_search_gap.png}
 \caption{Top: Google search interest for Trump and Kamala with key campaign events marked.
@@ -229,7 +225,7 @@ Bottom: daily search interest gap (Trump minus Kamala); positive bars indicate T
 \centering
 \includegraphics[width=\textwidth,height=0.38\textheight,keepaspectratio]{gt_trends_vs_polymarket.png}
 
-\vspace{0.5em}
+\vspace{1.2em}
 
 \includegraphics[width=\textwidth,height=0.38\textheight,keepaspectratio]{gt_correlation_scatter.png}
 \caption{Top: Google Trends interest vs.\ Polymarket win probability for Trump and Kamala.
@@ -244,15 +240,15 @@ dashed line shows OLS trend, Pearson $r$ reported in panel titles.}
 \centering
 \includegraphics[width=\textwidth,height=0.22\textheight,keepaspectratio]{gt_trump.png}
 
-\vspace{0.3em}
+\vspace{0.9em}
 
 \includegraphics[width=\textwidth,height=0.22\textheight,keepaspectratio]{gt_harris.png}
 
-\vspace{0.3em}
+\vspace{0.9em}
 
 \includegraphics[width=\textwidth,height=0.22\textheight,keepaspectratio]{gt_vance.png}
 
-\vspace{0.3em}
+\vspace{0.9em}
 
 \includegraphics[width=\textwidth,height=0.22\textheight,keepaspectratio]{gt_walz.png}
 \caption{Google search interest with key campaign events for Trump, Harris, Vance,
@@ -278,7 +274,7 @@ and Walz (top to bottom), July--November 2024.}
 \centering
 \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{centrality_landscape_bluesky.png}
 
-\vspace{0.5em}
+\vspace{1.2em}
 
 \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{centrality landscape.png}
 \caption{Top: centrality landscape of the Bluesky mention network (betweenness vs.\ in-degree).
@@ -295,7 +291,7 @@ Bottom: centrality landscape of the Reddit mention network (betweenness vs.\ in-
 \centering
 \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{echo_chambers_blueksy.png}
 
-\vspace{0.5em}
+\vspace{1.2em}
 
 \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{echochambersreddit.png}
 \caption{Top: Bluesky echo-chamber diagnostics for TrumpBuzz and HarrisBuzz clusters.
@@ -325,7 +321,7 @@ cross-cluster audience overlap.}
 \centering
 \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{news_network.png}
 
-\vspace{0.5em}
+\vspace{1.2em}
 
 \includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{news_network_top40.png}
 \caption{Top: full newspaper source network based on shared title keywords.
@@ -351,15 +347,6 @@ grouped and colour-coded by media leaning.}
 \subsection{Bluesky Textual Analysis}
 
 \subsubsection{Preprocessing}
-
-\vspace*{\fill}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{1_char_distribution.png}
-\caption{Character length distribution of Bluesky posts after cleaning.}
-\label{fig:bsky_char_distribution}
-\end{figure}
-\vspace*{\fill}
 
 \begin{table}[H]
 \centering
@@ -451,15 +438,13 @@ grouped and colour-coded by media leaning.}
 \end{figure}
 \vspace*{\fill}
 
-\begin{landscape}
+\begin{table}[H]
 \centering
-\vspace*{\fill}
-\captionof{table}{Bluesky LSA concepts and dominant loading terms.}
+\small
+\includegraphics[width=\textwidth]{figures/bluesky/tables/concept_df.png}
+\caption{Bluesky LSA concepts and dominant loading terms.}
 \label{tab:bsky_concepts}
-\vspace{0.5em}
-\includegraphics[width=0.97\linewidth]{figures/bluesky/tables/concept_df.png}
-\vspace*{\fill}
-\end{landscape}
+\end{table}
 
 \subsubsection{Key Terms}
 
@@ -518,10 +503,10 @@ key political figures extracted via NER (July--November 2024).}
 \vspace*{\fill}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{LDA_topic.png}
-\caption{LDA topic composition for news headlines. Each bar shows the share of the
-two latent topics per day, with $K=2$ selected by coherence sweep.}
-\label{fig:news_lda_topic}
+\includegraphics[width=\textwidth]{key_mentions_over_time_NER.png}
+\caption{Named-entity mention counts over time in newspaper headlines, tracking
+key political figures extracted via NER (July--November 2024).}
+\label{fig:news_ner_mentions_repeat}
 \end{figure}
 \vspace*{\fill}
 
@@ -616,15 +601,9 @@ two latent topics per day, with $K=2$ selected by coherence sweep.}
 \vspace*{\fill}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth,height=0.38\textheight,keepaspectratio]{SVD-posts.png}
-
-\vspace{0.5em}
-
-\includegraphics[width=\textwidth,height=0.38\textheight,keepaspectratio]{SVD-comments.png}
-\caption{SVD / Latent Semantic Analysis scree plots for Bluesky posts (top) and
-comments (bottom), showing variance explained per component with 80\%, 90\%, and 95\%
-thresholds.}
-\label{fig:bsky_svd}
+\includegraphics[width=\textwidth]{4_svd_variance.png}
+\caption{Bluesky SVD scree plot and cumulative explained variance.}
+\label{fig:bsky_svd_variance_repeat}
 \end{figure}
 \vspace*{\fill}
 
@@ -650,7 +629,7 @@ July--November 2024. Vertical dashed lines mark key campaign events.}
 \centering
 \includegraphics[width=\textwidth,height=0.38\textheight,keepaspectratio]{comparision_sentiment.png}
 
-\vspace{0.5em}
+\vspace{1.2em}
 
 \includegraphics[width=\textwidth,height=0.38\textheight,keepaspectratio]{newssentiment_textblob.png}
 \caption{Top: comparison of sentiment methods (VADER, FinBERT, TextBlob) on newspaper headlines.
@@ -664,7 +643,7 @@ Bottom: TextBlob polarity and subjectivity scores by media leaning.}
 \centering
 \includegraphics[width=\textwidth,height=0.38\textheight,keepaspectratio]{normal_distributions_sentiment_scores.png}
 
-\vspace{0.5em}
+\vspace{1.2em}
 
 \includegraphics[width=\textwidth,height=0.38\textheight,keepaspectratio]{sentiment_score_by_leaning_projections.png}
 \caption{Top: KDE distributions of sentiment scores per method and media-leaning group.
@@ -678,7 +657,7 @@ Bottom: sentiment score projections by leaning and candidate focus (TrumpBuzz vs
 \centering
 \includegraphics[width=\textwidth,height=0.38\textheight,keepaspectratio]{../figures/news/NRC.png}
 
-\vspace{0.5em}
+\vspace{1.2em}
 
 \includegraphics[width=\textwidth,height=0.38\textheight,keepaspectratio]{NRCle_ emotionscores.png}
 \caption{Top: NRC emotion scores for newspaper headlines across media leanings.
@@ -700,19 +679,6 @@ breakdown for TrumpBuzz and HarrisBuzz clusters.}
 \end{figure}
 \vspace*{\fill}
 
-% ------------------------------------------------------------------
-\subsubsection{Reddit}
-
-\vspace*{\fill}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{../figures/reddit/NRC.png}
-\caption{NRC emotion scores for Reddit posts, comparing emotion profiles across
-TrumpBuzz, HarrisBuzz, and ElectionBuzz subreddit clusters.}
-\label{fig:reddit_nrc}
-\end{figure}
-\vspace*{\fill}
-
 % ==================================================================
 \newpage
 \subsection{Cross Source}
@@ -720,23 +686,8 @@ TrumpBuzz, HarrisBuzz, and ElectionBuzz subreddit clusters.}
 \vspace*{\fill}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{cross_source_dashboard.png}
-\caption{Cross-source dashboard combining key indicators from all tracked data sources
-over the campaign period (July--November 2024).}
-\label{fig:cross_source_dashboard}
-\end{figure}
-\vspace*{\fill}
-
-\vspace*{\fill}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth,height=0.38\textheight,keepaspectratio]{media_attention_vs_polymarket.png}
-
-\vspace{0.5em}
-
-\includegraphics[width=\textwidth,height=0.38\textheight,keepaspectratio]{newspapersentimentvspolymarketodds.png}
-\caption{Top: media attention (coverage volume and Trump share) vs.\ Polymarket odds.
-Bottom: newspaper sentiment by media leaning vs.\ Polymarket odds.}
+\includegraphics[width=\textwidth]{newspapersentimentvspolymarketodds.png}
+\caption{Newspaper sentiment by media leaning versus Polymarket odds.}
 \label{fig:cross_attention_sentiment}
 \end{figure}
 \vspace*{\fill}
@@ -790,3 +741,5 @@ July--November 2024.}
 \label{fig:pred_beeswarm}
 \end{figure}
 \vspace*{\fill}
+
+
