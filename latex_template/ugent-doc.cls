@@ -103,7 +103,7 @@
 % Set default page layout
 % Can be overwritten in preamble of document
 \renewcommand{\baselinestretch}{1.15} % line spacing
-\geometry{bottom=2.5cm,top=2.5cm,left=3cm,right=2cm} % margins
+\geometry{bottom=1.5cm,top=1.5cm,left=2cm,right=1.5cm} % margins
 
 % Redefine the titlepage in accordance with UGent styleguide
 \renewcommand\maketitle{\begin{titlepage}%
@@ -126,7 +126,7 @@
     %\colorbox{ugentwhite}{%
     \begin{minipage}[c][\subpaperheight][t]{\subpaperwidth}%
     	\vskip 5\gridunit % top margin within minipage
-    	\hskip \gridunit % left margin of 1 within the colorbox 
+    	\hskip \gridunit % left margin of 1 within the colorbox
         %\fbox{%
         \begin{minipage}{\subpaperwidth-2\gridunit} % tile minipage, right margin of 1
             \raggedright\bfseries\huge
