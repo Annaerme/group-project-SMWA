@@ -1,6 +1,6 @@
 # Social Media & Web Analytics — 2024 US Presidential Election
 
-> Can social media signals, search trends, financial markets, and online betting odds predict the outcome of a presidential election?
+> Can social media signals, news coverage, polling data, and financial markets predict daily movements in election prediction market probabilities?
 
 This project analyses the **2024 US presidential election** (July 5 – November 4, 2024) by collecting and cross-referencing data from seven distinct sources. It moves from raw data collection through descriptive analysis to predictive modelling, with every notebook sharing a unified visual identity via [`house_style.py`](#house-style).
 
@@ -44,6 +44,11 @@ A high-level map of every notebook is available in [`project_overview.ipynb`](pr
 │   ├── 2_preprocessing/
 │   ├── 3_models/
 │   └── 4_model_analysis/
+├── Functions/               # Shared Python helpers imported across notebooks
+│   ├── buzz_column.py       # Buzz-label assignment logic
+│   ├── data_splits.py       # Walk-forward CV split utilities
+│   ├── evaluation_metrics.py# Model evaluation helpers
+│   └── text_preprocessing.py# Reusable text cleaning functions
 ├── house_style.py           # Shared colour palette, style helpers, event markers
 ├── project_overview.ipynb   # Auto-generated index of all notebooks
 ├── update_tocs.py           # Script: regenerates TOCs & project_overview.ipynb
