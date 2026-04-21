@@ -62,6 +62,8 @@ Data/3_Gold/sbert_features_cache.csv
 *.xls
 *.png
 !latex_template/figures/*/*/*.png
+!latex_template/figures/*/*.png
+!latex_template/figures/*.png
 *.txt
 
 # ========================
