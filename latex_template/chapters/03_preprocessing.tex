@@ -2,6 +2,10 @@
 \section{Preprocessing}
 % ---------------------------------------------------------------------
 
-All text data were processed through a uniform eight-step pipeline: (1)~lowercasing, (2)~URL removal, (3)~second-pass URL fallback, (4)~removal of @mentions, (5)~hashtag stripping while preserving the word, (6)~removal of non-alphabetic characters, (7)~whitespace normalization, and (8)~tokenization with NLTK English stopwords and removal of tokens shorter than three characters or with URL-slug-like structure. Language detection via \texttt{langdetect} retained only English documents, removing 5.4\% of Reddit posts, 1.7\% of comments, and 18\% of Bluesky posts. Reddit comments were additionally filtered to between 3 and 500 words, and duplicates were removed.
+All text data were processed using a standardized preprocessing pipeline. First, basic string manipulation was applied: all text was converted to lowercase, and URLs, @mentions, hashtag symbols, non-alphabetic characters, and excess whitespace were removed.
 
-Each cleaned document was assigned a political buzz label using whole-word regex matching. Documents were classified as TrumpBuzz, HarrisBuzz, or ElectionBuzz based on keyword sets of approximately 80 and 70 terms respectively. The label of the highest-scoring category was assigned provided its margin over the runner-up met a minimum gap of one match; ambiguous or keyword-free documents received the ElectionBuzz label. This approach does not account for irony or sarcasm, a known limitation discussed in Section~7.
+Next, tokenization and filtering were performed. Tokens were filtered using NLTK English stopwords, and tokens shorter than three characters as well as URL-slug-like strings were removed. Language detection using \texttt{langdetect} was applied to retain only English-language documents.
+
+For the Bluesky TF-IDF analysis, stemming was additionally applied using the \texttt{SnowballStemmer}. No stemming or lemmatization was performed for other parts of the analysis.
+
+Finally, each document was assigned a political buzz label using whole-word keyword matching. Documents were classified as \texttt{TrumpBuzz}, \texttt{HarrisBuzz}, or \texttt{ElectionBuzz}. The label corresponding to the highest number of keyword matches was assigned, provided it exceeded the next highest category by at least one match. In cases of ties, the default label \texttt{ElectionBuzz} was assigned.
