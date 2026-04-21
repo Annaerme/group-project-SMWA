@@ -9,6 +9,7 @@
 \titleformat{\subsubsection}{\sffamily\normalsize\bfseries\color{textmuted}}{\color{textmuted}\thesubsubsection}{1em}{}
 \captionsetup{labelfont={color=textmuted,bf}, textfont={color=textmuted}}
 \captionsetup[table]{position=bottom}
+\setcounter{table}{0}
 \section{Key Figures}
 \label{app:figures}
 
@@ -63,8 +64,8 @@
 \textcolor{textmuted}{\small\ref{fig:news_source_network}}         & \textcolor{textmuted}{\small News Source Network}  & \textcolor{textmuted}{\small Newspapers}      & \textcolor{textmuted}{\small Full network \& top-40 sources}           & \textcolor{textmuted}{\small\pageref{fig:news_source_network}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:news_centrality_top20}}       & \textcolor{textmuted}{\small News Source Network}  & \textcolor{textmuted}{\small Newspapers}      & \textcolor{textmuted}{\small Top-20 centrality metrics}                & \textcolor{textmuted}{\small\pageref{fig:news_centrality_top20}} \\\hline
 
-% ----- 3. Bluesky Textual Analysis -----
-\multicolumn{5}{|l|}{\rule[-0.3em]{0pt}{1.2em}\textcolor{textprimary}{\sffamily\bfseries\small\enspace 3 \enspace Bluesky Textual Analysis}} \\
+% ----- 3. Textual Analysis -----
+\multicolumn{5}{|l|}{\rule[-0.3em]{0pt}{1.2em}\textcolor{textprimary}{\sffamily\bfseries\small\enspace 3 \enspace Textual Analysis}} \\
 \hline
 \textcolor{textmuted}{\small\ref{fig:bsky_tfidf_buzzgroups}}       & \textcolor{textmuted}{\small TF-IDF}           & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Distinctive words by buzz group}          & \textcolor{textmuted}{\small\pageref{fig:bsky_tfidf_buzzgroups}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:bsky_svd_variance}}           & \textcolor{textmuted}{\small LSA / SVD}        & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Variance explained by SVD components}     & \textcolor{textmuted}{\small\pageref{fig:bsky_svd_variance}} \\\hline
@@ -75,27 +76,27 @@
 % ----- 4. NLP -----
 \multicolumn{5}{|l|}{\rule[-0.3em]{0pt}{1.2em}\textcolor{textprimary}{\sffamily\bfseries\small\enspace 4 \enspace NLP}} \\
 \hline
-\textcolor{textmuted}{\small\ref{fig:news_ner_mentions}}           & \textcolor{textmuted}{\small Newspapers NLP}      & \textcolor{textmuted}{\small Newspapers}      & \textcolor{textmuted}{\small Named-entity mentions over time}          & \textcolor{textmuted}{\small\pageref{fig:news_ner_mentions}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:bsky_nlp_preprocessing}}      & \textcolor{textmuted}{\small Bluesky LDA Setup}   & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small LDA preprocessing summary}                & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_preprocessing}} \\\hline
 \textcolor{textmuted}{\small Tab.~\ref{tab:bsky_nlp_dictionary}}   & \textcolor{textmuted}{\small Bluesky LDA Setup}   & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Vocabulary size and filter metrics}       & \textcolor{textmuted}{\small\pageref{tab:bsky_nlp_dictionary}} \\\hline
-\textcolor{textmuted}{\small Tab.~\ref{tab:bsky_nlp_top_terms}}    & \textcolor{textmuted}{\small Bluesky LDA Setup}   & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Top 15 terms by document frequency}       & \textcolor{textmuted}{\small\pageref{tab:bsky_nlp_top_terms}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:bsky_nlp_coherence_sweep}}    & \textcolor{textmuted}{\small LDA Selection}       & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Coherence and AIC sweep (K=2 to 10)}      & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_coherence_sweep}} \\\hline
 \textcolor{textmuted}{\small Tab.~\ref{tab:bsky_nlp_model_summary}}& \textcolor{textmuted}{\small LDA Selection}       & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Final LDA model parameters}               & \textcolor{textmuted}{\small\pageref{tab:bsky_nlp_model_summary}} \\\hline
 \textcolor{textmuted}{\small Tab.~\ref{tab:bsky_nlp_topic_words}}  & \textcolor{textmuted}{\small LDA Selection}       & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Top 10 words per topic}                   & \textcolor{textmuted}{\small\pageref{tab:bsky_nlp_topic_words}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:bsky_nlp_wordclouds}}         & \textcolor{textmuted}{\small LDA Outputs}         & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Topic-specific word clouds}               & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_wordclouds}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:bsky_nlp_topics_time}}        & \textcolor{textmuted}{\small LDA Outputs}         & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Topic prominence over time}               & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_topics_time}} \\\hline
 \textcolor{textmuted}{\small\ref{fig:bsky_nlp_topics_buzz}}        & \textcolor{textmuted}{\small LDA Outputs}         & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small Topic distribution by buzz cluster}       & \textcolor{textmuted}{\small\pageref{fig:bsky_nlp_topics_buzz}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:news_ner_mentions}}           & \textcolor{textmuted}{\small Newspapers NLP}      & \textcolor{textmuted}{\small Newspapers}      & \textcolor{textmuted}{\small Named-entity mentions over time}          & \textcolor{textmuted}{\small\pageref{fig:news_ner_mentions}} \\\hline
 
 % ----- 5. Sentiment Analysis -----
 \multicolumn{5}{|l|}{\rule[-0.3em]{0pt}{1.2em}\textcolor{textprimary}{\sffamily\bfseries\small\enspace 5 \enspace Sentiment Analysis}} \\
 \hline
-\textcolor{textmuted}{\small\ref{fig:news_headline_sentiment_overtime}} & \textcolor{textmuted}{\small VADER}             & \textcolor{textmuted}{\small Newspapers}      & \textcolor{textmuted}{\small Headline sentiment over time}             & \textcolor{textmuted}{\small\pageref{fig:news_headline_sentiment_overtime}} \\\hline
-\textcolor{textmuted}{\small\ref{fig:news_sentiment_methods}}      & \textcolor{textmuted}{\small VADER}             & \textcolor{textmuted}{\small Newspapers}      & \textcolor{textmuted}{\small VADER/FinBERT/TextBlob comparison}        & \textcolor{textmuted}{\small\pageref{fig:news_sentiment_methods}} \\\hline
-\textcolor{textmuted}{\small\ref{fig:news_sentiment_distributions}} & \textcolor{textmuted}{\small TextBlob}          & \textcolor{textmuted}{\small Newspapers}      & \textcolor{textmuted}{\small Polarity/subjectivity distributions}      & \textcolor{textmuted}{\small\pageref{fig:news_sentiment_distributions}} \\\hline
-\textcolor{textmuted}{\small\ref{fig:news_nrc}}                    & \textcolor{textmuted}{\small NRC-Lex}           & \textcolor{textmuted}{\small Newspapers}      & \textcolor{textmuted}{\small NRC \& NRCLex emotion scores}             & \textcolor{textmuted}{\small\pageref{fig:news_nrc}} \\\hline
-\textcolor{textmuted}{\small\ref{fig:bluesky_nrc}}                 & \textcolor{textmuted}{\small NRC-Lex}           & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small NRC emotion scores}                       & \textcolor{textmuted}{\small\pageref{fig:bluesky_nrc}} \\\hline
-\textcolor{textmuted}{\small\ref{fig:cross_attention_sentiment}}   & \textcolor{textmuted}{\small Combination}       & \textcolor{textmuted}{\small All sources}     & \textcolor{textmuted}{\small Newspaper sentiment vs.\ Polymarket}      & \textcolor{textmuted}{\small\pageref{fig:cross_attention_sentiment}} \\\hline
-\textcolor{textmuted}{\small\ref{fig:share_negative_headlines}}    & \textcolor{textmuted}{\small Combination}       & \textcolor{textmuted}{\small All sources}     & \textcolor{textmuted}{\small Share of negative headlines}              & \textcolor{textmuted}{\small\pageref{fig:share_negative_headlines}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:bsky_vader}}                  & \textcolor{textmuted}{\small VADER}             & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small VADER compound sentiment over time}        & \textcolor{textmuted}{\small\pageref{fig:bsky_vader}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:news_vader}}                  & \textcolor{textmuted}{\small VADER}             & \textcolor{textmuted}{\small Newspapers}      & \textcolor{textmuted}{\small Headline VADER sentiment over time}        & \textcolor{textmuted}{\small\pageref{fig:news_vader}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:bsky_textblob}}               & \textcolor{textmuted}{\small TextBlob}          & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small TextBlob polarity \& subjectivity}         & \textcolor{textmuted}{\small\pageref{fig:bsky_textblob}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:news_textblob}}               & \textcolor{textmuted}{\small TextBlob}          & \textcolor{textmuted}{\small Newspapers}      & \textcolor{textmuted}{\small TextBlob scores by media leaning}          & \textcolor{textmuted}{\small\pageref{fig:news_textblob}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:bluesky_nrc}}                 & \textcolor{textmuted}{\small NRCLex}            & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small NRC emotion scores}                        & \textcolor{textmuted}{\small\pageref{fig:bluesky_nrc}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:news_nrc}}                    & \textcolor{textmuted}{\small NRCLex}            & \textcolor{textmuted}{\small Newspapers}      & \textcolor{textmuted}{\small NRC \& NRCLex emotion scores}              & \textcolor{textmuted}{\small\pageref{fig:news_nrc}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:bsky_roberta}}                & \textcolor{textmuted}{\small Twitter RoBERTa}   & \textcolor{textmuted}{\small Bluesky}         & \textcolor{textmuted}{\small RoBERTa sentiment by buzz cluster}         & \textcolor{textmuted}{\small\pageref{fig:bsky_roberta}} \\\hline
+\textcolor{textmuted}{\small\ref{fig:news_sentiment_methods}}      & \textcolor{textmuted}{\small Combination}       & \textcolor{textmuted}{\small Newspapers}      & \textcolor{textmuted}{\small Cross-method sentiment comparison}         & \textcolor{textmuted}{\small\pageref{fig:news_sentiment_methods}} \\\hline
 
 % ----- 6. Predictive -----
 \multicolumn{5}{|l|}{\rule[-0.3em]{0pt}{1.2em}\textcolor{textprimary}{\sffamily\bfseries\small\enspace 6 \enspace Predictive}} \\
@@ -315,24 +316,24 @@ grouped and colour-coded by media leaning.}
 
 % ==================================================================
 \newpage
-\subsection{Bluesky Textual Analysis}
+\subsection{Textual Analysis}
 
 \subsubsection{Preprocessing}
 
 \begin{table}[H]
 \centering
 \small
+\includegraphics[width=\textwidth]{figures/bluesky/tables/prep_df.png}
 \caption{Bluesky preprocessing: vocabulary reduction after cleaning.}
 \label{tab:bsky_prep}
-\includegraphics[width=\textwidth]{figures/bluesky/tables/prep_df.png}
 \end{table}
 
 \begin{table}[H]
 \centering
 \small
+\includegraphics[width=\textwidth]{figures/bluesky/tables/stats.png}
 \caption{Bluesky post-length summary after cleaning.}
 \label{tab:bsky_stats}
-\includegraphics[width=\textwidth]{figures/bluesky/tables/stats.png}
 \end{table}
 
 \subsubsection{TF-IDF}
@@ -340,9 +341,9 @@ grouped and colour-coded by media leaning.}
 \begin{table}[H]
 \centering
 \small
+\includegraphics[width=\textwidth]{figures/bluesky/tables/pt_df.png}
 \caption{Bluesky post type balance and leading distinctive terms.}
 \label{tab:bsky_pt}
-\includegraphics[width=\textwidth]{figures/bluesky/tables/pt_df.png}
 \end{table}
 
 \begin{figure}[H]
@@ -355,9 +356,9 @@ grouped and colour-coded by media leaning.}
 \begin{table}[H]
 \centering
 \small
+\includegraphics[width=\textwidth]{figures/bluesky/tables/dtm_compare.png}
 \caption{Bluesky TF-IDF document-term matrix before and after spell correction.}
 \label{tab:bsky_dtm_compare}
-\includegraphics[width=\textwidth]{figures/bluesky/tables/dtm_compare.png}
 \end{table}
 
 \subsubsection{SVD}
@@ -372,17 +373,17 @@ grouped and colour-coded by media leaning.}
 \begin{table}[H]
 \centering
 \small
+\includegraphics[width=\textwidth]{figures/bluesky/tables/thr_df.png}
 \caption{Bluesky SVD thresholds for explained variance.}
 \label{tab:bsky_thr}
-\includegraphics[width=\textwidth]{figures/bluesky/tables/thr_df.png}
 \end{table}
 
 \begin{table}[H]
 \centering
 \small
+\includegraphics[width=\textwidth]{figures/bluesky/tables/lsa_summary.png}
 \caption{Bluesky LSA dimensionality reduction summary.}
 \label{tab:bsky_lsa_summary}
-\includegraphics[width=\textwidth]{figures/bluesky/tables/lsa_summary.png}
 \end{table}
 
 \subsubsection{LSA}
@@ -425,17 +426,6 @@ grouped and colour-coded by media leaning.}
 \subsection{NLP}
 
 % ------------------------------------------------------------------
-\subsubsection{Newspapers NLP}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{key_mentions_over_time_NER.png}
-\caption{Named-entity mention counts over time in newspaper headlines, tracking
-key political figures extracted via NER (July--November 2024).}
-\label{fig:news_ner_mentions}
-\end{figure}
-
-% ------------------------------------------------------------------
 \subsubsection{Bluesky LDA Setup}
 
 \begin{figure}[H]
@@ -448,9 +438,9 @@ key political figures extracted via NER (July--November 2024).}
 \begin{table}[H]
 \centering
 \small
+\includegraphics[width=\textwidth]{tables/nlp_dictionary.png}
 \caption{Bluesky vocabulary size and filtering metrics for LDA topic modeling.}
 \label{tab:bsky_nlp_dictionary}
-\includegraphics[width=\textwidth]{tables/nlp_dictionary.png}
 \end{table}
 
 % ------------------------------------------------------------------
@@ -466,17 +456,17 @@ key political figures extracted via NER (July--November 2024).}
 \begin{table}[H]
 \centering
 \small
+\includegraphics[width=\textwidth]{tables/nlp_model_summary.png}
 \caption{Final LDA model parameters and training metrics for Bluesky posts.}
 \label{tab:bsky_nlp_model_summary}
-\includegraphics[width=\textwidth]{tables/nlp_model_summary.png}
 \end{table}
 
 \begin{table}[H]
 \centering
 \small
+\includegraphics[width=\textwidth]{tables/nlp_topic_words.png}
 \caption{Top 10 terms and maximum weight for each of the 4 LDA topics.}
 \label{tab:bsky_nlp_topic_words}
-\includegraphics[width=\textwidth]{tables/nlp_topic_words.png}
 \end{table}
 
 % ------------------------------------------------------------------
@@ -503,6 +493,17 @@ key political figures extracted via NER (July--November 2024).}
 \label{fig:bsky_nlp_topics_buzz}
 \end{figure}
 
+% ------------------------------------------------------------------
+\subsubsection{Newspapers NLP}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{key_mentions_over_time_NER.png}
+\caption{Named-entity mention counts over time in newspaper headlines, tracking
+key political figures extracted via NER (July--November 2024).}
+\label{fig:news_ner_mentions}
+\end{figure}
+
 % ==================================================================
 \newpage
 \subsection{Sentiment Analysis}
@@ -512,22 +513,16 @@ key political figures extracted via NER (July--November 2024).}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{headline_sentiment_overtime.png}
-\caption{Daily average headline sentiment score over time for each media-leaning group,
-July--November 2024. Vertical dashed lines mark key campaign events.}
-\label{fig:news_headline_sentiment_overtime}
+\includegraphics[width=\textwidth]{vader_bluesky.png}
+\caption{VADER compound sentiment scores for Bluesky posts, comparing TrumpBuzz and HarrisBuzz clusters over the campaign period.}
+\label{fig:bsky_vader}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth,height=0.38\textheight,keepaspectratio]{comparision_sentiment.png}
-
-\vspace{1.2em}
-
-\includegraphics[width=\textwidth,height=0.38\textheight,keepaspectratio]{newssentiment_textblob.png}
-\caption{Top: comparison of sentiment methods (VADER, FinBERT, TextBlob) on newspaper headlines.
-Bottom: TextBlob polarity and subjectivity scores by media leaning.}
-\label{fig:news_sentiment_methods}
+\includegraphics[width=\textwidth]{vader_news.png}
+\caption{Daily average VADER sentiment score for newspaper headlines by media-leaning group, July--November 2024. Vertical dashed lines mark key campaign events.}
+\label{fig:news_vader}
 \end{figure}
 
 % ------------------------------------------------------------------
@@ -535,18 +530,27 @@ Bottom: TextBlob polarity and subjectivity scores by media leaning.}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth,height=0.38\textheight,keepaspectratio]{normal_distributions_sentiment_scores.png}
+\includegraphics[width=\textwidth]{textblob_bluesky.png}
+\caption{TextBlob polarity and subjectivity scores for Bluesky posts by buzz group.}
+\label{fig:bsky_textblob}
+\end{figure}
 
-\vspace{1.2em}
-
-\includegraphics[width=\textwidth,height=0.38\textheight,keepaspectratio]{sentiment_score_by_leaning_projections.png}
-\caption{Top: KDE distributions of sentiment scores per method and media-leaning group.
-Bottom: sentiment score projections by leaning and candidate focus (TrumpBuzz vs.\ HarrisBuzz).}
-\label{fig:news_sentiment_distributions}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{textblob_news.png}
+\caption{TextBlob sentiment scores for newspaper headlines by media leaning.}
+\label{fig:news_textblob}
 \end{figure}
 
 % ------------------------------------------------------------------
-\subsubsection{NRC-Lex}
+\subsubsection{NRCLex}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../figures/bluesky/NRC.png}
+\caption{NRC emotion scores for Bluesky posts, showing the eight-emotion breakdown for TrumpBuzz and HarrisBuzz clusters.}
+\label{fig:bluesky_nrc}
+\end{figure}
 
 \begin{figure}[H]
 \centering
@@ -561,14 +565,13 @@ Bottom: NRCLex eight-emotion profiles by media leaning (Plutchik wheel).}
 \end{figure}
 
 % ------------------------------------------------------------------
-\subsubsection{Bluesky}
+\subsubsection{Twitter RoBERTa}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{../figures/bluesky/NRC.png}
-\caption{NRC emotion scores for Bluesky posts, showing the eight-emotion
-breakdown for TrumpBuzz and HarrisBuzz clusters.}
-\label{fig:bluesky_nrc}
+\includegraphics[width=\textwidth]{twitter_roberta_bluesky.png}
+\caption{Twitter RoBERTa sentiment scores for Bluesky posts, comparing TrumpBuzz and HarrisBuzz clusters.}
+\label{fig:bsky_roberta}
 \end{figure}
 
 % ------------------------------------------------------------------
@@ -576,17 +579,9 @@ breakdown for TrumpBuzz and HarrisBuzz clusters.}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{newspapersentimentvspolymarketodds.png}
-\caption{Newspaper sentiment by media leaning versus Polymarket odds.}
-\label{fig:cross_attention_sentiment}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{negativety_coverage_share.png}
-\caption{Share of negative headlines by media leaning compared with Polymarket odds,
-July--November 2024.}
-\label{fig:share_negative_headlines}
+\includegraphics[width=\textwidth]{comparision_sentiment.png}
+\caption{Comparison of sentiment methods (VADER, FinBERT, TextBlob) on newspaper headlines.}
+\label{fig:news_sentiment_methods}
 \end{figure}
 
 % ==================================================================
@@ -620,6 +615,3 @@ July--November 2024.}
 \caption{Feature importance beeswarm plot showing the distribution of SHAP values across all predictions, with color indicating feature value and position indicating impact on model output.}
 \label{fig:pred_beeswarm}
 \end{figure}
-
-
-
